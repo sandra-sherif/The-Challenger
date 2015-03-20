@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+ <html> 
+ <head>
+  <title>HTML Video Tag Example</title> 
+  </head>
+  <body>
+  <br> 
+  <!-- <video id="custom_video_play" width="400" controls="controls" onclick="tagging()"> -->
+ 
+
+ <!--  <video id="sampleMovie" src="HTML5Sample.mov" preload width="400" onclick="tagging()">
+  <source src="HTML5Sample_H264.mov" />
+	<source src="HTML5Sample_Ogg.ogv" />
+	<source src="HTML5Sample_WebM.webm" />
+</video>
+   -->
+ 
+ <!-- <video id="sampleMovie" width="640" height="360" preload controls>
+	<source src="HTML5Sample_H264.mov" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+	<source src="HTML5Sample_Ogg.ogv" type='video/ogg; codecs="theora, vorbis"' />
+	<source src="HTML5Sample_WebM.webm" type='video/webm; codecs="vp8, vorbis"' />
+<object type="application/x-shockwave-flash" data="https://www.youtube.com/watch?v=ikpdmeQ1Dq8" width="640" height="360">
+<param name="movie" value="https://www.youtube.com/watch?v=ikpdmeQ1Dq8"/>
+<param name="allowFullScreen" value="true" />
+		<param name="wmode" value="transparent" />
+<param name="flashvars" value='config={"clip":{"url":"HTML5Sample_flv.flv","autoPlay":false,"autoBuffering":true}}' />
+	</object>
+</video> -->
+
+
+<video controls style="width:640px;height:360px;" poster="poster.png">
+  <source src="devstories.webm" 
+          type='video/webm;codecs="vp8, vorbis"' />
+  <source src="devstories.mp4" 
+          type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
+  <track src="devstories-en.vtt" label="English subtitles" 
+         kind="subtitles" srclang="en" default></track>
+</video>
+
+
+
+
+   <!-- Browser Not Supporting  -->
+  <br>
+  Choose Name: <input type="text" id="myText" placeholder="type it here"><br><br> 
+  <script> 
+
+  function tagging() {
+  	var x= document.getElementById("myText").value;
+  	if (x == null || x== ""){
+			alert ("Person tagged: "); //+ y);
+		
+		} else {
+  	alert("Person tagged: "+ x);
+  }
+  	//	var y='x';
+
+
+
+
+
+
+
+
+
+
+
+
+  var myVideo=document.getElementById("custom_video_play"); 
+
+  function makeBig() 
+  { myVideo.width=650; } 
+  function makeSmall() 
+  { myVideo.width=350; } 
+  function makeNormal() 
+  { myVideo.width=450; } 
+
+  </script> 
+  <div style="text-align:left"> 
+  <button onclick="makeBig()">Adjust: Large Screen</button> 
+  <button onclick="makeSmall()">Adjust: Small Screen</button> 
+  <button onclick="makeNormal()">Adjust: Normal Screen</button> 
+  <p></p>
+   </div> 
+   </body> 
+   </html>
+

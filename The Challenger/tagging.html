@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Challenger</title>
+
+</head>
+<body>
+<img src="http://i.imgur.com/02mzXwm.png" onclick="myFunction()"><br> 
+Choose Name: <input type="text" id="myText" placeholder="type it here">
+<!-- <button onclick="myFunction()">Tag a Photo</button> -->
+<script >
+/*function onChange(changeValue) {
+	if ("myText" == empty)
+		alert()
+}*/
+	function myFunction() {
+		var x =document.getElementById("myText").value;
+		if (x == null || x== ""){
+			alert ("Person tagged: ");
+		
+		} else {
+		alert("Person taged: "+ x);
+				} 	
+				// var y= x;
+		}
+	
+	</script>
+</body>
+</html>
