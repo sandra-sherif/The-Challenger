@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,27 +6,61 @@
 </head>
 <body>
   <H3>Challenge 1</H3>
-  <img src="http://i.imgur.com/NxdTAga.jpg" alt="Image 1" height="auto" width="450">
+  <img src="http://i.imgur.com/NxdTAga.jpg" alt="Image 1" height="auto" width="450" onclick="tagging()"><br>
+  Choose Name: <input type="text" id="1" placeholder="type it here"><br><br>
+   Comment: <input type="text" id="1" placeholder="type it here">
+    <input name="submit" type="submit" value="Submit comment" onclick="myFunction()"/> 
     <H3>Challenge 2</H3>
-  <img src="http://i.imgur.com/s9ha1Cq.jpg" width="450" height=auto;>
+  <img src="http://i.imgur.com/s9ha1Cq.jpg" width="450" height= "auto" onclick="tagging()"><br>
+  Choose Name: <input type="text" id="2" placeholder="type it here"><br><br>
+   Comment: <input type="text" id="2" placeholder="type it here">
+    <input name="submit" type="submit" value="Submit comment" onclick="myFunction()"/>
+   
+
     <H3>Challenge 3</H3>
-  <video width="640" height="360" controls>
+  <video width="640" height="360" controls onclick="tagging()">
   <source src="app/assets/videos/arrow.mp4" type="video/mp4">
   <source src="app/assets/videos/arrow.ogg" type="video/ogg">
-  </video>
+  </video><br>
+   Choose Name: <input type="text" id="3" placeholder="type it here"><br><br> 
+    Comment: <input type="text" id="3" placeholder="type it here">
+     <input name="submit" type="submit" value="Submit comment" onclick="myFunction()" /> 
+
+   
     <H3>Challenge 4</H3>
-<video controls="controls" width="640" height="360">
-	<source src="app/assets/videos/arrow.mp4" type="video/mp4" />
-	<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
-		<param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
-		<param name="allowFullScreen" value="true" />
-		<param name="wmode" value="transparent" />
-		<param name="flashVars" value="config={'playlist':[{'url':'wildlife.wmv','autoPlay':false}]}" />
-		<span title="No video playback capabilities, please download the video below">Arrow</span>
-	</object>
-</video>
+<video controls="controls" width="640" height="360" onclick="tagging()">
+  <source src="app/assets/videos/arrow.mp4" type="video/mp4" />
+  <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
+    <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="wmode" value="transparent" />
+    <param name="flashVars" value="config={'playlist':[{'url':'wildlife.wmv','autoPlay':false}]}" />
+    <span title="No video playback capabilities, please download the video below">Arrow</span>
+  </object>
+</video><br>
 <p>
-	<strong>Download video:</strong> <a href="app/assets/videos/arrow.mp4">MP4 format</a>
+  <strong>Download video:</strong> <a href="app/assets/videos/arrow.mp4">MP4 format</a>
 </p>
+ Choose Name: <input type="text" id="4" placeholder="type it here"><br><br> 
+  Comment: <input type="text" id="4" placeholder="type it here">
+   <input name="submit" type="submit" value="Submit comment" onclick="myFunction()"/>
+
+<script>
+  function myFunction() {
+    alert("Comment posted");
+        }
+
+    function tagging() {
+    var x= document.getElementById("myText").value;
+    if (x == null || x== ""){
+      alert ("Person tagged: "); //+ y);
+    
+    } else {
+    alert("Person tagged: "+ x);
+  }
+    //  var y='x';
+}
+</script>>
     
 </body>
+</html>
