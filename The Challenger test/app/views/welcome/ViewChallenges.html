@@ -7,12 +7,12 @@
 <body>
   <H3>Challenge 1</H3>
   <img src="http://i.imgur.com/NxdTAga.jpg" alt="Image 1" height="auto" width="450" onclick="tagging()"><br>
-  Choose Name: <input type="text" id="1" placeholder="type it here"><br><br>
+  Choose Name: <input type="text" id="myText" placeholder="type it here"><br><br>
    Comment: <input type="text" id="1" placeholder="type it here">
     <input name="submit" type="submit" value="Submit comment" onclick="myFunction()"/> 
     <H3>Challenge 2</H3>
   <img src="http://i.imgur.com/s9ha1Cq.jpg" width="450" height= "auto" onclick="tagging()"><br>
-  Choose Name: <input type="text" id="2" placeholder="type it here"><br><br>
+  Choose Name: <input type="text" id="myText" placeholder="type it here"><br><br>
    Comment: <input type="text" id="2" placeholder="type it here">
     <input name="submit" type="submit" value="Submit comment" onclick="myFunction()"/>
    
@@ -22,7 +22,7 @@
   <source src="app/assets/videos/arrow.mp4" type="video/mp4">
   <source src="app/assets/videos/arrow.ogg" type="video/ogg">
   </video><br>
-   Choose Name: <input type="text" id="3" placeholder="type it here"><br><br> 
+   Choose Name: <input type="text" id="myText" placeholder="type it here"><br><br> 
     Comment: <input type="text" id="3" placeholder="type it here">
      <input name="submit" type="submit" value="Submit comment" onclick="myFunction()" /> 
 
@@ -41,7 +41,7 @@
 <p>
   <strong>Download video:</strong> <a href="app/assets/videos/arrow.mp4">MP4 format</a>
 </p>
- Choose Name: <input type="text" id="4" placeholder="type it here"><br><br> 
+ Choose Name: <input type="text" id="myText" placeholder="type it here"><br><br> 
   Comment: <input type="text" id="4" placeholder="type it here">
    <input name="submit" type="submit" value="Submit comment" onclick="myFunction()"/>
 
@@ -53,14 +53,14 @@
     function tagging() {
     var x= document.getElementById("myText").value;
     if (x == null || x== ""){
-      alert ("Person tagged: "); //+ y);
+      alert ("No one is tagged in this post."); //+ y);
     
     } else {
     alert("Person tagged: "+ x);
   }
     //  var y='x';
 }
-</script>>
+</script>
     
 </body>
 </html>
