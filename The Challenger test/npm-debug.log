@@ -3,12 +3,12 @@
 1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'install',
 1 verbose cli   '-g',
-1 verbose cli   'html5box' ]
+1 verbose cli   'devise' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.36
 4 verbose node symlink C:\Program Files\nodejs\\node.exe
-5 verbose cache add [ 'html5box', null ]
-6 verbose cache add name=undefined spec="html5box" args=["html5box",null]
+5 verbose cache add [ 'devise', null ]
+6 verbose cache add name=undefined spec="devise" args=["devise",null]
 7 verbose parsed url { protocol: null,
 7 verbose parsed url   slashes: null,
 7 verbose parsed url   auth: null,
@@ -18,29 +18,29 @@
 7 verbose parsed url   hash: null,
 7 verbose parsed url   search: null,
 7 verbose parsed url   query: null,
-7 verbose parsed url   pathname: 'html5box',
-7 verbose parsed url   path: 'html5box',
-7 verbose parsed url   href: 'html5box' }
-8 silly lockFile 9346f8f0-html5box html5box
-9 verbose lock html5box C:\Users\DELL\AppData\Roaming\npm-cache\9346f8f0-html5box.lock
-10 silly lockFile 9346f8f0-html5box html5box
-11 silly lockFile 9346f8f0-html5box html5box
-12 verbose addNamed [ 'html5box', '' ]
+7 verbose parsed url   pathname: 'devise',
+7 verbose parsed url   path: 'devise',
+7 verbose parsed url   href: 'devise' }
+8 silly lockFile c2c479ad-devise devise
+9 verbose lock devise C:\Users\DELL\AppData\Roaming\npm-cache\c2c479ad-devise.lock
+10 silly lockFile c2c479ad-devise devise
+11 silly lockFile c2c479ad-devise devise
+12 verbose addNamed [ 'devise', '' ]
 13 verbose addNamed [ null, '*' ]
-14 silly lockFile ae9b745b-html5box html5box@
-15 verbose lock html5box@ C:\Users\DELL\AppData\Roaming\npm-cache\ae9b745b-html5box.lock
-16 silly addNameRange { name: 'html5box', range: '*', hasData: false }
-17 verbose request where is /html5box
+14 silly lockFile 0edf3452-devise devise@
+15 verbose lock devise@ C:\Users\DELL\AppData\Roaming\npm-cache\0edf3452-devise.lock
+16 silly addNameRange { name: 'devise', range: '*', hasData: false }
+17 verbose request where is /devise
 18 verbose request registry https://registry.npmjs.org/
-19 verbose request id 2326b8bd75658230
-20 verbose url raw /html5box
-21 verbose url resolving [ 'https://registry.npmjs.org/', './html5box' ]
-22 verbose url resolved https://registry.npmjs.org/html5box
-23 verbose request where is https://registry.npmjs.org/html5box
-24 info trying registry request attempt 1 at 19:06:07
-25 http GET https://registry.npmjs.org/html5box
-26 http 404 https://registry.npmjs.org/html5box
-27 verbose headers { date: 'Fri, 20 Mar 2015 17:05:56 GMT',
+19 verbose request id c0b1f8ea3f491845
+20 verbose url raw /devise
+21 verbose url resolving [ 'https://registry.npmjs.org/', './devise' ]
+22 verbose url resolved https://registry.npmjs.org/devise
+23 verbose request where is https://registry.npmjs.org/devise
+24 info trying registry request attempt 1 at 01:17:50
+25 http GET https://registry.npmjs.org/devise
+26 http 404 https://registry.npmjs.org/devise
+27 verbose headers { date: 'Fri, 20 Mar 2015 23:17:39 GMT',
 27 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
 27 verbose headers   'content-type': 'application/json',
 27 verbose headers   'cache-control': 'max-age=0',
@@ -48,14 +48,14 @@
 27 verbose headers   'accept-ranges': 'bytes',
 27 verbose headers   via: '1.1 varnish',
 27 verbose headers   age: '0',
-27 verbose headers   'x-served-by': 'cache-lhr6335-LHR',
+27 verbose headers   'x-served-by': 'cache-lhr6327-LHR',
 27 verbose headers   'x-cache': 'MISS',
 27 verbose headers   'x-cache-hits': '0',
-27 verbose headers   'x-timer': 'S1426871155.920755,VS0,VE358',
+27 verbose headers   'x-timer': 'S1426893458.738759,VS0,VE359',
 27 verbose headers   'keep-alive': 'timeout=10, max=50',
 27 verbose headers   connection: 'Keep-Alive' }
 28 silly registry.get cb [ 404,
-28 silly registry.get   { date: 'Fri, 20 Mar 2015 17:05:56 GMT',
+28 silly registry.get   { date: 'Fri, 20 Mar 2015 23:17:39 GMT',
 28 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
 28 silly registry.get     'content-type': 'application/json',
 28 silly registry.get     'cache-control': 'max-age=0',
@@ -63,24 +63,24 @@
 28 silly registry.get     'accept-ranges': 'bytes',
 28 silly registry.get     via: '1.1 varnish',
 28 silly registry.get     age: '0',
-28 silly registry.get     'x-served-by': 'cache-lhr6335-LHR',
+28 silly registry.get     'x-served-by': 'cache-lhr6327-LHR',
 28 silly registry.get     'x-cache': 'MISS',
 28 silly registry.get     'x-cache-hits': '0',
-28 silly registry.get     'x-timer': 'S1426871155.920755,VS0,VE358',
+28 silly registry.get     'x-timer': 'S1426893458.738759,VS0,VE359',
 28 silly registry.get     'keep-alive': 'timeout=10, max=50',
 28 silly registry.get     connection: 'Keep-Alive' } ]
-29 silly lockFile ae9b745b-html5box html5box@
-30 silly lockFile ae9b745b-html5box html5box@
-31 error 404 404 Not Found: html5box
+29 silly lockFile 0edf3452-devise devise@
+30 silly lockFile 0edf3452-devise devise@
+31 error 404 404 Not Found: devise
 31 error 404
-31 error 404 'html5box' is not in the npm registry.
+31 error 404 'devise' is not in the npm registry.
 31 error 404 You should bug the author to publish it
 31 error 404
 31 error 404 Note that you can also install from a
 31 error 404 tarball, folder, or http url, or git url.
 32 error System Windows_NT 6.2.9200
-33 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "html5box"
-34 error cwd C:\Users\DELL\Desktop\upload
+33 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "devise"
+34 error cwd C:\Users\DELL\Desktop\The-Challenger\The Challenger test
 35 error node -v v0.10.36
 36 error npm -v 1.4.28
 37 error code E404

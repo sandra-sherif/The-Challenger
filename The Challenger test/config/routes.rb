@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :articles
   get 'welcome/index'
 
-
-Rails.application.routes.draw do
- 
-  resources :articles
+  
  
   root 'welcome#index'
-end
+  
+  match "/users/sign_out", via: [:get, :delete], to: "devise/sessions#destroy"
 
 
 get '/ViewChallenges.html', to: 'welcome#ViewChallenges'
