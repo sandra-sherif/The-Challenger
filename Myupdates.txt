@@ -9,4 +9,10 @@ creating a branch but couln't checkout the new branch resulting in inability to 
 ---------------------
 today, I only did till 45% of the codecademy tutorial for ruby because i was stuck for 2 hours in one step and didn't know how to solve it. 
 i also only created a file for tagging but didn't decide on the best method to.
-but still I didn't achive something in the actual coding.
+but still I didn't achive something in the actual coding
+=================================================================
+30.3.2015
+----------------
+didn't continue on codecademy as it failed to connect to the internet many times.
+searched for methods and how to create them in ruby. 
+starting the mehoed for the challenger but ididn't finish it.
