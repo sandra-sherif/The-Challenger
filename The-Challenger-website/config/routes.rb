@@ -53,4 +53,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  resource :user_friendship
+
+  get '/:id', to 'profiles#show', as: 'profile'
 end
