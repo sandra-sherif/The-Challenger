@@ -1,0 +1,13 @@
+<h1>Challenges#new</h1>
+<p>Find me in app/views/challenges/new.html.erb</p>
+
+<%= form_for @challenge, :html => {:multipart => true} do |f| %>
+  <p>
+    <%= f.label "Name" %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.file_field :path %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

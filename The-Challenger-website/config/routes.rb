@@ -1,32 +1,15 @@
 Rails.application.routes.draw do
-  get 'paintings/_form'
 
-  get 'paintings/edit'
-
-  get 'paintings/new'
-
-  get '_form/edit'
-
-  get '_form/new'
-
-  get 'galleries/form'
-
-  get 'galleries/edit'
-
-  get 'galleries/index'
-
-  get 'galleries/new'
-
-  get 'galleries/show'
+  get 'challenges/new'
 
   get 'welcome/index'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+  resources :challenges
   # You can have the root of your site routed with "root"
-   root 'welcome#index'
+   root 'challenges#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

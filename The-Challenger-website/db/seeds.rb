@@ -3,5 +3,5 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+   Challenge.create(email: 'Chicago', path: 'Copenhagen')
 #   Mayor.create(name: 'Emanuel', city: cities.first)
