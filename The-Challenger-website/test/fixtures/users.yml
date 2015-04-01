@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  First_Name: 
+  Last_Name: 
+  Age: 
+  email: 
+  Password: 
+  Img_Path: 
+
+two:
+  First_Name: 
+  Last_Name: 
+  Age: 
+  email: 
+  Password: 
+  Img_Path: 
