@@ -35,9 +35,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #end
   protected
 
-  def after_sign_up_path_for(resource)
-    '/users/#{:id}'
-  end
+  # def after_sign_up_path_for(resource)
+  #   '/users/#{:id}'
+  # end
   
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -57,9 +57,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # You can put the params you want to permit in the empty array.
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.for(:account_update) << :attribute
+  #   devise_parameter_sanitizer.for(:account_update) << :first_name
+  #   devise_parameter_sanitizer.for(:account_update) << :last_name
+  #   devise_parameter_sanitizer.for(:account_update) << :age
   # end
 
+  def sign_up_params
+    params.require(:user).permit(:first_name, :last_name, :age, :password, :password_confirmation)
+  end
+
+  def account_update_params
+    params.require(:user).permit(:first_name, :last_name, :age, :password, :password_confirmation, :current_password)
+  end
+
+  def after_update_path_for(user)
+    profile_path
+  end
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)
