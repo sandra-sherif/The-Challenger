@@ -23,10 +23,6 @@ class ChallengesController < ApplicationController
     redirect_to challenges_path, notice:  "The challenge #{@challenge.name} has been deleted."
   end
 
-  def find
-    redirect_to challenges_path, notice:  "The challenge #{@challenge.name} has been found."
-  end
-
   private
   def challenge_params
     params.require(:challenge).permit(:name, :path, :user1_id)
