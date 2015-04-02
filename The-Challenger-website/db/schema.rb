@@ -11,7 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402103111) do
+ActiveRecord::Schema.define(version: 20150402153647) do
+
+  create_table "challenge_responses", force: true do |t|
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "challenges", force: true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.integer  "user1_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "friends", force: true do |t|
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "likes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

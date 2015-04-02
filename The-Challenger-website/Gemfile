@@ -42,4 +42,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 # Installing devise gem 
 gem 'devise'
 
+gem 'carrierwave'
+gem 'bootstrap-sass'
+
 
