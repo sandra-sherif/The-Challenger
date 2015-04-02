@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402153647) do
+ActiveRecord::Schema.define(version: 20150402210231) do
 
   create_table "challenge_responses", force: true do |t|
     t.string   "path"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150402153647) do
     t.integer  "user1_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "upload_type"
   end
 
   create_table "comments", force: true do |t|

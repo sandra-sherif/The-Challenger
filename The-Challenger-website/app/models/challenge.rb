@@ -4,6 +4,8 @@ class Challenge < ActiveRecord::Base
 	has_many :comments
 	mount_uploader :path, UploadUploader
     validates :name, presence: true
+    validates :upload_type, presence: true
+    validates :path, presence: true
 	# validates :Challenge, presence: true,
 	# 						length: {minimum: 2 }
 

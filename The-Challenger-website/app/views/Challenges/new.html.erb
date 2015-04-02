@@ -14,6 +14,8 @@
     <%= f.text_field :name %>
     <%= f.label :path %>
     <%= f.file_field :path %>
+    <%= f.label :upload_type %>
+    <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Challenge Type'%>
     <%= f.submit "Save", class: "btn btn-primary" %>
 
   <% end %>

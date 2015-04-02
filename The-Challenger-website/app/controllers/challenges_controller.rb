@@ -25,7 +25,7 @@ class ChallengesController < ApplicationController
 
   private
   def challenge_params
-    params.require(:challenge).permit(:name, :path, :user1_id)
+    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type)
   end
 
 end

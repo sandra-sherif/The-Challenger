@@ -21,7 +21,11 @@
       <tr>
         <td><%= challenge.name %></td>
         <td><%= link_to "Download Challenge", challenge.path_url %></td>
+        <% if challenge.upload_type == "Video" %>
         <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
+        <%else%>
+        <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+        <%end%>
         <td><%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{challenge.name}?" %></td>
       </tr>
     <% end %>
