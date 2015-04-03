@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401085409) do
+ActiveRecord::Schema.define(version: 20150402210231) do
 
   create_table "challenge_responses", force: true do |t|
     t.string   "path"
@@ -20,18 +20,22 @@ ActiveRecord::Schema.define(version: 20150401085409) do
   end
 
   create_table "challenges", force: true do |t|
-    t.string   "Path"
+    t.string   "name"
+    t.string   "path"
+    t.integer  "user1_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "upload_type"
   end
 
   create_table "comments", force: true do |t|
+    t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "friends", force: true do |t|
-    t.string   "Status"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,14 +46,21 @@ ActiveRecord::Schema.define(version: 20150401085409) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "First_Name"
-    t.string   "Last_Name"
-    t.integer  "Age"
-    t.string   "email"
-    t.string   "Password"
-    t.string   "Img_Path"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

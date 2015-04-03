@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  Path: 
-  User_email: 
+  name: MyString
+  path: MyString
+  user1_id: 1
 
 two:
-  Path: 
-  User_email: 
+  name: MyString
+  path: MyString
+  user1_id: 1

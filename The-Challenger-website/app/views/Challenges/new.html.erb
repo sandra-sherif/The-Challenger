@@ -1,0 +1,22 @@
+<% if !@challenge.errors.empty? %>
+  <div class="alert alert-error">
+    <ul>
+      <% @challenge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="well">
+  <%= form_for @challenge, html: { multipart: true } do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :path %>
+    <%= f.file_field :path %>
+    <%= f.label :upload_type %>
+    <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Challenge Type'%>
+    <%= f.submit "Save", class: "btn btn-primary" %>
+
+  <% end %>
+</div>
