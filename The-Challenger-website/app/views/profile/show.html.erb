@@ -7,3 +7,9 @@
 <% if user_signed_in? %>
 <%= link_to "Edit profile", edit_user_registration_path, :class => 'navbar-link' %>
 <% end %>
+<% unless @user.avatar_file_name.blank? %>
+  <li class="round-image-50"><%= image_tag(@user.avatar.url(:thumb)) %></li>
+ <% else %> 
+  <li class="round-image-50"><%= image_tag(@user.avatar.url(:thumb), :size =>"100x100") %> 
+  </li> 
+ <% end %>
