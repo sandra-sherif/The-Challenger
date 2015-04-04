@@ -26,8 +26,10 @@
         <%else%>
         <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
         <%end%>
+        <td>
         <% if challenge.user1_id == current_user.id %>
-        <td><%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{challenge.name}?" %>
+        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{challenge.name}?" %>
+        <%= link_to "comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary" %>
         <% end %>
         <div id="fb-root"></div>
         <script>(function(d, s, id) {

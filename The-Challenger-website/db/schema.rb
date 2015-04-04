@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402210231) do
+ActiveRecord::Schema.define(version: 20150404140648) do
 
   create_table "challenge_responses", force: true do |t|
     t.string   "path"
@@ -30,9 +30,14 @@ ActiveRecord::Schema.define(version: 20150402210231) do
 
   create_table "comments", force: true do |t|
     t.string   "text"
+    t.integer  "challenge_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["challenge_id"], name: "index_comments_on_challenge_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "friends", force: true do |t|
     t.string   "status"

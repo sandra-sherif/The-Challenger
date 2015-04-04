@@ -53,6 +53,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.4.0)
+    foreigner (1.7.4)
+      activerecord (>= 3.0.0)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.2.12)
@@ -133,6 +135,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   devise
+  foreigner
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.1.8)

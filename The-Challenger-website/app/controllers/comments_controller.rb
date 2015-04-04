@@ -1,12 +1,22 @@
 class CommentsController < ApplicationController
-	before_filter :signed_in_user, only: [:create, :destroy]
-	
-	def new
-		@comment = comment.new
-	end
 
 	def create
-		comment = current_user.Comments.build(params[:text])
-		comment.challenge = Challenge.find(params[:challenge_id])
-		comment.save
+    @challenge = Challenge.find(params[:challenge_id])
+    @comment = @challenge.comments.create(comment_params)
+    redirect_to challenge_path(@challenge)
+  end
+ 	
+ 	def index
+ 		@challenge = Challenge.find(params[:challenge_id])
+ 	end
+
+ 	def show
+ 		@comment = Comment.find(params[:id])
+ 	end
+
+  private
+    def comment_params
+      params.require(:comment).permit(:text)
+    end
+
 end
