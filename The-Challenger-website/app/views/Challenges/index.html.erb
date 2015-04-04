@@ -13,7 +13,7 @@
       <th>Name</th>
       <th>Download Link</th>
       <th>Display Challenge</th>
-      <th>&nbsp;</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,19 @@
         <%else%>
         <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
         <%end%>
-        <td><%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{challenge.name}?" %></td>
+        <% if challenge.user1_id == current_user.id %>
+        <td><%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{challenge.name}?" %>
+        <% end %>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+        </td>
       </tr>
     <% end %>
   </tbody>

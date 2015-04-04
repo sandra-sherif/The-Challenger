@@ -12,11 +12,14 @@
   <%= form_for @challenge, html: { multipart: true } do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
+    <BR><BR> 
     <%= f.label :path %>
     <%= f.file_field :path %>
+    <BR><BR> 
     <%= f.label :upload_type %>
     <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Challenge Type'%>
-    <%= f.submit "Save", class: "btn btn-primary" %>
+    <BR><BR> 
+    <%= f.submit "Upload Challenge", class: "btn btn-primary" %>
 
   <% end %>
 </div>
