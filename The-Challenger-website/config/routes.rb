@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  # creates all the routes that are related to the challenges controller
   resources :challenges
 
   root "challenges#index"
