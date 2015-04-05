@@ -10,7 +10,7 @@ class AddFriendsTest <ActiveSupport::TestCase
 end
 	test "Add friends using Id" do
 	AddFriend.create user_id: users(:seif).id, friend_id: user(:sarah).id
-	assert users(:sarah).friends.include?(users(:sarah))
+	assert users(:sarah).pending_friends.include?(users(:sarah))
 
 end
 
@@ -51,5 +51,18 @@ should "send an acceptance email" do
 	end
 end
 end
+
+context ".request" do
+	should "create two user friendships" do
+		assert_difference 'UserFriendship.count' 2 do
+			UserFriendship.request(users(:seif), users(:sarah))
+		end
+	end
+	should "send a friend request email" do
+		assert_difference 'ActionMailer::Base.delivers.size',1 do
+			UserFriendship.request(users(:seif), users(:sarah))
+		end
+	end
+
 
 end
