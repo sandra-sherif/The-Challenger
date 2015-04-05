@@ -8,7 +8,15 @@
 </head>
 <body>
 
+<% if !user_signed_in? %>
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
 
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+<%end%>
 
 <div class="container" style="padding-top:20px;">
 <%= yield %>
