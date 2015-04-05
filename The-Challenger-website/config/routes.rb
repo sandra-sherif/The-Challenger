@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
 
-  resources :challenges, only: [:index, :new, :create, :destroy]
+  resources :challenges
+
   root "challenges#index"
 
   get 'welcome/index'
