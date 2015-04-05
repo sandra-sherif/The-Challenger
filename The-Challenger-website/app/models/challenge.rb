@@ -2,6 +2,7 @@ class Challenge < ActiveRecord::Base
 	belongs_to :user1, :class_name => "User", :foreign_key => "user1_id"
 	belongs_to :user2, :class_name => "User", :foreign_key => "user2_id"
 	has_many :comments
+<<<<<<< HEAD
 	has_many :tags
 	mount_uploader :path, UploadUploader
     validates :name, presence: true
@@ -9,5 +10,9 @@ class Challenge < ActiveRecord::Base
     validates :path, presence: true
 	# validates :Challenge, presence: true,
 	# 						length: {minimum: 2 }
+=======
+	validates :Challenge, presence: true,
+							length: {minimum: 2 }
+>>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
 
 end

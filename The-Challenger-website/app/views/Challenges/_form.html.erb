@@ -1,4 +1,4 @@
-<!--# <% @challenges.tags.build %>
+<% @challenges.tags.build %>
  <%= form_for(@challenges) do |challenge_form| %>
    <% if @challenges.errors.any? %> 
    <div id="errorExplanation">
@@ -9,30 +9,30 @@
     <% end %>
     </ul>
   </div>
-  <% end %> -->
+  <% end %> 
  
-  <!-- <div class="field">
+ <div class="field">
     <%= challenge_form.label :name %><br />
     <%= challenge_form.text_field :name %>
   </div>
   <div class="field">
-    <%= challenge_form.label :title %><br />
-    <%= challenge_form.text_field :title %>
+    <%= challenge_form.label :upload_type %><br />
+    <%= challenge_form.text_field :upload_type %>
   </div>
   <div class="field">
-    <%= challenge_form.label :content %><br />
-    <%= challenge_form.text_area :content %> -->
-  <!-- </div>
+    <%= challenge_form.label :path %><br />
+    <%= challenge_form.text_area :path %> -->
+  </div>
   <h2>Tags</h2>
   <%= render :partial => 'tags/form',
              :locals => {:form => challenge_form} %>
   <div class="actions">
     <%= challenge_form.submit %>
   </div>
-<% end %> -->
+<% end %> 
 
 
-<!-- <%= form.fields_for :tags do |tag_form| %>
+ <%= form.fields_for :tags do |tag_form| %>
   <div class="field">
     <%= tag_form.label :name, 'Tag:' %>
     <%= tag_form.text_field :name %>
@@ -43,12 +43,4 @@
       <%= tag_form.check_box :_destroy %>
     </div>
   <% end %>
-<% end %> -->
-
-
-<!-- from another source -->
-
-<div class="field">
-  <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-  <%= f.text_field :tag_list %>
-</div>
+<% end %> 

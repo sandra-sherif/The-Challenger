@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TheChallengerWebsite</title>
+  <title>The Challenger</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<p class="navbar-text pull-right">
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.full_name %> </strong>
+ <!--  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> | -->
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
 
+<<<<<<< HEAD
 
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
@@ -30,5 +36,18 @@
   <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
 <% end %>
 
+=======
+<!--   <% unless @user.avatar_file_name.blank? %>
+  <li class="round-image-50"><%= image_tag(@user.avatar.url(:thumb)) %></li>
+  
+  <% else %> 
+  <li class="round-image-50"><%= image_tag(@user.avatar.url("public/images/thumb/missing.jpeg")) %></li>
+ 
+ <% end %>
+  -->
+ <% end %>
+ </p>
+<%= yield %>
+>>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
 </body>
 </html>
