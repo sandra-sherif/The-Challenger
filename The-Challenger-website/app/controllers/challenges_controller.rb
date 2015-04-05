@@ -23,6 +23,10 @@ class ChallengesController < ApplicationController
     redirect_to challenges_path, notice:  "The challenge #{@challenge.name} has been deleted."
   end
 
+  def show
+    @challenge = Challenge.find(params[:id])
+  end
+
   private
   def challenge_params
     params.require(:challenge).permit(:name, :path, :user1_id, :upload_type)

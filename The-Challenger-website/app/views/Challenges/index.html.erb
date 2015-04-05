@@ -7,7 +7,7 @@
 <%= link_to "New Challenge", new_challenge_path, class: "btn btn-primary" %>
 <br />
 <br />
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped able-condensed table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -19,17 +19,19 @@
   <tbody>
     <% @challenges.each do |challenge| %>
       <tr>
-        <td><%= challenge.name %></td>
-        <td><%= link_to "Download Challenge", challenge.path_url %></td>
+        <td ><%= challenge.name %></td>
+        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
         <% if challenge.upload_type == "Video" %>
         <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
         <%else%>
         <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
         <%end%>
         <td>
+        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+        <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
+        <p></p>
         <% if challenge.user1_id == current_user.id %>
-        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{challenge.name}?" %>
-        <%= link_to "comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary" %>
+        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %>
         <% end %>
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
