@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<!-- This condition checks whether the user is signed in or not. In both cases, a message will be displayed whether the request was confirmed or rejected -->
+
 <% if !user_signed_in? %>
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
@@ -21,6 +23,8 @@
 <div class="container" style="padding-top:20px;">
 <%= yield %>
 </div>
+
+<!-- This code will create a navigation bar as a footer with the current user signed in name and two links edit profile and log out if the user is signed in. Otherwise, it will display two links to sign up or log in -->
 
 <p class="navbar-text pull-right">
 <% if user_signed_in? %>
