@@ -1,11 +1,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
  # :confirmable, :lockable, :timeoutable and :omniauthable
+
+#This method gets the user's full name to be used later in the views
+
 def full_name
     if self.first_name.blank? && self.last_name.blank?
       self.email
     else
-      self.first_name << " " << self.last_name
+      self.first_name + " " + self.last_name
     end
   end
 

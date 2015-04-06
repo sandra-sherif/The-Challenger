@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-#Added the def of users just to try it out
-	 def show
+#This action gets all the challenges into a variable to be used later in the view and it also
+#gets the user with the id passed and stores into the variable user
+    
      @user = User.find(params[:id])
+     @challenges = Challenge.all
    end
 
    	# def new 
