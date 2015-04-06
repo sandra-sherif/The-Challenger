@@ -62,6 +62,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   devise_parameter_sanitizer.for(:account_update) << :age
   # end
 
+  #These two actions set up the parameters needed for signing up and updating the profile
+
   def sign_up_params
     params.require(:user).permit(:first_name, :last_name, :age, :password, :password_confirmation, :avatar, :email)
   end
@@ -69,6 +71,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def account_update_params
     params.require(:user).permit(:first_name, :last_name, :age, :password, :password_confirmation, :current_password, :avatar, :email)
   end
+
+  #This action redirects the user to his/her profile after updating the account to see the changes
 
   def after_update_path_for(user)
     profile_path

@@ -1,4 +1,6 @@
 
+<!-- This part will display the user's profile picture if he/she uploaded one and otherwise it will display the defaut picture -->
+
 <% unless @user.avatar_file_name.blank? %>
   <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb)) %></td>
  <% else %> 
@@ -7,6 +9,8 @@
  <% end %>
  </br>
 
+ <!-- This part will display the user's full name or email if the full name doesn't exist. It will also display two buttons one to view all challenges and the other is to create a new challenge -->
+
 <h2> <%= @user.full_name %> </h2></br>
 <% unless @user.age.blank? %>
 <p> Age: <%= @user.age %> </p></br>
@@ -14,6 +18,9 @@
 </br>
 <%= link_to "View All Challenges", challenges_path, class:"btn btn-primary" %>
 <%= link_to "New Challenge", new_challenge_path, class:"btn btn-primary" %>
+
+<!-- This code will load all the challenges posted by the user signed in and put them in a table. A download button, a button to view the challenge,another one to view the comments and a last one to delete the challenge are available. A Facebook share button is also part of the code below-->
+
 <div class="container"> <h3> Challenges posted by <%= @user.full_name %> </h3></div>
 <table class="table table-bordered table-striped able-condensed table-hover">
   <thead>

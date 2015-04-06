@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
  # :confirmable, :lockable, :timeoutable and :omniauthabl
  # before_save :delete_avatar, if:{ delete_avatar == '1' && !avatar_updated_at_changed? }
+
+#This method gets the user's full name to be used later in the views
+
 def full_name
     if self.first_name.blank? && self.last_name.blank?
       self.email

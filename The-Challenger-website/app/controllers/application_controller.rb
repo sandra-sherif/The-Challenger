@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 #   devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:first_name, :last_name, :age, :email, :password) }
 # end
 
+#This code redirects the user after signing in or signing up to his/her profile
 
 def after_sign_up_path_for(user)
     '/profile/'
@@ -18,10 +19,10 @@ def after_sign_up_path_for(user)
  def after_sign_in_path_for(user)
     '/profile/'
   end
-def removepicture_path(user)
-	user.delete_avatar
-'/profile/'
-end
+# def removepicture_path(user)
+# 	user.delete_avatar
+# '/profile/'
+# end
 
 
   protect_from_forgery with: :exception

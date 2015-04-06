@@ -22,8 +22,10 @@ end
  
   # You can have the root of your site routed with "root"
 
+#This line sets the route of /profile/ to the action show in the profile controller
+
   get 'profile/', to: 'profile#show', as: 'profile'
-  get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
+  #get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
 
 
   # Example of regular route:
