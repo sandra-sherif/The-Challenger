@@ -1,32 +1,46 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
 
 
-  resources :challenges, only: [:index, :new, :create, :destroy]
+  resources :challenges
+
   root "challenges#index"
 
   get 'welcome/index'
 
+
   devise_for :users
-=======
+
+  resources :challenges do
+  resources :comments
+end
+
+
   get 'welcome/index'
   
   
   devise_for :users, controllers: { registrations: "users/registrations" }
 
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 #  devise_for :users, controllers: { registrations: "registrations" }
   resources :users
+
  
   # You can have the root of your site routed with "root"
-<<<<<<< HEAD
+
  
-=======
+
   root 'welcome#index'
   get 'profile/', to: 'profile#show', as: 'profile'
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
+ 
+  # You can have the root of your site routed with "root"
+
+  get 'profile/', to: 'profile#show', as: 'profile'
+  get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -63,9 +77,11 @@ Rails.application.routes.draw do
   #     end
   #   end
 
+
   resources :challenges do
     resources :comments
   end
+
 
   # Example resource route with concerns:
   #   concern :toggleable do

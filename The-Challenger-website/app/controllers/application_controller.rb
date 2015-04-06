@@ -19,11 +19,13 @@ def after_sign_up_path_for(user)
     '/profile/'
   end
 
+def removepicture_path(user)
+	user.delete_avatar
+'/profile/'
+end
 
   protect_from_forgery with: :exception
-<<<<<<< HEAD
+
   before_action :authenticate_user!
-=======
-  
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
 end

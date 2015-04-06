@@ -1,31 +1,40 @@
-<p id="notice"><%= notice %></p>
- 
+<body>
 <p>
-  <b>Name:</b>
-  <%= @challenge.name %>
+  <h1><%=@challenge.name %></h1>
 </p>
- 
-<p>
-  <b>upload_type:</b>
-  <%= @challenge.upload_type %> <!-- path -->
-</p>
- 
-<p>
-  <b>path:</b>
-  <%= @challenges.path %>
-</p>
- 
-<p>
-  <b>Tags:</b>
-  <%= join_tags(@challenges) %>
-</p>
- 
-<h2>Comments</h2>
-<%= render @challenges.comments %>
- 
-<h2>Add a comment:</h2>
-<%= render "comments/form" %>
- 
- 
-<%= link_to 'Edit challenge', edit_challenge_path(@challenges) %> |
-<%= link_to 'Back to challenges', challenge_path %> |
+
+  <% if @challenge.upload_type == "Video" %>
+        <%= video_tag @challenge.path_url, :size => "1000x540", :controls => true %>
+        <%else%>
+        <%= image_tag @challenge.path_url, :width => 600, :height => 500 %>
+        <%end%>
+        <div id="fb-root"></div><BR>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+</p><p></p>
+<h3>Comments</h3>
+<%= render @challenge.comments %>
+
+<%= link_to "Add Comment", {controller: "comments", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
+<%= link_to "Back", challenges_path , class:"btn btn-danger"%>
+</body>
+<style>
+h1 {
+  text-align: center;
+  font-weight: bold;
+}
+div {
+  vertical-align: center;
+  text-align: center;
+}
+body {
+background: url("http://i.imgur.com/PVYiioJ.jpg");
+}
+</style>
+

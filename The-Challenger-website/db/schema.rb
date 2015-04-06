@@ -11,22 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150402210231) do
 
   create_table "challenge_responses", force: true do |t|
-=======
+
 ActiveRecord::Schema.define(version: 20150402075905) do
 
   create_table "challenge_responses", force: :cascade do |t|
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
+ActiveRecord::Schema.define(version: 20150404140648) do
+
+  create_table "challenge_responses", force: :cascade do |t|
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
   create_table "challenges", force: true do |t|
+
+  create_table "challenges", force: :cascade do |t|
+
     t.string   "name"
     t.string   "path"
     t.integer  "user1_id"
@@ -35,8 +39,9 @@ ActiveRecord::Schema.define(version: 20150402075905) do
     t.string   "upload_type"
   end
 
+
   create_table "comments", force: true do |t|
-=======
+
   create_table "challenges", force: :cascade do |t|
     t.string   "Path"
     t.datetime "created_at"
@@ -44,37 +49,51 @@ ActiveRecord::Schema.define(version: 20150402075905) do
   end
 
   create_table "comments", force: :cascade do |t|
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
+  create_table "comments", force: :cascade do |t|
+
     t.string   "text"
+    t.integer  "challenge_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
+
   create_table "friends", force: true do |t|
+
+  add_index "comments", ["challenge_id"], name: "index_comments_on_challenge_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "friends", force: :cascade do |t|
+
     t.string   "status"
-=======
+
   create_table "friends", force: :cascade do |t|
     t.string   "Status"
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
+
   create_table "likes", force: true do |t|
-=======
+
   create_table "likes", force: :cascade do |t|
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
+
+  create_table "likes", force: :cascade do |t|
+
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
   create_table "users", force: true do |t|
-=======
+
   create_table "users", force: :cascade do |t|
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
+  create_table "users", force: :cascade do |t|
+
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -87,17 +106,22 @@ ActiveRecord::Schema.define(version: 20150402075905) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-=======
+
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "age"
     t.string   "img_path"
+
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "age"
+
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
+
+
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

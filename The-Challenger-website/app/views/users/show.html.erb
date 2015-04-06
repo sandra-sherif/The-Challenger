@@ -10,3 +10,54 @@
   <% else %> 
   <li class="round-image-50"><%= image_tag(@user.avatar.url(:thumb), :size =>"100x100") %></li> 
  <% end %>
+
+<% unless @user.avatar_file_name.blank? %>
+  <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb)) %></td>
+  <% else %> 
+  <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb), :size =>"100x100")%></td> 
+ <% end %> </br>
+ 
+ <strong><%= @user.full_name%> </strong>
+  </br>
+<% unless @user.age.blank? %>
+<p> Age: <%= @user.age %> </p></br>
+<% end %>
+
+<table class="table table-bordered table-striped able-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Download Link</th>
+      <th>Display Challenge</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+<tbody>
+    <% @challenges.each do |challenge| %>
+     <% if challenge.user1_id == @user.id %>
+      <tr>
+        <td ><%= challenge.name %></td>
+        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
+        <% if challenge.upload_type == "Video" %>
+        <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
+        <%else%>
+        <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+        <%end%>
+        <td>
+        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+        <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
+        <p></p>
+        <% end %>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>

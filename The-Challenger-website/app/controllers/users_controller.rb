@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 #Added the def of users just to try it out
 	 def show
      @user = User.find(params[:id])
+
+     @challenges = Challenge.all
+
    end
 
    	# def new 
