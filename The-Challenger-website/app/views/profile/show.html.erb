@@ -12,6 +12,9 @@
 <p> Age: <%= @user.age %> </p></br>
 <% end %>
 </br>
+<%= link_to "View All Challenges", challenges_path, class:"btn btn-primary" %>
+<%= link_to "New Challenge", new_challenge_path, class:"btn btn-primary" %>
+<div class="container"> <h3> Challenges posted by <%= @user.full_name %> </h3></div>
 <table class="table table-bordered table-striped able-condensed table-hover">
   <thead>
     <tr>
