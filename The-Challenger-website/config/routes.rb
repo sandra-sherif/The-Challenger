@@ -77,9 +77,9 @@ end
   #   end
 
 
-  resources :challenges do
-    resources :comments
-  end
+  # resources :challenges do
+  #   resources :comments
+  # end
 
 
   # Example resource route with concerns:
