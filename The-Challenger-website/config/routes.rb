@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  resources :challenges
+  #resources :challenges
 
   root "challenges#index"
 
