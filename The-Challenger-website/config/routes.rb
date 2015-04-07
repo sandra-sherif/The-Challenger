@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+
+  resources :challenges
+
+  root "challenges#index"
+
+  get 'welcome/index'
+
+  resources :challenges do
+  resources :comments
+end
+
   get 'welcome/index'
   
   
@@ -10,8 +21,12 @@ Rails.application.routes.draw do
   resources :users
  
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+
+#This line sets the route of /profile/ to the action show in the profile controller
+
   get 'profile/', to: 'profile#show', as: 'profile'
+  #get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -48,9 +63,7 @@ Rails.application.routes.draw do
   #     end
   #   end
 
-  resources :challenges do
-    resources :comments
-  end
+ 
 
   # Example resource route with concerns:
   #   concern :toggleable do
@@ -65,7 +78,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  resource :user_friendship
-
-  get '/:id', to 'profiles#show', as: 'profile'
 end

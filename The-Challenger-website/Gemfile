@@ -9,29 +9,11 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-<<<<<<< HEAD
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
-gem 'execjs'
-gem 'therubyracer', :platforms => :ruby
-#gem 'simple form'
-gem 'activemodel'
-gem 'state_machine'
-
-group :test do 
-	gem 'shoulda'
-	
-end
-	
-=======
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
->>>>>>> 54d0329f768ec500c21ed1302fd475e76c66a5b3
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -44,6 +26,7 @@ gem 'devise'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass'
+# gem 'bootstrap_form'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -59,5 +42,25 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~>4.1.0'
 end
+
+group :test do
+
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+end
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
+
+#Sprint no. 1
+# Installing devise gem 
+
+gem 'carrierwave'
+
+gem 'foreigner'
+
 
