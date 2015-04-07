@@ -6,7 +6,5 @@ class Challenge < ActiveRecord::Base
     validates :name, presence: true
     validates :upload_type, presence: true
     validates :path, presence: true
-	# validates :Challenge, presence: true,
-	# 						length: {minimum: 2 }
 
 end
