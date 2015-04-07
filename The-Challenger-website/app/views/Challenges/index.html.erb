@@ -1,3 +1,15 @@
+<!-- This file provides an html view to show all the challenges.
+Notes:
+1- The file uses bootstrap tags and buttons such as table, thead and btn-primary for design purposes.
+2- The first part of the document (If condition) checks if there is an popup message generated when trying to delete or upload a challenge and displays the message of the popup.
+3- The New Challenge button calls the challenges/new.html.erb view.
+4- The View Challenge button calls the challenges/show.html.erb view.
+5- The View Comments buttons calls the comments/index.html.erb view.
+6- The delete button calls the predefined delete method that calls the def destroy method in challenges_controller
+and it is enabled only if the current_user is the one who uploaded the challenge.
+7- @challenges.each do |challenge| loops on all the challenges and view each one in a separate row.
+8- if challenge.upload_type == "Video" checks the upload_type of the challenge to choose the appropriate tag.-->
+
 <% if !flash[:notice].blank? %>
   <div class="alert alert-info">
   <%= flash[:notice] %>
@@ -7,7 +19,7 @@
 <%= link_to "New Challenge", new_challenge_path, class: "btn btn-primary" %>
 <br />
 <br />
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped able-condensed table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -19,17 +31,19 @@
   <tbody>
     <% @challenges.each do |challenge| %>
       <tr>
-        <td><%= challenge.name %></td>
-        <td><%= link_to "Download Challenge", challenge.path_url %></td>
+        <td ><%= challenge.name %></td>
+        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
         <% if challenge.upload_type == "Video" %>
         <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
         <%else%>
         <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
         <%end%>
         <td>
+        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+        <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
+        <p></p>
         <% if challenge.user1_id == current_user.id %>
-        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{challenge.name}?" %>
-        <%= link_to "comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary" %>
+        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %>
         <% end %>
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
