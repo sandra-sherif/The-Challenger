@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
 
-  devise_for :users
+  
 
   resources :challenges do
   resources :comments
 end
 
 
-  get 'welcome/index'
+  
   
   
   devise_for :users, controllers: { registrations: "users/registrations" }
@@ -32,7 +32,6 @@ end
  
 
   root 'welcome#index'
-  get 'profile/', to: 'profile#show', as: 'profile'
 
  
   # You can have the root of your site routed with "root"
