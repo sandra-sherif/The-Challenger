@@ -9,3 +9,22 @@ one: {}
 #
 two: {}
 #  column: value
+<<<<<<< HEAD
+=======
+
+one:
+  first_name: 
+  last_name: 
+  age: 
+  email: 
+  Password:  
+
+two:
+  first_name: 
+  last_name: 
+  age: 
+  email: 
+  Password: 
+
+
+>>>>>>> f144b4733f31ac593af335bcf112e78b2d1dfcb8
