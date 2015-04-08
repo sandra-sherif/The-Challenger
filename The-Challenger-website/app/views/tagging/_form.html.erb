@@ -11,18 +11,7 @@
   </div>
   <% end %> 
  
- <div class="field">
-    <%= challenge_form.label :name %><br />
-    <%= challenge_form.text_field :name %>
-  </div>
-  <div class="field">
-    <%= challenge_form.label :upload_type %><br />
-    <%= challenge_form.text_field :upload_type %>
-  </div>
-  <div class="field">
-    <%= challenge_form.label :path %><br />
-    <%= challenge_form.text_area :path %> -->
-  </div>
+ 
   <h2>Tags</h2>
   <%= render :partial => 'tags/form',
              :locals => {:form => challenge_form} %>
