@@ -1,4 +1,5 @@
 class Challenge < ActiveRecord::Base
+	
 	# A challenge has user1_id and user2_id attributes as foreign keys from table User.
 	# A challenge has many comments.
 	# The model uses the Uploader class that was generated in order to get the path of the uploaded challenge.
@@ -10,7 +11,5 @@ class Challenge < ActiveRecord::Base
     validates :name, presence: true
     validates :upload_type, presence: true
     validates :path, presence: true
-	# validates :Challenge, presence: true,
-	# 						length: {minimum: 2 }
 
 end
