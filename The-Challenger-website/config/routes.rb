@@ -1,9 +1,32 @@
 Rails.application.routes.draw do
+
+  resources :challenges
+
+  root "challenges#index"
+
+  get 'welcome/index'
+
+  resources :challenges do
+  resources :comments
+end
+
+  get 'welcome/index'
+  
+  
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+#  devise_for :users, controllers: { registrations: "registrations" }
+  resources :users
+ 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+
+#This line sets the route of /profile/ to the action show in the profile controller
+
+  get 'profile/', to: 'profile#show', as: 'profile'
+  #get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -40,6 +63,8 @@ Rails.application.routes.draw do
   #     end
   #   end
 
+ 
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
@@ -47,7 +72,7 @@ Rails.application.routes.draw do
   #   resources :posts, concerns: :toggleable
   #   resources :photos, concerns: :toggleable
 
-  # Example resource route within a namespace:
+  # Example resource route within a namespace:http://guides.rubyonrails.org/routing.html#specifying-a-controller-to-use
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
