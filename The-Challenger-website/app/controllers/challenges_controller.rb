@@ -2,19 +2,19 @@ class ChallengesController < ApplicationController
 
   # def index returns all the challenges in the database.
   def index
-  	@challenges = Challenge.all
+    @challenges = Challenge.all
   end
 
   def new
-  	@challenge = Challenge.new
+    @challenge = Challenge.new
   end
 
   # def create takes params from the user.
   # Creates a new challenge with the given params then redirects to challanges view.
   # View a message that the challenge is uploaded if the challenge is actually saved or render the same view.
   def create
-  	 @challenge = Challenge.new(challenge_params)
-     @challenge.user1_id = current_user.id
+    @challenge = Challenge.new(challenge_params)
+    @challenge.user1_id = current_user.id
     if @challenge.save
       redirect_to challenges_path, notice: "The challenge #{@challenge.name} has been uploaded."
     else

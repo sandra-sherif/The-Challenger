@@ -1,11 +1,15 @@
 <% if !@challenge.errors.empty? %>
+
   <div class="alert alert-error">
     <ul>
       <% @challenge.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
+
       <% end %>
+    
     </ul>
   </div>
+
 <% end %>
 
 <div class="well">
@@ -22,4 +26,5 @@
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 
   <% end %>
+
 </div>

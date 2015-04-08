@@ -11,40 +11,58 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 8- if challenge.upload_type == "Video" checks the upload_type of the challenge to choose the appropriate tag.-->
 
 <% if !flash[:notice].blank? %>
+  
   <div class="alert alert-info">
   <%= flash[:notice] %>
   </div>
+
 <% end %>
+
 <br />
 <%= link_to "New Challenge", new_challenge_path, class: "btn btn-primary" %>
 <br />
+
 <br />
 <table class="table table-bordered table-striped able-condensed table-hover">
   <thead>
+    
     <tr>
       <th>Name</th>
       <th>Download Link</th>
       <th>Display Challenge</th>
       <th>Actions</th>
+
     </tr>
   </thead>
+  
   <tbody>
     <% @challenges.each do |challenge| %>
+  
       <tr>
         <td ><%= challenge.name %></td>
         <td ><%= link_to "Download Challenge", challenge.path_url %></td>
+  
         <% if challenge.upload_type == "Video" %>
-        <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
+
+          <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
+ 
         <%else%>
-        <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+
+          <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+  
         <%end%>
+ 
         <td>
         <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
         <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
         <p></p>
+ 
         <% if challenge.user1_id == current_user.id %>
+ 
         <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %>
+ 
         <% end %>
+ 
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -56,6 +74,8 @@ and it is enabled only if the current_user is the one who uploaded the challenge
         <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
         </td>
       </tr>
+
     <% end %>
+    
   </tbody>
 </table>
