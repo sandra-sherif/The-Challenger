@@ -32,6 +32,7 @@
         <p></p>
         <% if challenge.user1_id == current_user.id %>
         <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %>
+        <% button_to "Tag", challenge, method: :tags , class: "btn btn-primary" data: %>
         
         <% end %>
         <div id="fb-root"></div>
