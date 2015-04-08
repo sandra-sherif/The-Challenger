@@ -32,6 +32,7 @@ gem 'bootstrap-sass'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'paperclip', '~> 4.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -43,12 +44,13 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   # gem 'factory_girl_rails', '~>4.1.0'
+
 end
 
 # group :test do
 
 # 	gem 'faker'
-   gem 'capybara'
+gem 'capybara'
 #   gem 'guard-rspec'
 #   gem 'launchy'
 # end

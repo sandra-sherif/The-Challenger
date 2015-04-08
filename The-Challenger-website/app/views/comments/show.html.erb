@@ -1,13 +1,16 @@
 <h2>Comments</h2>
+
 <% @challenge.comments.each do |comment| %>
  
   <p>
     <strong>Comment:</strong>
     <%= comment.text %>
   </p>
+  
 <% end %>
  
 <h2>Add a comment:</h2>
+
 <%= form_for([@challenge, @challenge.comments.build]) do |f| %>
   <p>
     <%= f.label :text %><br>
@@ -16,4 +19,5 @@
   <p>
     <%= f.submit %>
   </p>
+
 <% end %>

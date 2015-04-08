@@ -10,10 +10,15 @@
                 <%= comment.text %>
         </p>
         <p>
-         <% if comment.user_id == current_user.id %>
- 		<%= link_to 'Delete Comment', [comment.challenge, comment],
+        
+        <% if comment.user_id == current_user.id %>
+ 		
+        <%= link_to 'Delete Comment', [comment.challenge, comment],
                method: :delete,
+        
                data: { confirm: 'Are you sure?' }, class:"btn btn-warning" %>
+       
        <% end %>
 </p>
+
 <% end %>

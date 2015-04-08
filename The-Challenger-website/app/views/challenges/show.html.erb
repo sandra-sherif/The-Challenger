@@ -3,20 +3,27 @@ a view challenge button that sends a challenge_id to the def show method in the 
 Notes:
 1- The view challenge button is located in challenges/index.html.erb.
 2- The @challenge variable that is used throughout the document is the variable that was sent by the show method.-->
+
 <body>
 <p>
   <h1><%= @challenge.name %></h1>
 </p>
 <!-- This condition checks if @challenge.upload_type is a video or an image in order to write the appropriate tag.-->
+
   <% if @challenge.upload_type == "Video" %>
+
         <%= video_tag @challenge.path_url, :size => "1000x540", :controls => true %>
-        <%else%>
+
+  <%else%>
+  
         <%= image_tag @challenge.path_url, :width => 600, :height => 500 %>
-        <%end%>
+  <%end%>
+  
         <!-- Creates the facebook sharing button.-->
         <div id="fb-root"></div><BR>
         <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
+
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
@@ -24,7 +31,9 @@ Notes:
         }(document, 'script', 'facebook-jssdk'));</script>
         <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
 </p><p></p>
+
 <h3>Comments</h3>
+
 <%= render @challenge.comments %>
 
 <%= link_to "Add Comment", {controller: "comments", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
