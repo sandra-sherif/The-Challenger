@@ -1,24 +1,13 @@
 require 'test_helper'
 
 class ChallengesControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
 
-  test "should get new" do
-    get :new
-    assert_response :success
+test "should create article" do
+  assert_difference('Challenge.count') do
+    post :create, challenge: {name: 'Some title'}
   end
-
-  test "should get create" do
-    get :create
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get :destroy
-    assert_response :success
-  end
+ 
+  assert_redirected_to challenges_path(assigns(:challenge))
+end
 
 end
