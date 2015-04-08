@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
  
-<p>
+<p> <!-- to take the parameters of the challenge to be connected to only onle one and not to every challenge -->
   <b>Name:</b>
   <%= @Challenge.name %>
 </p>
@@ -18,7 +18,7 @@
 <h2>Tag</h2>
 <% @Challenge.tag.each do |tag| %>
   <p>
-    <b>CHallenger:</b>
+    <b>Challenger:</b>
     <%= Challenge.challenger %>
   </p>
  
@@ -28,22 +28,25 @@
   </p>
 <% end %>
  
-<h2>Add a tag:</h2>
+<h2>Add a tag:</h2> <!-- to add a new tag .build acts as .new  in an older version of ruby, it takes the challenger name and the text in a textfield--> 
+  
 <%= form_for([@Challenge, @challenge.tags.build]) do |f| %>
   <div class="field">
-    <%= f.label :challengerer %><br />
+    <%= f.label :challenger %><br />
     <%= f.text_field :challenger %>
   </div>
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :body %><br />
     <%= f.text_area :body %>
-  </div>
+  </div> -->
+  
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
  
 <br />
+<!-- to edit a challenge or to simply go back to view challenges-->
  
 <%= link_to 'Edit Challenge', edit_challenge_path(@Challenge) %> |
 <%= link_to 'Back to Challenge', challenge_path %> |

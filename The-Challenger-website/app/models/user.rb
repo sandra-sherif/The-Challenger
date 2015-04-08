@@ -5,26 +5,26 @@ class User < ActiveRecord::Base
 
  # :confirmable, :lockable, :timeoutable and :omniauthabl
  # before_save :delete_avatar, if:{ delete_avatar == '1' && !avatar_updated_at_changed? }
-def full_name
-    if self.first_name.blank? && self.last_name.blank?
-      self.email
-    else
-      self.first_name + " " + self.last_name
-    end
-  end
+# def full_name
+#     if self.first_name.blank? && self.last_name.blank?
+#       self.email
+#     else
+#       self.first_name + " " + self.last_name
+#     end
+#   end
 
-# def delete_avatar
-#   self.avatar = nil
-#   self.save
-# end
+# # def delete_avatar
+# #   self.avatar = nil
+# #   self.save
+# # end
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+#   devise :database_authenticatable, :registerable,
+#          :recoverable, :rememberable, :trackable, :validatable
 
-	has_many :challenges, :dependent => :destroy
-	has_many :comments, :dependent => :destroy
-	has_many :Likes, :dependent => :destroy
-  has_many :tags, :dependent => :destroy
+# 	has_many :challenges, :dependent => :destroy
+# 	has_many :comments, :dependent => :destroy
+# 	has_many :Likes, :dependent => :destroy
+#   has_many :tags, :dependent => :destroy
  # :confirmable, :lockable, :timeoutable and :omniauthable
 def full_name
     if self.first_name.blank? && self.last_name.blank?
