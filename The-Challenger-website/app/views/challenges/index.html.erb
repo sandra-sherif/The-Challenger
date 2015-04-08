@@ -1,3 +1,15 @@
+<!-- This file provides an html view to show all the challenges.
+Notes:
+1- The file uses bootstrap tags and buttons such as table, thead and btn-primary for design purposes.
+2- The first part of the document (If condition) checks if there is an popup message generated when trying to delete or upload a challenge and displays the message of the popup.
+3- The New Challenge button calls the challenges/new.html.erb view.
+4- The View Challenge button calls the challenges/show.html.erb view.
+5- The View Comments buttons calls the comments/index.html.erb view.
+6- The delete button calls the predefined delete method that calls the def destroy method in challenges_controller
+and it is enabled only if the current_user is the one who uploaded the challenge.
+7- @challenges.each do |challenge| loops on all the challenges and view each one in a separate row.
+8- if challenge.upload_type == "Video" checks the upload_type of the challenge to choose the appropriate tag.-->
+
 <% if !flash[:notice].blank? %>
   <div class="alert alert-info">
   <%= flash[:notice] %>

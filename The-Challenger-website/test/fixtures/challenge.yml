@@ -1,11 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  path: MyString
-  user1_id: 1
-
-two:
-  name: MyString
-  path: MyString
-  user1_id: 1
+challenge_with_path: # generated id: 1
+  path: 'Amr.jpg'
