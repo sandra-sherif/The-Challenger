@@ -27,5 +27,8 @@ def full_name
 	has_many :Likes, :dependent => :destroy
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "missing.jpeg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates :age, :numericality => {:only_integer => true}, :allow_nil => true,
+  :length => {:maximum => 2}
+  # validates :age, :numericality => {:must_be_less_than_or_equal_to => 100}
 
 end

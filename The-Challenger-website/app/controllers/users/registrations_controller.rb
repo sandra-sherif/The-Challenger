@@ -4,11 +4,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
  #  GET /resource/sign_up
  #  def new
-#   super
+ #  super
  #  end
 
   # POST /resource
-  #def create
+  # def create
   #   super
   #   redirect_to @user
   # end
@@ -29,8 +29,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
  # addeb by me 
-#  def sign_up_params
-#    allow = [:email, :password, :password_confirmation, :first_name, :last_name, :age]
+ #  def sign_up_params
+ #    allow = [:email, :password, :password_confirmation, :first_name, :last_name, :age]
  #   params.require(resource_name).permit(allow)
   #end
   protected
