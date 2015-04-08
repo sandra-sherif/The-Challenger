@@ -1,9 +1,3 @@
-<!-- This file provides an html view to show a create challenge and it is called by
-the New Challenge button.
-Notes:
-1- The New Challenge button is located in challenges/index.html.erb.
-2- The first part of the document (If condition) checks if there is an error message generated when trying to upload a file and displays the message of the error without performing the upload process.-->
-
 <% if !@challenge.errors.empty? %>
   <div class="alert alert-error">
     <ul>
@@ -13,15 +7,6 @@ Notes:
     </ul>
   </div>
 <% end %>
-<!--This part shows the html components for the user to fill in the required data to upload a challenge.
-Components:
-1- text_field to write the name of the challenge that is stored in the database in the name column.
-2- file_field to locally choose the challenge. However, only the path is stored in the database in the path column.
-3- The file itself is stored in public/challenges/challenges/path/challenge_id which is defined in uploaders/upload_uploader.rb in the def store_dir method.
-4- A dropdown list with values (Image/Video) to choose the challenge to for the tag in the index.html.erb file.
-5- The value of the dropdown list is stored in the database in the upload_type column.
-6- A submit button in order to call the def create method in challenges_controller.
-7- A delete button to return to challenge/index.html.erb.-->
 
 <div class="well">
   <%= form_for @challenge, html: { multipart: true } do |f| %>
