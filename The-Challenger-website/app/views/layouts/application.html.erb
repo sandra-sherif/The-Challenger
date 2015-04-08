@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TheChallengerWebsite</title>
+  <title>The Challenger</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<!-- This condition checks whether the user is signed in or not. In both cases, a message will be displayed whether the request was confirmed or rejected -->
 
 <% if !user_signed_in? %>
 <% if notice %>
@@ -22,15 +24,17 @@
 <%= yield %>
 </div>
 
+<!-- This code will create a navigation bar as a footer with the current user signed in name and two links edit profile and log out if the user is signed in. Otherwise, it will display two links to sign up or log in -->
+
 <p class="navbar-text pull-right">
 <% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
+  Logged in as <strong><%= current_user.full_name %></strong>.
   <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %> 
+  
 <% else %>
   <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
   <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
 <% end %>
-
 </body>
 </html>
