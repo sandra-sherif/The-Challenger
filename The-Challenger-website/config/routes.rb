@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-
+ resources :challenges
+resources :taggings
   #resources :challenges
 
   root "challenges#index"
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
 end
 
 
-  
+  get 'welcome/index'
   
   
   devise_for :users, controllers: { registrations: "users/registrations" }
@@ -37,7 +38,7 @@ end
   # You can have the root of your site routed with "root"
 
   get 'profile/', to: 'profile#show', as: 'profile'
-  get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
+#  get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
 
 
 
