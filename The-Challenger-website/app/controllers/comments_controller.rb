@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @challenge = Challenge.find(params[:challenge_id])
     @comment = @challenge.comments.create(comment_params)
     redirect_to challenge_path(@challenge)
-  end
+  	end
  	
  	def index
  		@challenge = Challenge.find(params[:challenge_id])

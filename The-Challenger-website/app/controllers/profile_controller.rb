@@ -6,7 +6,7 @@ class ProfileController < ApplicationController
 	def show
      @user = current_user
      @challenges = Challenge.all
-   end
+    end
 
    # def delete_picture
    # 	@user = current_user

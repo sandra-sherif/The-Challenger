@@ -1,4 +1,5 @@
 class Users::UnlocksController < Devise::UnlocksController
+ 
   # GET /resource/unlock/new
   # def new
   #   super
@@ -25,4 +26,5 @@ class Users::UnlocksController < Devise::UnlocksController
   # def after_unlock_path_for(resource)
   #   super(resource)
   # end
+  
 end

@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
 
 def after_sign_up_path_for(user)
     '/profile/'
-  end
+end
 
- def after_sign_in_path_for(user)
+def after_sign_in_path_for(user)
     '/profile/'
-  end
+end
 # def removepicture_path(user)
 # 	user.delete_avatar
 # '/profile/'
