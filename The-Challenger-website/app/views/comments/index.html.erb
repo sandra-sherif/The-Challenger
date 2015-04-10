@@ -10,7 +10,6 @@
 <h2>Add a comment:</h2>
 <%= form_for([@challenge, @challenge.comments.build]) do |f| %>
   <p>
-    <%= f.label :text %><br>
     <%= f.text_area :text %>
   </p>
   <p>
