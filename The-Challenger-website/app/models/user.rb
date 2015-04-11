@@ -1,17 +1,29 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
- # :confirmable, :lockable, :timeoutable and :omniauthabl
- # before_save :delete_avatar, if:{ delete_avatar == '1' && !avatar_updated_at_changed? }
+# Include default devise modules. Others available are:
+# :confirmable, :lockable, :timeoutable and :omniauthabl
+# before_save :delete_avatar, if:{ delete_avatar == '1' && !avatar_updated_at_changed? }
 
 #This method gets the user's full name to be used later in the views
+# ransacker :full_name do |parent|
+#     Arel::Nodes::NamedFunction.new('concat_ws', [' ', parent.table[:first_name], parent.table[:last_name]])
+#   end
+ransacker :full_name do |parent|
+  Arel::Nodes::InfixOperation.new('||',
+    Arel::Nodes::InfixOperation.new('||',
+      parent.table[:first_name], Arel::Nodes.build_quoted(' ')
+    ),
+    parent.table[:last_name]
+  )
+end
 
-def full_name
-    if self.first_name.blank? && self.last_name.blank?
+ def full_name
+  if self.first_name.blank? && self.last_name.blank?
       self.email
-    else
+  else
       self.first_name + " " + self.last_name
-    end
   end
+ end
+
 
 # def delete_avatar
 #   self.avatar = nil
@@ -25,10 +37,10 @@ def full_name
 	has_many :challenges, :dependent => :destroy
 	has_many :comments, :dependent => :destroy
 	has_many :Likes, :dependent => :destroy
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "missing.jpeg"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-  validates :age, :numericality => {:only_integer => true}, :allow_nil => true,
-  :length => {:maximum => 2}
-  # validates :age, :numericality => {:must_be_less_than_or_equal_to => 100}
+   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "missing.jpeg"
+   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+   validates :age, :numericality => {:only_integer => true}, :allow_nil => true,
+   :length => {:maximum => 2}
+#validates :age, :numericality => {:must_be_less_than_or_equal_to => 100}
 
 end

@@ -19,6 +19,19 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <%= link_to "New Challenge", new_challenge_path, class: "btn btn-primary" %>
 <br />
 <br />
+
+<% content_for :search do %>
+  <div class="large-8 small-9 columns">
+  <%= search_form_for @search do |f| %>
+    <%= f.text_field :name_cont, class: "radius-left expand", placeholder: "Challenges by name" %>
+  </div>
+    <div class="large-4 small-3 columns">
+      <%= f.submit "Search", class: "radius-right button" %>
+    </div>
+  <% end %>
+<% end %>
+
+
 <table class="table table-bordered table-striped able-condensed table-hover">
   <thead>
     <tr>
