@@ -11,7 +11,7 @@
         </p>
         <p>
         
-        <% if comment.user_id == current_user.id %>
+        <% if comment.user_id == current_user.id or current_user.try(:admin?)%>
  		
         <%= link_to 'Delete Comment', [comment.challenge, comment],
                method: :delete,
