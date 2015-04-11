@@ -1,0 +1,25 @@
+<% content_for :search do %>
+  <div class="large-8 small-9 columns">
+  <%= search_form_for @search do |f| %>
+    <%= f.text_field :full_name_cont, class:"radius-left expand", placeholder: "Challengers by Name" %>
+  </div>
+  <br/>
+    <div class="large-4 small-3 columns">
+      <%= f.submit "Search", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="container">
+	<% @users.each do |user| %>
+		<strong> <%= user.full_name %> </strong> 
+		<% if user == current_user %>
+			<%= link_to "View Profile", '/profile/', class:"btn btn-primary" %>
+		<% else %>
+			<%= link_to "View Profile", user_path(user), class:"btn btn-primary" %>
+	</br>              
+		<% end %>
+	<% end %>
+
+	</div>
+	
