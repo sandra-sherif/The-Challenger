@@ -1,0 +1,32 @@
+<% if !@report.errors.empty? %>
+
+  <div class="alert alert-error">
+    <ul>
+      <% @report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+
+      <% end %>
+    
+    </ul>
+  </div>
+
+<% end %>
+
+<div class="well">
+  <%= form_for @report, html: { multipart: true } do |f| %>
+  	<% @challenge = Challenge.find(params[:challenge_id]) %>
+  	<% @user = User.find(params[:user_id]) %>
+  	<%= f.label "Challenge Name" %><p></p>
+  	<%= @challenge.name %><p></p>
+  	<%= f.label "Uploaded By" %><p></p>
+  	<%= @user.full_name %><p></p>
+  	<%= hidden_field_tag(:challenge_id, @challenge.id) %>
+  	<%= hidden_field_tag(:user_id, @user.id) %>
+    <%= f.label "Why do you want to remove this challenge?" %><p></p>
+    <%= f.select :reason, [["It's annoying or not interesting","It's annoying or not interesting"],["I don't think it should be on The Challenger","I don't think it should be on The Challenger"],["It's spam","It's spam"]], :prompt => 'Select a reason'%><p></p>
+    <%= f.submit "Submit report", class: "btn btn-success" %>
+    <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
+
+  <% end %>
+
+</div>
