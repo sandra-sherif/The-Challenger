@@ -57,7 +57,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
         <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
         <p></p>
  
-        <% if challenge.user1_id == current_user.id %>
+        <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
  
         <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %>
  
