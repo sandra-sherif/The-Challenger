@@ -1,0 +1,85 @@
+
+<!-- This part will display the user's profile picture if he/she uploaded one and otherwise it will display the defaut picture -->
+
+<% unless @user.avatar_file_name.blank? %>
+ 
+  <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb)) %></td>
+ 
+  <% else %> 
+ 
+  <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb), :size =>"100x100")%></td> 
+ 
+ <% end %> </br>
+
+  <!-- This part will display the user's full name or email if the full name doesn't exist. It will also display a button to view all challenges. -->
+ 
+ <strong><%= @user.full_name%> </strong>
+  </br>
+
+<% unless @user.age.blank? %>
+
+<p> Age: <%= @user.age %> </p></br>
+
+<% end %>
+
+<p></p>
+
+<%= link_to "View All Challenges", challenges_path, class:"btn btn-primary" %>
+
+<!-- This code will load all the challenges posted by the user signed in and put them in a table. A download button, a button to view the challenge,another one to view the comments are available. A Facebook share button is also part of the code below-->
+
+<div class="container"> <h3> Challenges posted by <%= @user.full_name %> </h3></div>
+<table class="table table-bordered table-striped able-condensed table-hover">
+  <thead>
+
+    <tr>
+      <th>Name</th>
+      <th>Download Link</th>
+      <th>Display Challenge</th>
+      <th>Actions</th>
+    </tr>
+
+  </thead>
+<tbody>
+    <% @challenges.each do |challenge| %>
+
+     <% if challenge.user1_id == @user.id %>
+
+      <tr>
+        <td ><%= challenge.name %></td>
+        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
+
+        <% if challenge.upload_type == "Video" %>
+
+        <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
+
+        <%else%>
+
+        <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+
+        <%end%>
+
+        <td>
+        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+        <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
+        <p></p>
+
+        <% end %>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+
+        if (d.getElementById(id)) return;
+
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+        </td>
+      </tr>
+
+    <% end %>
+
+  </tbody>
