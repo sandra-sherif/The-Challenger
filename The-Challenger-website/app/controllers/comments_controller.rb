@@ -10,10 +10,20 @@ class CommentsController < ApplicationController
 	# and saved in the new comment created and then it is saved and redirected to the challenge
 	def create
     @challenge = Challenge.find(params[:challenge_id])
+    @user = User.find(current_user.id)
     @comment = @challenge.comments.create(comment_params)
     @comment.user_id = current_user.id
     @comment.save
-    redirect_to challenge_path(@challenge)
+    @notification = Notification.new
+    @notification.sent_by = current_user.id
+    @notification.sent_to = @challenge.user1_id
+    @notification.challenge_id = @challenge.id
+    @notification.comment_id = @comment.id
+    @notification.notification_type = "Comment Notification"
+    @notification.text = @user.email + " commented on " + @challenge.name
+    if @notification.save
+      redirect_to challenge_path(@challenge)
+    end
   end
 
   # def destroy is the delete method, inwhich it locates the id of the specified challenge and comment 
