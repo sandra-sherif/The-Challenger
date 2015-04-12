@@ -41,9 +41,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
     <% @challenges.each do |challenge| %>
   
       <tr>
-        <td ><%= challenge.name %>
-        <%= challenge.id %>
-        <%= challenge.user1_id %></td>
+        <td ><%= challenge.name %></td>
         <td ><%= link_to "Download Challenge", challenge.path_url %></td>
   
         <% if challenge.upload_type == "Video" %>

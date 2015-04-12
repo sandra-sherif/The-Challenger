@@ -27,6 +27,7 @@
 </br>
 <%= link_to "New Challenge", new_challenge_path, class:"btn btn-primary" %>
 <%= link_to "View All Challenges", challenges_path, class:"btn btn-primary" %>
+<%= link_to "View Notifications", notifications_path, class:"btn btn-primary" %>
 <% if current_user.try(:admin?) %>
 <%= link_to "View All Reports", reports_path, class:"btn btn-danger" %>
 <%end%>
