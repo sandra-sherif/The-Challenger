@@ -11,27 +11,26 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :challenges do
+    # match :search, to: 'challenges#index', via: :post
   resources :comments
 end
 
-  get 'welcome/index'
   
   
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-#  devise_for :users, controllers: { registrations: "registrations" }
-  resources :users
+   resources :users
  
   # You can have the root of your site routed with "root"
 
 #This line sets the route of /profile/ to the action show in the profile controller
 
   get 'profile/', to: 'profile#show', as: 'profile'
+  
   #get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
-
-
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
