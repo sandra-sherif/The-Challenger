@@ -8,4 +8,6 @@ class Challenge < ActiveRecord::Base
     validates :upload_type, presence: true
     validates :path, presence: true
 
+ 
+
 end

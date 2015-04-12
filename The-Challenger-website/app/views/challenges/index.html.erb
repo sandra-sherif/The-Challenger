@@ -21,11 +21,24 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <br />
 <%= link_to "New Challenge", new_challenge_path, class: "btn btn-primary" %>
 
-<%= link_to "Back", :back, class: "btn btn-warning" %>
+<%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
 <br />
 
 <br />
-<table class="table table-bordered table-striped able-condensed table-hover">
+
+<% content_for :search do %>
+  <div class="large-8 small-9 columns">
+  <%= search_form_for @search do |f| %>
+    <%= f.text_field :name_cont, class: "radius-left expand", placeholder: "Challenges by name" %>
+  </div>
+    <div class="large-4 small-3 columns">
+      <%= f.submit "Search", class: "radius-right button" %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<table class="table table-bordered able-condensed table-hover">
   <thead>
     
     <tr>
@@ -82,3 +95,11 @@ and it is enabled only if the current_user is the one who uploaded the challenge
     
   </tbody>
 </table>
+<style>
+  th {
+    text-align: center;
+  }
+  td {
+    text-align: center;
+  }
+</style>

@@ -4,19 +4,71 @@
 	<title>Notification Center</title>
 	<h1>Notification Center</h1>
 	<style>
-h1 {
-  text-align: center;
-  font-weight: bold;
-  color: DarkBlue;
-}
+	h1 
+	{
+	  text-align: center;
+	  font-weight: bold;
+	  color: DarkBlue;
+	}
+	th
+	{
+	  text-align: center;
+	}
+	td 
+	{
+	  text-align: center;
+	  vertical-align: middle;
+	}
+	new {
+		color: red;
+		font-style: italic;
+	}
 
 	</style>
 </head>
 <body>
 
+<% if !flash[:notice].blank? %>
+  
+  <div class="alert alert-info">
+  <%= flash[:notice] %>
+  </div>
+
+<% end %>
+
+<%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
+<br />
+
+<table class="table table-bordered able-condensed table-hover">
+  <thead>
+    
+    <tr>
+      <th>Notification</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notifications.each do |notification| %>
+  	<% if notification.sent_to == current_user.id %>
+      <tr>
+        <td ><%= notification.text %>
+        <% if notification.seen == false %>
+        <new>(New)</new>
+        <%end%></td>
+        <td>
+        <% if notification.notification_type == "Challenge Notification" or 
+        	notification.notification_type == "Comment Notification" %>
+        	<!-- check if challenge is available -->
+        	<% @challenge = Challenge.find(notification.challenge_id) %>
+        	<%= link_to "View Challenge", challenge_path(@challenge), class:"btn btn-primary btn-block" %>
+        	<p></p>
+ 		<% end %>
+        <%= button_to "Delete",  notification, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete this notification?"} %><p></p>
+        </td>
+      </tr>
+    <%end%>
+    <%end%>
+  </tbody>
+
 </body>
 </html>
-
-
-
-<p>Find me in app/views/notifications/index.html.erb</p>
