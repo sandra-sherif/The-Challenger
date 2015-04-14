@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-	belongs_to :User
+	belongs_to :user
 	validates :sent_to, presence: true
 	validates :sent_by, presence: true
 	validates :text, presence: true
