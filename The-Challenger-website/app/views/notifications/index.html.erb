@@ -53,7 +53,11 @@
       <tr>
         <td ><%= notification.text %>
         <% if notification.seen == false %>
-        <new>(New)</new>
+          <% notification.seen = true %>
+          <% current_user.decrement(:notifications, 1) %>
+          <% current_user.save %>
+          <% notification.save %>
+          <new>(New)</new>
         <%end%></td>
         <td>
         <% if notification.notification_type == "Challenge Notification" or 
@@ -62,7 +66,17 @@
         	<% @challenge = Challenge.find(notification.challenge_id) %>
         	<%= link_to "View Challenge", challenge_path(@challenge), class:"btn btn-primary btn-block" %>
         	<p></p>
- 		     <% end %>
+ 		    <% end %>
+        <% if notification.notification_type == "Friend Request Notification" %>
+          <% @user = User.find(notification.sent_by) %>
+          <%= link_to "Accept", {controller: "friends", action:"accept", notification: notification.id}, class:"btn btn-success btn-block" %>
+          <p></p>
+          <%= link_to "Reject", {controller: "friends", action:"reject", notification: notification.id}, class:"btn btn-danger btn-block" %>
+          <p></p>
+        <%end%>
+        <% if notification.notification_type == "Accepted Request Notification" %>
+          <%= link_to "View Profile", user_path(notification.sent_by), class:"btn btn-primary btn-block" %><p></p>
+        <%end%>
         <%= button_to "Delete",  notification, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete this notification?"} %><p></p>
         </td>
       </tr>
