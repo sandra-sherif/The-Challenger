@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413133327) do
+ActiveRecord::Schema.define(version: 20150414130918) do
 
   create_table "challenge_responses", force: :cascade do |t|
     t.string   "path"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150413133327) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "admin",                  default: false
+    t.integer  "notifications",          default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
