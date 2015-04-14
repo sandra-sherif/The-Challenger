@@ -11,6 +11,7 @@ class FriendsController < ApplicationController
     @notification.notification_type = "Friend Request Notification"
     @notification.text = current_user.email + " wants to add you as a friend."
     @notification.save
+    @user.increment!(:notifications)
     if @friends.save and @notification.save
       redirect_to @user, notice: "A friend request has been sent."
       session[:user_id] = nil

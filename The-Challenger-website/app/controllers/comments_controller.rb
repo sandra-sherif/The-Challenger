@@ -21,6 +21,8 @@ class CommentsController < ApplicationController
     @notification.comment_id = @comment.id
     @notification.notification_type = "Comment Notification"
     @notification.text = @user.email + " commented on " + @challenge.name
+    @user1 = User.find(@challenge.user1_id)
+    @user1.increment!(:notifications)
     if @notification.save
       redirect_to challenge_path(@challenge)
     end

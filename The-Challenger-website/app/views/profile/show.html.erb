@@ -27,7 +27,15 @@
 </br>
 <%= link_to "New Challenge", new_challenge_path, class:"btn btn-primary" %>
 <%= link_to "View All Challenges", challenges_path, class:"btn btn-primary" %>
-<%= link_to "View Notifications", notifications_path, class:"btn btn-primary" %>
+<% if @user.notifications == 0 %>
+  <%= link_to "You have #{@user.notifications} new notification", notifications_path, class:"btn btn-primary" %>
+<%else%>
+  <% if @user.notifications == 1 %>
+    <%= link_to "You have #{@user.notifications} new notification", notifications_path, class:"btn btn-success" %>
+  <%else%>
+    <%= link_to "You have #{@user.notifications} new notifications", notifications_path, class:"btn btn-success" %>
+  <%end%>  
+<%end%>
 <%= link_to "Search a Challenger", users_path, class:"btn btn-primary" %>
 <% if current_user.try(:admin?) %>
 <%= link_to "View All Reports", reports_path, class:"btn btn-danger" %>
