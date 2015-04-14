@@ -62,7 +62,7 @@
         	<% @challenge = Challenge.find(notification.challenge_id) %>
         	<%= link_to "View Challenge", challenge_path(@challenge), class:"btn btn-primary btn-block" %>
         	<p></p>
- 		<% end %>
+ 		     <% end %>
         <%= button_to "Delete",  notification, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete this notification?"} %><p></p>
         </td>
       </tr>

@@ -32,6 +32,7 @@ end
 	has_many :comments, :dependent => :destroy
 	has_many :Likes, :dependent => :destroy
   has_many :reports, :dependent => :destroy
+  has_many :friends, :dependent => :destroy
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "missing.jpeg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   validates :age, :numericality => {:only_integer => true}, :allow_nil => true,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412074409) do
+ActiveRecord::Schema.define(version: 20150413133327) do
 
   create_table "challenge_responses", force: :cascade do |t|
     t.string   "path"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20150412074409) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sent_by"
+    t.string   "sent_to"
   end
 
   create_table "likes", force: :cascade do |t|
