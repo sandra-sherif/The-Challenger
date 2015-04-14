@@ -29,6 +29,7 @@ end
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 	has_many :challenges, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
 	has_many :comments, :dependent => :destroy
 	has_many :Likes, :dependent => :destroy
   has_many :reports, :dependent => :destroy
