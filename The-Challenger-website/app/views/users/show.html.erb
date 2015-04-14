@@ -1,6 +1,14 @@
 
 <!-- This part will display the user's profile picture if he/she uploaded one and otherwise it will display the defaut picture -->
 
+<% if !flash[:notice].blank? %>
+  
+  <div class="alert alert-info">
+  <%= flash[:notice] %>
+  </div>
+
+<% end %>
+
 <% unless @user.avatar_file_name.blank? %>
  
   <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb)) %></td>
@@ -34,6 +42,8 @@
   <%= link_to "View All Reports", reports_path, class:"btn btn-danger" %>
   <%end%>
 <%else%>
+  <% session[:user_id] = @user.id %>
+  <%= link_to "Add", {controller: "friends", action:"add_friend", sent_to: @user.id, status: "Pending", sent_by: current_user.id}, class:"btn btn-success" %>
   <%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
 <%end%>
 

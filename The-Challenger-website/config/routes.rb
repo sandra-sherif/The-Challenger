@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :friends
+
   resources :notifications
 
   resources :reports
@@ -12,8 +14,8 @@ Rails.application.routes.draw do
 
   resources :challenges do
     # match :search, to: 'challenges#index', via: :post
-  resources :comments
-end
+    resources :comments
+  end
 
   
   
@@ -22,6 +24,8 @@ end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
    resources :users
+
+   get '/users/:controller/:action/:id/:sent_to/:status/:sent_by', to: 'users#show'
  
   # You can have the root of your site routed with "root"
 

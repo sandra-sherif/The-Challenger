@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :set_search
-
+  
   def set_search
     @search = User.search(params[:q])
   end
