@@ -33,10 +33,48 @@ class FriendsController < ApplicationController
   end
 
   def destroy
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+    redirect_to notifications_path, notice:  "The notification has been deleted."
+  end
+
+  def accept
+    @notification = Notification.find(params[:notification])
+    @friends = Friends.find_by(:sent_to => current_user.id, :sent_by => @notification.sent_by)
+    @friends.status = "Accepted"
+    @user = User.find(@friends.sent_by)
+    @notification.text = "You and #{@user.email} are now friends."
+    @notification.notification_type = "Accepted Request Notification"
+    @notification.save
+    @acceptNotification = Notification.new
+    @acceptNotification.sent_by = current_user.id
+    @acceptNotification.sent_to = @user.id
+    @acceptNotification.notification_type = "Accepted Request Notification"
+    @acceptNotification.text = "#{current_user.email} has accepted your friend request."
+    @user.increment!(:notifications)
+    if @friends.save and @acceptNotification.save
+      redirect_to notifications_path, notice: "You and #{@user.email} are now friends."
+    else
+      redirect_to notifications_path, notice: "Failed to accept the request."
+    end
+  end
+
+  def reject
+    @notification = Notification.find(params[:notification])
+    @friends = Friends.find_by(:sent_to => current_user.id, :sent_by => @notification.sent_by)
+    @friends.status = "Reject"
+    @user = User.find(@friends.sent_by)
+    @notification.text = "You have rejected a friend request from #{@user.email}."
+    @notification.save
+    if @friends.save
+      redirect_to notifications_path, notice: "The friend request has been rejected."
+    else
+      redirect_to notifications_path, notice: "Failed to reject the request."
+    end
   end
 
   private
   def friends_params
-    params.require(:friends).permit(:sent_to, :status, :sent_by)
+    params.require(:friends).permit(:sent_to, :sent_by, :status)
   end
 end
