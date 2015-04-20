@@ -1,0 +1,4 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+challenge_with_path: # generated id: 1
+  path: 'Amr.jpg'
