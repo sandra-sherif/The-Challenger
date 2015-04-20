@@ -13,6 +13,7 @@ class FriendsController < ApplicationController
     @notification.save
     @user.increment!(:notifications)
     if @friends.save and @notification.save
+      UserNotifier.friend_requested(@user).deliver
       redirect_to @user, notice: "A friend request has been sent."
       session[:user_id] = nil
     else
@@ -53,6 +54,7 @@ class FriendsController < ApplicationController
     @acceptNotification.text = "#{current_user.email} has accepted your friend request."
     @user.increment!(:notifications)
     if @friends.save and @acceptNotification.save
+      UserNotifier.friend_requested_accepted(@user).deliver
       redirect_to notifications_path, notice: "You and #{@user.email} are now friends."
     else
       redirect_to notifications_path, notice: "Failed to accept the request."
