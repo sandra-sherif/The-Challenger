@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :responses
+
   resources :friends
 
   resources :notifications
@@ -17,7 +19,9 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  
+  resources :challenges do
+    resources :responses
+  end
   
   devise_for :users, controllers: { registrations: "users/registrations" }
 
@@ -27,6 +31,7 @@ Rails.application.routes.draw do
 
    get '/users/:controller/:action/:id/:sent_to/:status/:sent_by', to: 'users#show'
    get '/notifications/:controller/:action/:notification', to: 'notifications#index'
+   get '/challenges/:controller/:action/:challenge_id', to: 'responses#new'
  
   # You can have the root of your site routed with "root"
 

@@ -21,7 +21,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <br />
 <%= link_to "New Challenge", new_challenge_path, class: "btn btn-primary" %>
 
-<%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
+<%= link_to "Back To Profile", current_user, class: "btn btn-primary" %>
 <br />
 
 <br />
@@ -68,15 +68,17 @@ and it is enabled only if the current_user is the one who uploaded the challenge
         <%end%>
  
         <td>
-        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+
+        <%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => challenge.id}, class:"btn btn-success btn-block" %><p></p>
+        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %><p></p>
+        <%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %><p></p>
         <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
         <p></p>
  
         <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
- 
-        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
-        <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
- 
+          <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
+        <%else%>
+          <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
         <% end %>
  
         <div id="fb-root"></div>

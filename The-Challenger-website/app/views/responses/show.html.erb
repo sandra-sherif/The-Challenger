@@ -1,0 +1,44 @@
+<!-- This file provides an html view to show a certain challenge in a separate page and it is called by
+a view challenge button that sends a challenge_id to the def show method in the challenges_controller.
+Notes:
+1- The view challenge button is located in challenges/index.html.erb.
+2- The @responses variable that is used throughout the document is the variable that was sent by the show method.-->
+
+<body>
+	<p>
+		<h1><%= @responses.name %></h1>
+	</p>
+<!-- This condition checks if @responses.upload_type is a video or an image in order to write the appropriate tag.-->
+	<% if @responses.upload_type == "Video" %>
+    	<%= video_tag @responses.path_url, :size => "1000x540", :controls => true %>
+	<%else%>
+    	<%= image_tag @responses.path_url, :width => 600, :height => 500 %>
+	<%end%>
+  
+    <!-- Creates the facebook sharing button.-->
+    <div id="fb-root"></div><BR>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+	<%= link_to "Back", {controller: "responses", action:"index", challenge_id:@responses.challenge_id }, class:"btn btn-warning" %><p></p>
+</body>
+<!-- Adding styles to the current body content.-->
+<style>
+	h1 {
+		text-align: center;
+		font-weight: bold;
+	}
+	div {
+		vertical-align: center;
+		text-align: center;
+	}
+	body {
+		background: url("http://i.imgur.com/PVYiioJ.jpg");
+	}
+</style>
+
