@@ -37,6 +37,7 @@ Notes:
 <%= render @challenge.comments %>
 
 <%= link_to "Add Comment", {controller: "comments", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
+<%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
 <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 </body>
 <!-- Adding styles to the current body content.-->
