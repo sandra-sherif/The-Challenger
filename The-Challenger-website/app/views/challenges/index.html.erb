@@ -68,8 +68,9 @@ and it is enabled only if the current_user is the one who uploaded the challenge
         <%end%>
  
         <td>
-
-        <%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => challenge.id}, class:"btn btn-success btn-block" %><p></p>
+        <% if challenge.user1_id != current_user.id %>
+          <%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => challenge.id}, class:"btn btn-success btn-block" %><p></p>
+        <% end %>
         <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %><p></p>
         <%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %><p></p>
         <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>

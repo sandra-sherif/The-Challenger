@@ -19,7 +19,10 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <% end %>
 
 <br />
-<%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => params[:challenge_id]}, class:"btn btn-success" %>
+<% @challenge = Challenge.find(params[:challenge_id]) %>
+<% if @challenge.user1_id != current_user.id %>
+	<%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => params[:challenge_id]}, class:"btn btn-success" %>
+<%end%>
 <%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
 <%= link_to "Back To Challenges", challenges_path, class: "btn btn-warning" %>
 <br />
@@ -39,7 +42,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
     </tr>
   </thead>
   <tbody>
-  	<% @challenge = Challenge.find(params[:challenge_id]) %>
+  	
     <% @responses.each do |response| %>
   		<% if response.challenge_id == @challenge.id %> 
   			<% @response_owner = User.find(response.user_id) %>
