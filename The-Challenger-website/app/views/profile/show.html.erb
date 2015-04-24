@@ -70,9 +70,9 @@
         <%else%>
 
         <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
-
         <%end%>
 
+       
         <td>
         <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
         <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>

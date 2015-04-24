@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414130918) do
+ActiveRecord::Schema.define(version: 20150421211842) do
 
   create_table "challenge_responses", force: :cascade do |t|
     t.string   "path"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150414130918) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "upload_type"
+    t.string   "sharing_type"
   end
 
   create_table "comments", force: :cascade do |t|

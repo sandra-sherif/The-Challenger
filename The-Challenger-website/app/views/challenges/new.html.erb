@@ -22,6 +22,7 @@
     <p></p>
     <%= f.label :upload_type %>
     <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Challenge Type'%><p></p>
+    <%= f.select :sharing_type, [['Private', 'Private'],['Public','Public']], :prompt => 'Select a Sharing Type' %> <p></p>
     <%= f.submit "Upload Challenge", class: "btn btn-success" %>
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 

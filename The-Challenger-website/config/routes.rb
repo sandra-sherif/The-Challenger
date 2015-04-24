@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   resources :challenges do
     # match :search, to: 'challenges#index', via: :post
     resources :comments
-  end
+    
+   end
 
   
   

@@ -18,7 +18,7 @@ class NotificationsController < ApplicationController
 
     private
   def notification_params
-    params.require(:notification).permit(:sent_by, :sent_to, :challenge_id, :comment_id, :text, :seen, :notification_type)
+    params.require(:notification).permit(:sent_by, :sent_to, :challenge_id, :comment_id, :text, :seen, :notification_type, :tag_id)
   end
 
 end

@@ -4,15 +4,27 @@ before_filter :set_search
   def set_search
     @search = Challenge.search(params[:q])
   end
-  # def index returns all the challenges in the database.
-  def index
-  	@challenges = Challenge.all
-    if params[:q]
-      @search = Challenge.search(params[:q])
+
+   if params[:q]
+       @search = Challenge.search(params[:q])
       @challenges = @search.result
     end
   end
-
+  # def index returns all the challenges in the database.
+ 
+  def index
+    # if params[:user_id]
+      if current_user.id == params[:user_id]
+        @challenges = Challenge.where(user_id: params[:user_id])
+      
+      elsif current_user_id != params[:user_id]
+        @challenges = Challenge.public.where(user_id: params[:user_id]) 
+      
+      else 
+       @challenges = Challenge.all
+  end
+ 
+   
   def new
     @challenge = Challenge.new
   end
@@ -40,14 +52,17 @@ before_filter :set_search
 
   # def show view a challenge with the input challenge id.
   def show
+    if user_id == current_user_id 
     @challenge = Challenge.find(params[:id])
+  else 
+    @challenge = Challenge.find(params[:user_id.public])
   end
+end
 
 
   # Allows the view to access these attributes.
   private
   def challenge_params
-    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type)
+    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type, :sharing_type)
   end
-
 end
