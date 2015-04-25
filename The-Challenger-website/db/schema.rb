@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421211842) do
+ActiveRecord::Schema.define(version: 20150425102816) do
 
   create_table "challenge_responses", force: :cascade do |t|
     t.string   "path"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150421211842) do
     t.datetime "updated_at"
     t.string   "upload_type"
     t.string   "sharing_type"
+    t.string   "sharing_with"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -71,6 +72,22 @@ ActiveRecord::Schema.define(version: 20150421211842) do
     t.string   "reason"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "challenge_id"
+    t.integer  "tag_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "taggings", ["challenge_id"], name: "index_taggings_on_challenge_id"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

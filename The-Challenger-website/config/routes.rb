@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'challenges/index'
+
+  get 'challenges/create'
+
   resources :friends
 
   resources :notifications

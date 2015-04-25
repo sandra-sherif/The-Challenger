@@ -8,6 +8,7 @@ class Challenge < ActiveRecord::Base
     validates :upload_type, presence: true
     validates :path, presence: true
     validates :sharing_type, presence: true
-   
+    validates :sharing_with, presence: true
+    
 
 end

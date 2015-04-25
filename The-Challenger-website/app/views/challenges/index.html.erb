@@ -51,8 +51,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   </thead>
   
   <tbody>
-    <% @challenges.each do |challenge| %>
-  
+    <% @challenges.each do |challenge| %>  
       <tr>
         <td ><%= challenge.name %></td>
         <td ><%= link_to "Download Challenge", challenge.path_url %></td>
@@ -65,30 +64,8 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 
           <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
         <%end%>
-        <!--
-        if params[:user_id]
-      if current_user && current_user.id == params[:user_id].to_i
-        @challenges = Challenge.where(user_id: params[:user_id])
-      
-      elsif current_user && current_user_id != params[:user_id].to_i
-
-       @challenges = Challenge.public.where(user_id: params[:user_id]) 
-     end 
-   end
-
-   else 
-    @challenges = Challenge.all
-  end
-        -->
-        <%if current_user_id == :user_id %>
-          <td><%= challenges.all? { |user_id == current_user_id|  } %><td>
-          <%elsif current_user_id != :user_id %>
-           <td> challenges =challenges.public </td>
-           <%end%>
-           <%else%>
-           <td> challenges= challenges.all</td> 
-        <td>
-        <% end %>
+       
+        
         <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
         <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
           <p></p>
@@ -124,4 +101,3 @@ and it is enabled only if the current_user is the one who uploaded the challenge
     text-align: center;
   }
 </style>
-<% end %>
