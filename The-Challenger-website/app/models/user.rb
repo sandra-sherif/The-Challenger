@@ -38,5 +38,6 @@ end
   validates :age, :numericality => {:only_integer => true}, :allow_nil => true,
   :length => {:maximum => 2}
   # validates :age, :numericality => {:must_be_less_than_or_equal_to => 100}
-
+  ratyrate_rater
+  
 end
