@@ -44,6 +44,7 @@ before_filter :set_search
   end
 
 
+
   # Allows the view to access these attributes.
   private
   def challenge_params

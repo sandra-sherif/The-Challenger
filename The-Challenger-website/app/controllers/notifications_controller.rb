@@ -11,6 +11,10 @@ class NotificationsController < ApplicationController
   end
 
   def destroy
+    #Bug
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+    redirect_to notifications_path, notice:  "The notification has been deleted."
   end
 
   def status
