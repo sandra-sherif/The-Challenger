@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421154938) do
+ActiveRecord::Schema.define(version: 20150427140350) do
 
   create_table "challenge_responses", force: :cascade do |t|
     t.string   "path"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20150421154938) do
     t.datetime "updated_at",                        null: false
     t.boolean  "seen",              default: false
     t.string   "notification_type"
+    t.integer  "response_id"
   end
 
   create_table "reports", force: :cascade do |t|

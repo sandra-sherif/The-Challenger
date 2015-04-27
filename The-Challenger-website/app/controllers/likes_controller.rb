@@ -1,28 +1,54 @@
 class LikesController < ApplicationController
   def create
+
   	if params[:upload_type] == "Challenge"
 	  	@challenge = Challenge.find(params[:file_id])
 	  	@like = Likes.new
 	  	@like.path = @challenge.path
 	  	@like.user_id = current_user.id
+	  	if @challenge.user1_id != current_user.id
+		  	@notification = Notification.new
+		    @notification.sent_by = current_user.id
+		    @notification.sent_to = @challenge.user1_id
+		    @notification.notification_type = "Like Challenge Notification"
+		    @notification.text = current_user.email + " liked your challenge."
+		    @notification.challenge_id = @challenge.id
+		    @notification.save
+		    @user = User.find(@challenge.user1_id)
+		    @user.increment!(:notifications)
+		    @user.save
+		end
 	  	if @like.save
-	      redirect_to challenges_path, notice: "You liked #{@challenge.name}."
-	      @challenge.increment!(:likes_number)
-	      @challenge.save
+	    	redirect_to challenges_path, notice: "You liked #{@challenge.name}."
+	    	@challenge.increment!(:likes_number)
+	    	@challenge.save
 	    else
-	      redirect_to challenges_path(@challenge), notice: "Unable to like #{@challenge.name}, Please Try Again."
+	    	redirect_to challenges_path(@challenge), notice: "Unable to like #{@challenge.name}, Please Try Again."
 	    end
 	else
 		@response = Response.find(params[:file_id])
 	  	@like = Likes.new
 	  	@like.path = @response.path
 	  	@like.user_id = current_user.id
+	  	if @response.user_id != current_user.id
+		  	@notification = Notification.new
+		    @notification.sent_by = current_user.id
+		    @notification.sent_to = @response.user_id
+		    @notification.notification_type = "Like Response Notification"
+		    @notification.text = current_user.email + " liked your response."
+		    @notification.challenge_id = @response.challenge_id
+		    @notification.response_id = @response.id
+		    @notification.save
+		    @user = User.find(@response.challenge_owner)
+		    @user.increment!(:notifications)
+		    @user.save
+		end
 	  	if @like.save
-	      redirect_to :controller => 'responses', :action => 'index',  :challenge_id => @response.challenge_id, notice: "You liked #{@response.name}."
-	      @response.increment!(:likes_number)
-	      @response.save
+	    	redirect_to :controller => 'responses', :action => 'index',  :challenge_id => @response.challenge_id, notice: "You liked #{@response.name}."
+	    	@response.increment!(:likes_number)
+	    	@response.save
 	    else
-	      redirect_to challenges_path(@challenge), notice: "Unable to like #{@response.name}, Please Try Again."
+	    	redirect_to challenges_path(@challenge), notice: "Unable to like #{@response.name}, Please Try Again."
 	    end
 	end
   end
