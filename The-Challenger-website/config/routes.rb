@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  post 'likes/new' => 'challenges#show'
+  resources :likes
+
   resources :responses
 
   resources :friends

@@ -14,7 +14,8 @@ Notes:
 	<%else%>
     	<%= image_tag @responses.path_url, :width => 600, :height => 500 %>
 	<%end%>
-  
+	<p></p>
+  	<%= "#{@responses.likes_number} Liked this response" %>
     <!-- Creates the facebook sharing button.-->
     <div id="fb-root"></div><BR>
     <script>(function(d, s, id) {
@@ -24,7 +25,17 @@ Notes:
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div><p></p>
+    <% if user_signed_in? %>
+	    <% @test = Likes.find_by(user_id: current_user.id, path: @responses.path.to_s) %>
+	    <% if @test.nil? %>
+	    	<%= link_to "👍", {controller: "likes", action:"create", file_id:@responses.id, upload_type:"Response" }, :method => :post, class:"btn btn-success" %>
+	    <%else%>
+	    	<%= link_to "👎",  @test, method: :delete, class: "btn btn-danger" %>
+	    <%end%>
+    <%else%>
+    	<%= link_to "👍", new_user_session_path, class:"btn btn-success" %>
+    <%end%>
 	<%= link_to "Back", {controller: "responses", action:"index", challenge_id:@responses.challenge_id }, class:"btn btn-warning" %><p></p>
 </body>
 <!-- Adding styles to the current body content.-->
