@@ -6,7 +6,8 @@ class ReportsController < ApplicationController
     @report.challenge_id = @challenge.id
     @report.user_id = @user.id
     @report.save
-    if @report.save
+    if @report.save 
+       UserNotifier.report_sent(@user).deliver
       redirect_to challenges_path, notice: "The report has been sent."
     else
       render "new"

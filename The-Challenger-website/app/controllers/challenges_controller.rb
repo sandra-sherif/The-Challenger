@@ -35,6 +35,7 @@ before_filter :set_search
   def destroy
   	@challenge = Challenge.find(params[:id])
     @challenge.destroy
+     UserNotifier.deleted_video(@user).deliver
     redirect_to challenges_path, notice:  "The challenge #{@challenge.name} has been deleted."
   end
 
