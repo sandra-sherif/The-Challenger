@@ -13,15 +13,15 @@
  
   <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb)) %></td>
  
-  <% else %> 
+<% else %> 
  
   <td class="round-image-50"><%= image_tag(@user.avatar.url(:thumb), :size =>"100x100")%></td> 
  
- <% end %> </br>
+<% end %> </br>
 
   <!-- This part will display the user's full name or email if the full name doesn't exist. It will also display a button to view all challenges. -->
  
- <strong><%= @user.full_name%> </strong>
+<strong><%= @user.full_name%> </strong>
   </br>
 
 <% unless @user.age.blank? %>
@@ -34,91 +34,126 @@
 
 </br>
 <%= link_to "View All Challenges", challenges_path, class:"btn btn-primary" %>
+
+
 <% if @user.id == current_user.id %>
+
   <%= link_to "New Challenge", new_challenge_path, class:"btn btn-primary" %>
+
   <% if @user.notifications == 0 %>
     <%= link_to "You have #{@user.notifications} new notification", notifications_path, class:"btn btn-primary" %>
+
   <%else%>
+
     <% if @user.notifications == 1 %>
       <%= link_to "You have #{@user.notifications} new notification", notifications_path, class:"btn btn-success" %>
+
     <%else%>
       <%= link_to "You have #{@user.notifications} new notifications", notifications_path, class:"btn btn-success" %>
-    <%end%>  
-  <%end%>
-  <%= link_to "Search a Challenger", users_path, class:"btn btn-primary" %>
-  <% if current_user.try(:admin?) %>
-  <%= link_to "View All Reports", reports_path, class:"btn btn-danger" %>
-  <%end%>
-<%else%>
-  <% @friends1 = Friends.find_by(:sent_to => @user.id, :sent_by => current_user.id) %>
-  <% @friends2 = Friends.find_by(:sent_to => current_user.id, :sent_by => @user.id) %>
-  <% if @friends1.nil? and @friends2.nil? %>
-    <% session[:user_id] = @user.id %>
-    <%= link_to "Add", {controller: "friends", action:"add_friend", sent_to: @user.id, status: "Pending", sent_by: current_user.id}, class:"btn btn-success" %>
-  <%end%>
-  <%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
+
+    <% end %> 
+  <% end %>
 <%end%>
 
+  <%= link_to "Search a Challenger", users_path, class:"btn btn-primary" %>
+
+  <% if current_user.try(:admin?) %>
+    <%= link_to "View All Reports", reports_path, class:"btn btn-danger" %>
+  <%end%>
+
+  <% @block3 = Block.find_by(:blocked_by => @user.id, :blocked => current_user.id) %>
+
+  <% if @block3.nil? %>
+
+    <% @friends1 = Friends.find_by(:sent_to => @user.id, :sent_by => current_user.id) %>
+    <% @friends2 = Friends.find_by(:sent_to => current_user.id, :sent_by => @user.id) %>
+
+    <% if @friends1.nil? and @friends2.nil? %>
+      <% session[:user_id] = @user.id %>
+      <%= link_to "Add", {controller: "friends", action:"add_friend", sent_to: @user.id, status: "Pending", sent_by: current_user.id}, class:"btn btn-success" %>
+    <%end%>
+
+  <% end %>
+
+  <% @block2 = Block.find_by(:blocked_by => current_user.id, :blocked => @user.id) %>
+
+  <% if @block2.nil? %>
+    <% session[:user_id] = @user.id %>
+    <%= link_to "Block", {controller: "block", action:"create_block", blocked: @user.id, blocked_by: current_user.id}, class:"btn btn-danger" %>
+    <% else %>
+    <%= link_to "Unblock", {controller: "block", action:"destroy", blocked: @user.id, blocked_by: current_user.id}, class:"btn btn-success" %>
+  <%end%>
+
+  <%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
 
 
 <!-- This code will load all the challenges posted by the user signed in and put them in a table. A download button, a button to view the challenge,another one to view the comments are available. A Facebook share button is also part of the code below-->
 
-<div class="container"> <h3> Challenges posted by <%= @user.full_name %> </h3></div>
-<table class="table table-bordered able-condensed table-hover">
-  <thead>
+<% @block = Block.find_by(:blocked_by => @user.id, :blocked => current_user.id) %>
 
-    <tr>
-      <th>Name</th>
-      <th>Download Link</th>
-      <th>Display Challenge</th>
-      <th>Actions</th>
-    </tr>
+<%if @block.nil? %>
 
-  </thead>
-<tbody>
-    <% @challenges.each do |challenge| %>
-
-     <% if challenge.user1_id == @user.id %>
+  <div class="container"> <h3> Challenges posted by <%= @user.full_name %> </h3></div>
+  <table class="table table-bordered able-condensed table-hover">
+    <thead>
 
       <tr>
-        <td ><%= challenge.name %></td>
-        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
-
-        <% if challenge.upload_type == "Video" %>
-
-        <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
-
-        <%else%>
-
-        <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
-
-        <%end%>
-
-        <td>
-        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
-        <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
-        <p></p>
-        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
-
-        <% end %>
-
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-
-        if (d.getElementById(id)) return;
-
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
-        </td>
+        <th>Name</th>
+        <th>Download Link</th>
+        <th>Display Challenge</th>
+        <th>Actions</th>
       </tr>
 
-    <% end %>
+    </thead>
+  <tbody>
+      <% @challenges.each do |challenge| %>
 
-  </tbody>
+       <% if challenge.user1_id == @user.id %>
+
+        <tr>
+          <td ><%= challenge.name %></td>
+          <td ><%= link_to "Download Challenge", challenge.path_url %></td>
+
+          <% if challenge.upload_type == "Video" %>
+
+            <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
+
+          <%else%>
+
+            <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+
+          <%end%>
+
+          <td>
+          <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+          <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
+          <p></p>
+
+          <% if current_user.id == @user.id %>
+
+          <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
+          <% end %>
+          <% end %>
+
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+
+          if (d.getElementById(id)) return;
+
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+          </td>
+        </tr>
+
+       <% end %>
+
+    </tbody>
+
+  <% end %>
 
   <style>
   th {

@@ -4,26 +4,24 @@ class User < ActiveRecord::Base
 # :confirmable, :lockable, :timeoutable and :omniauthabl
 # before_save :delete_avatar, if:{ delete_avatar == '1' && !avatar_updated_at_changed? }
 
-#This method gets the user's full name to be used later in the views
-# ransacker :full_name do |parent|
-#     Arel::Nodes::NamedFunction.new('concat_ws', [' ', parent.table[:first_name], parent.table[:last_name]])
-#   end
-ransacker :full_name do |parent|
-  Arel::Nodes::InfixOperation.new('||',
+  #It facilitates the search with the full name instead of only first name or last name
+  ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
-      parent.table[:first_name], Arel::Nodes.build_quoted(' ')
-    ),
-    parent.table[:last_name]
-  )
-end
-
- def full_name
-  if self.first_name.blank? && self.last_name.blank?
-      self.email
-  else
-      self.first_name + " " + self.last_name
+      Arel::Nodes::InfixOperation.new('||',
+        parent.table[:first_name], Arel::Nodes.build_quoted(' ')
+      ),
+      parent.table[:last_name]
+    )
   end
- end
+
+   #This method gets the user's full name to be used later in the views
+   def full_name
+    if self.first_name.blank? && self.last_name.blank?
+        self.email
+    else
+        self.first_name + " " + self.last_name
+    end
+   end
 
 
   devise :database_authenticatable, :registerable,

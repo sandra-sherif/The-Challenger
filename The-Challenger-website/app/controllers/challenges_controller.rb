@@ -4,6 +4,7 @@ before_filter :set_search
   def set_search
     @search = Challenge.search(params[:q])
   end
+
   # def index returns all the challenges in the database.
   def index
   	@challenges = Challenge.all
@@ -47,7 +48,7 @@ before_filter :set_search
   # Allows the view to access these attributes.
   private
   def challenge_params
-    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type)
+    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type, :category)
   end
 
 end

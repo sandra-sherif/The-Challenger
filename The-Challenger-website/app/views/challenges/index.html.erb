@@ -19,23 +19,47 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <% end %>
 
 <br />
+
+<% unless current_user.blank? %>
 <%= link_to "New Challenge", new_challenge_path, class: "btn btn-primary" %>
 
 <%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
+
+<% end %>
+<br />
 <br />
 
-<br />
+
+<!-- The view that shows the search bar and the submit button -->
 
 <% content_for :search do %>
   <div class="large-8 small-9 columns">
-  <%= search_form_for @search do |f| %>
-    <%= f.text_field :name_cont, class: "radius-left expand", placeholder: "Challenges by name" %>
+    <%= search_form_for @search do |f| %>
+      <%= f.text_field :name_category_cont, class: "radius-left expand", placeholder: "Challenges by name or category" %>
   </div>
     <div class="large-4 small-3 columns">
       <%= f.submit "Search", class: "radius-right button" %>
     </div>
   <% end %>
-<% end %>
+  <% end %>
+
+
+<div>
+<!-- <= form_for @challenges do |f| % -->
+<!-- select :category,  -->
+<!--   <p><= options_from_collection_for_select(Challenge.all, "id", "category"), include_blank: true, :prompt => "Find Challenges by Category", :selected => @category %></p> -->
+<!-- <= form_tag(:controller => 'challenges', :action => 'index') do %> -->
+<!-- <= form_for @challenge, html: { multipart: true } do |f| %> -->
+<!-- <= select_tag :challenge, options_from_collection_for_select(Challenge.all, :id, :category), include_blank: true, :prompt => "Find Challenges by Category" %> -->
+<!-- <= f.select :category, options_from_collection_for_select(Challenge.all, :id, :category), include_blank: true, :prompt => "Find Challenges by Category" %>
+< end %> -->
+<!-- <= submit_tag "Find"%>
+< end %>  -->
+<!--    <= f.collection_select(:challenge, :id, Challenge.all, 
+        :id, :category, { prompt: 'Select Challenges by Category'}) %>  -->
+   <!-- <p> <= submit_tag "Find" %> </p> -->
+<!--   < end %> -->
+</div>
 
 
 <table class="table table-bordered able-condensed table-hover">
@@ -52,49 +76,58 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   
   <tbody>
     <% @challenges.each do |challenge| %>
-  
-      <tr>
-        <td ><%= challenge.name %></td>
-        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
-  
-        <% if challenge.upload_type == "Video" %>
 
-          <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
- 
-        <%else%>
-
-          <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+      <% @block = Block.find_by(:blocked_by => challenge.user1_id, :blocked => current_user.id) %>
+      <% if @block.nil? %>
   
-        <%end%>
- 
-        <td>
-        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
-        <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
-        <p></p>
- 
-        <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
- 
-        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
-        <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
- 
-        <% end %>
- 
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
-        </td>
-      </tr>
+        <tr>
+          <td ><%= challenge.name %></td>
+          <td ><%= link_to "Download Challenge", challenge.path_url %></td>
+          <% if challenge.upload_type == "Video" %>
+
+            <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
+   
+          <%else%>
+
+            <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
+    
+          <%end%>
+   
+          <td>
+          <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+          <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
+          <p></p>
+   
+          <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
+   
+            <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
+            
+          <% else %> 
+
+            <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
+          <% end %>
+
+   
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+          </td>
+        </tr>
+      
+      <% end %>
 
     <% end %>
     
   </tbody>
 </table>
+
+
 <style>
   th {
     text-align: center;

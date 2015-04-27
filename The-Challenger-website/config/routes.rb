@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resources :friends
 
+  resources :block
+
   resources :notifications
 
   resources :reports
@@ -16,7 +18,6 @@ Rails.application.routes.draw do
     # match :search, to: 'challenges#index', via: :post
     resources :comments
   end
-
   
   
   devise_for :users, controllers: { registrations: "users/registrations" }
@@ -26,6 +27,10 @@ Rails.application.routes.draw do
    resources :users
 
    get '/users/:controller/:action/:id/:sent_to/:status/:sent_by', to: 'users#show'
+   get '/users/:controller/:action/:id/:blocked_by/:blocked', to: 'users#show'
+   # get 'block/create_block/:id/', to: 'block#create_block'
+   # get 'block/destroy/:id', to: 'block#destroy'
+
    get '/notifications/:controller/:action/:notification', to: 'notifications#index'
  
   # You can have the root of your site routed with "root"
@@ -33,6 +38,7 @@ Rails.application.routes.draw do
 #This line sets the route of /profile/ to the action show in the profile controller
 
   get 'profile/', to: 'profile#show', as: 'profile'
+  # get 'category', to: 'category#index'
   
   #get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
   

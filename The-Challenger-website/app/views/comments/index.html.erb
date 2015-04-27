@@ -8,7 +8,9 @@
   </p>
 
 <% end %>
- 
+
+<% unless current_user.blank? %>
+
 <h2>Add a comment:</h2>
 
 <%= form_for([@challenge, @challenge.comments.build]) do |f| %>
@@ -18,5 +20,7 @@
   <p>
     <%= f.submit %>
   </p>
+
+<% end %>
 
 <% end %>
