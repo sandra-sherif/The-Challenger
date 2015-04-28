@@ -18,70 +18,22 @@ Notes:
   
         <%= image_tag @challenge.path_url, :width => 600, :height => 500 %>
   <%end%>
-
-          
-        <!-- Creates the facebook sharing button.-->
-        <div id="fb-root"></div><BR>
-        <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
-</p><p></p>
-
-<h3>Comments</h3>
-
-<%= render @challenge.comments %>
-<h4>Tags</h4>
-<%= render @challenge.tags %>
-<!-- This file provides an html view to show a certain challenge in a separate page and it is called by
-a view challenge button that sends a challenge_id to the def show method in the challenges_controller.
-Notes:
-1- The view challenge button is located in challenges/index.html.erb.
-2- The @challenge variable that is used throughout the document is the variable that was sent by the show method.-->
-
-<body>
-<p>
-  <h1><%= @challenge.name %></h1>
-</p>
-<!-- This condition checks if @challenge.upload_type is a video or an image in order to write the appropriate tag.-->
-
-  <% if @challenge.upload_type == "Video" %>
-
-        <%= video_tag @challenge.path_url, :size => "1000x540", :controls => true %>
-
+  <% if @challenge.sharing_type == "Public" %>
+        <%= @challege.sharing_type == false%>
   <%else%>
-  
-        <%= image_tag @challenge.path_url, :width => 600, :height => 500 %>
+        <%= @challenge.sharing_type == true %>
   <%end%>
- <!-- <% if challenge.sharing_type == "Private" && user_id == current_user
-         challenge.show = true %>
-        <%elsif challenge.sharing_type == "Private" && user_id != current_user
-         challenge.show = false %>
-        <% elsif challenge.sharing_type == "Public"
-        challenge.show = true%>
-        <%end%>
-        -->
-  
-        <%if current_user_id == :user_id %>
-          <td><%= challenges.all? { |user_id == current_user_id|  } %><td>
-          <%elsif current_user_id != :user_id %>
-           <td> challenges =challenges.public </td>
-           <%end%>
-           <%else%>
-           <td> challenges= challenges.all</td> 
-        <td>
-        <% end %> 
+
+<!--  <% if @challenge.sharing_type == "Private" %>
+  <%= sharing_tag @challenge.,  %>
+  -->
+
         <!-- Creates the facebook sharing button.-->
         <div id="fb-root"></div><BR>
         <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-
         if (d.getElementById(id)) return;
+        
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
@@ -94,12 +46,7 @@ Notes:
 <%= render @challenge.comments %>
 
 <%= link_to "Add Comment", {controller: "comments", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
-
-<h4>Tags</h4>
-<%= render @challenge.tags %>
 <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
-
-
 </body>
 <!-- Adding styles to the current body content.-->
 <style>
@@ -115,25 +62,3 @@ body {
 background: url("http://i.imgur.com/PVYiioJ.jpg");
 }
 </style>
-
-
-<%= link_to "Add Comment", {controller: "comments", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
-<%= link_to "Back", challenges_path , class:"btn btn-danger"%>
-
-
-</body>
-<!-- Adding styles to the current body content.-->
-<style>
-h1 {
-  text-align: center;
-  font-weight: bold;
-}
-div {
-  vertical-align: center;
-  text-align: center;
-}
-body {
-background: url("http://i.imgur.com/PVYiioJ.jpg");
-}
-</style>
-

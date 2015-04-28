@@ -25,7 +25,7 @@
     <%= f.label :sharing_with %> 
     <%= f.text_field :sharing_with %><br>
     <%= f.label :sharing_type %>
-    <%= f.select :sharing_type, [['Private', 'Private'],['Public','Public']], :prompt => 'Select a Sharing Type'%> <p></p>
+    <%= f.select :sharing_type, [['Private', 'Private'],['Public','Public']], :prompt => 'Select a Sharing Type', :selected => params[:value] %> <p></p>
     
     <%= f.submit "Upload Challenge", class: "btn btn-success" %>
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
