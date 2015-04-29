@@ -1,0 +1,97 @@
+<!-- This file provides an html view to show all the challenges.
+Notes:
+1- The file uses bootstrap tags and buttons such as table, thead and btn-primary for design purposes.
+2- The first part of the document (If condition) checks if there is an popup message generated when trying to delete or upload a challenge and displays the message of the popup.
+3- The New Challenge button calls the challenges/new.html.erb view.
+4- The View Challenge button calls the challenges/show.html.erb view.
+5- The View Comments buttons calls the comments/index.html.erb view.
+6- The delete button calls the predefined delete method that calls the def destroy method in challenges_controller
+and it is enabled only if the current_user is the one who uploaded the challenge.
+7- @challenges.each do |challenge| loops on all the challenges and view each one in a separate row.
+8- if challenge.upload_type == "Video" checks the upload_type of the challenge to choose the appropriate tag.-->
+
+<% if !flash[:notice].blank? %>
+  <div class="alert alert-info">
+  <%= flash[:notice] %>
+  </div>
+<% end %>
+<br />
+<% @challenge = Challenge.find(params[:challenge_id]) %>
+<% if user_signed_in? %>
+  <% if @challenge.user1_id != current_user.id %>
+  	<%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => params[:challenge_id]}, class:"btn btn-success" %>
+  <%end%>
+  <%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
+<%else%>
+  <%= link_to "Reply", new_user_session_path, class:"btn btn-success" %>
+<%end%>
+<%= link_to "Back To Challenges", challenges_path, class: "btn btn-warning" %>
+<br /><br />
+<table class="table table-bordered able-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Uploaded By</th>
+      <th>Display Response</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @responses.each do |response| %>
+  		<% if response.challenge_id == @challenge.id %> 
+  			<% @response_owner = User.find(response.user_id) %>
+    		<tr>
+    			<td ><%= response.name %></td>
+          <% if user_signed_in? %>
+        		<td ><%= link_to "#{@response_owner.full_name}", user_path(response.challenge_owner)%><p></p></td>
+          <%else%>
+            <td ><%= link_to "#{@response_owner.full_name}", new_user_session_path%><p></p></td>
+          <%end%>
+        	<% if response.upload_type == "Video" %>
+          	<td><%= video_tag response.path_url, :size => "320x240", :controls => true %><p></p>
+            <%= "#{response.likes_number} Liked this response" %></td>
+        	<%else%>
+        		<td><%= image_tag response.path_url, :size => "320x240" %><p></p>
+            <%= "#{response.likes_number} Liked this response" %></td>
+      		<%end%>
+      		<td>
+        		<% if user_signed_in? %>
+              <% @test = Likes.find_by(user_id: current_user.id, path: response.path.to_s) %>
+              <% if @test.nil? %>
+                <%= link_to "👍", {controller: "likes", action:"create", file_id:response.id, upload_type:"Response" }, :method => :post, class:"btn btn-success btn-block" %><p></p>
+              <%else%>
+                <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger btn-block" %><p></p>
+              <%end%>
+          		<% if response.challenge_owner == current_user.id or current_user.try(:admin?) %>
+          			<%= button_to "Delete", response, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{response.name}?"} %><p></p>
+          		<%else%>
+          			<!-- Insert Report -->
+          		<% end %>
+            <%else%>
+              <%= link_to "👍", new_user_session_path, class:"btn btn-success btn-block" %><p></p>
+            <%end%>
+            <%= link_to "View Response", response_path(response), class:"btn btn-primary btn-block" %><p></p>
+            <%= link_to "Download Response", response.path_url , class:"btn btn-primary btn-block"%><p></p>
+        		<div id="fb-root"></div>
+        		<script>(function(d, s, id) {
+        		var js, fjs = d.getElementsByTagName(s)[0];
+        		if (d.getElementById(id)) return;
+        		js = d.createElement(s); js.id = id;
+        		js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+        		fjs.parentNode.insertBefore(js, fjs);
+        		}(document, 'script', 'facebook-jssdk'));</script>
+        		<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+        	</td>
+      		</tr>
+    	<% end %>
+    <%end%>
+  </tbody>
+</table>
+<style>
+  th {
+    text-align: center;
+  }
+  td {
+    text-align: center;
+  }
+</style>

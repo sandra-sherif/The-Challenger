@@ -55,6 +55,18 @@
   <% if @friends1.nil? and @friends2.nil? %>
     <% session[:user_id] = @user.id %>
     <%= link_to "Add", {controller: "friends", action:"add_friend", sent_to: @user.id, status: "Pending", sent_by: current_user.id}, class:"btn btn-success" %>
+  <%elsif @friends2.nil? %>
+    <% if @friends1.status == "Accepted" %>
+      <%= link_to "Unfriend", @friends1, method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure that you wish to remove this friend?"} %>
+    <%elsif @friends1.status == "Pending" %>
+      <%= link_to "Pending Request", @friends1, method: :delete, class: "btn btn-warning", data: {confirm: "Are you sure that you wish to remove this friend?"} %>
+    <% end %>  
+  <%else%>
+    <% if @friends2.status == "Accepted" %>
+        <%= link_to "Unfriend", @friends2, method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure that you wish to remove this friend?"} %>
+    <%elsif @friends2.status == "Pending" %>
+      <%= link_to "Pending Request", @friends2, method: :delete, class: "btn btn-warning", data: {confirm: "Are you sure that you wish to remove this friend?"} %>
+    <%end%>
   <%end%>
   <%= link_to "Back To Profile", current_user, class: "btn btn-warning" %>
 <%end%>
@@ -77,7 +89,6 @@
   </thead>
 <tbody>
     <% @challenges.each do |challenge| %>
-
      <% if challenge.user1_id == @user.id %>
 
       <tr>
@@ -95,19 +106,20 @@
         <%end%>
 
         <td>
-        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
+        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %><p></p>
+        <%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %><p></p>
         <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
         <p></p>
-        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
-
+        <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
+          <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
+        <%else%>
+          <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
         <% end %>
 
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-
         if (d.getElementById(id)) return;
-
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
@@ -115,7 +127,7 @@
         <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
         </td>
       </tr>
-
+     <% end %>
     <% end %>
 
   </tbody>

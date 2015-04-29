@@ -67,3 +67,5 @@ gem 'carrierwave'
 gem 'foreigner'
 gem 'ratyrate'
 
+
+gem 'streamio-ffmpeg'

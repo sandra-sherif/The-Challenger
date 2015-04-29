@@ -10,66 +10,61 @@ Notes:
 </p>
 <!-- This condition checks if @challenge.upload_type is a video or an image in order to write the appropriate tag.-->
 
-  <% if @challenge.upload_type == "Video" %>
 
-        <%= video_tag @challenge.path_url, :size => "1000x540", :controls => true %>
-
-  <%else%>
-  
-        <%= image_tag @challenge.path_url, :width => 600, :height => 500 %>
-  <%end%>
-  
-        <!-- Creates the facebook sharing button.-->
-        <div id="fb-root"></div><BR>
-        <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
-</p><p>
-  <div class="row">
-  <div class="small-2 large-2 columns">
-    <%= imdb_style_rating_for @challenge, current_user%>
-  </div>
-  <br>
-  <div class="small-2 large-4 columns">
-    <% if current_user %>
-      <div> Recording: <%= rating_for @challenge, "Recording", path: 'star_icons', disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv' %></div>
-      <div id="hintDiv"></div>
-      Original_Score: <%= rating_for @challenge, "Original_Score", disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv', targetType: "score"%>
-      <div id="hintDiv"></div>
-    <% end %>
-  </div>
-</div>
-</p>
+<% if @challenge.upload_type == "Video" %>
+  <%= video_tag @challenge.path_url, :size => "1000x540", :controls => true %>
+<%else%>
+  <%= image_tag @challenge.path_url, :width => 600, :height => 500 %>
+<%end%>
+<p></p>
+<%= "#{@challenge.likes_number} Liked this challenge" %>
+<!-- Creates the facebook sharing button.-->
+<div id="fb-root"></div><BR>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+</p><p></p>
 
 <h3>Comments</h3>
 
 <%= render @challenge.comments %>
-
-<%= link_to "Add Comment", {controller: "comments", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
+<% if user_signed_in? %>
+	<%= link_to "Add Comment", {controller: "comments", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
+<%else%>
+	<%= link_to "Add Comment", new_user_session_path, class:"btn btn-primary" %>
+<%end%>
+<%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:@challenge }, class:"btn btn-primary" %>
+<% if user_signed_in? %>
+  <% @test = Likes.find_by(user_id: current_user.id, path: @challenge.path.to_s) %>
+  <% if @test.nil? %>
+    <%= link_to "👍", {controller: "likes", action:"create", file_id:@challenge.id, upload_type:"Challenge" }, :method => :post, class:"btn btn-success" %>
+  <%else%>
+    <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger" %>
+  <%end%>
+<%else%>
+  <%= link_to "👍", new_user_session_path, class:"btn btn-success" %>
+<%end%>
 <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 </body>
 <!-- Adding styles to the current body content.-->
 <style>
-h1 {
-  text-align: center;
-  font-weight: bold;
-}
-div {
-  vertical-align: center;
-  text-align: center;
-}
-body {
-background: url("http://i.imgur.com/PVYiioJ.jpg");
-}
-p {
-  vertical-align: center;
-  text-align: center;
-}
+
+  h1 {
+    text-align: center;
+    font-weight: bold;
+  }
+  div {
+    vertical-align: center;
+    text-align: center;
+  }
+  body {
+  background: url("http://i.imgur.com/PVYiioJ.jpg");
+  }
+
 </style>
 
