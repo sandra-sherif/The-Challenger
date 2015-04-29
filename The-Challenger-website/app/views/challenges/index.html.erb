@@ -54,7 +54,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
     <% @challenges.each do |challenge| %>
   
       <tr>
-      <% if challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.name== challenge.sharing_with  %>
+      <% if challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.email== challenge.sharing_with  %>
          <td ><%= challenge.name %></td>
          <td ><%= link_to "Download Challenge", challenge.path_url %></td>
   
