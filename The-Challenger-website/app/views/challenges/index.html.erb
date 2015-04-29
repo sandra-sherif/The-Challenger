@@ -54,7 +54,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
     <% @challenges.each do |challenge| %>
   
       <tr>
-      <% if challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.email== challenge.sharing_with  %>
+      <% if ((challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.email== challenge.sharing_with) || challenge.sharing_type == "Public" )%>
          <td ><%= challenge.name %></td>
          <td ><%= link_to "Download Challenge", challenge.path_url %></td>
   
@@ -94,49 +94,10 @@ and it is enabled only if the current_user is the one who uploaded the challenge
           <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
           </td>
 
-     <%elsif  challenge.sharing_type == "Public" %>
-       <td ><%= challenge.name %></td>
-        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
-  
-        <% if challenge.upload_type == "Video" %>
-
-          <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
- 
-         <%else%>
-
-          <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
-      <%end%>
-    <%end%>
-    
-      
-         
-        <td>
-        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %><p></p>
-        <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
-        <p></p>
- 
-        <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
- 
-        <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
-        <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
-        <% end %>
-
-                
- 
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
-        </td>
-
+        <% end %>   
        </tr>
-      <% end %>
-    
+   <% end %> 
+   
     
   </tbody>
 </table>
