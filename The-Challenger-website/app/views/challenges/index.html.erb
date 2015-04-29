@@ -26,6 +26,8 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 
 <br />
 
+
+
 <% content_for :search do %>
   <div class="large-8 small-9 columns">
   <%= search_form_for @search do |f| %>
@@ -49,7 +51,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 
     </tr>
   </thead>
-  
+
   <tbody>
     <% @challenges.each do |challenge| %>
   

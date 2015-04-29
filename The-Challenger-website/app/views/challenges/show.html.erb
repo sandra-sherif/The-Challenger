@@ -38,10 +38,9 @@ Notes:
   <br>
   <div class="small-2 large-4 columns">
     <% if current_user %>
-      Recording: <%= rating_for @challenge, "Recording", disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv' %>
+      <div> Recording: <%= rating_for @challenge, "Recording", path: 'star_icons', disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv' %></div>
       <div id="hintDiv"></div>
-      <br>
-      Original_Score: <%= rating_for @challenge, "Original_Score", disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv'%>
+      Original_Score: <%= rating_for @challenge, "Original_Score", disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv', targetType: "score"%>
       <div id="hintDiv"></div>
     <% end %>
   </div>
@@ -67,6 +66,10 @@ div {
 }
 body {
 background: url("http://i.imgur.com/PVYiioJ.jpg");
+}
+p {
+  vertical-align: center;
+  text-align: center;
 }
 </style>
 
