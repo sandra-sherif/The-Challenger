@@ -41,8 +41,7 @@
 <%= link_to "View All Reports", reports_path, class:"btn btn-danger" %>
 <%end%>
 
-  <%= @challenge = Challenge.indexPrivateSharing %>
-
+ 
 <!-- This code will load all the challenges posted by the user signed in and put them in a table. A download button, a button to view the challenge,another one to view the comments and a last one to delete the challenge are available. A Facebook share button is also part of the code below-->
 
 <div class="container"> <h3> Challenges posted by <%= @user.full_name %> </h3></div>

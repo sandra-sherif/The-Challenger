@@ -43,13 +43,13 @@ before_filter :set_search
     @challenge = Challenge.find(params[:id])
   end
 
-def indexPrivateSharing
-  if params[:sharing_type].value == "Private"
-    @challenges = Challege.where(owner_id: current_user.following_ids, owner_type: "User", | :sharing_with current_user)
-  else @challenge = Challenge.all
-end
+# def indexPrivateSharing
 
-PublicActivity::Activity.not_private.order("created_at desc").where(owner_id: current_user.following_ids, owner_type: "User"
+#     @challenges = Challege.where(params[:user_id ,:sharing_with])
+  
+# end
+
+
 
   #Default show Image method streams the file contents.
   #File doesn't have to be in public/ dir
@@ -66,8 +66,5 @@ PublicActivity::Activity.not_private.order("created_at desc").where(owner_id: cu
   def challenge_params
     params.require(:challenge).permit(:name, :path, :user_id, :upload_type, :sharing_type, :sharing_with)
   end
-# Use your favorite authorization system to restrict access
-# filter_access_to :indexPrivateSharing, :require => :view, attribute_check => :true
-# end               #:show,
 end
-end
+
