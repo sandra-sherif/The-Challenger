@@ -41,6 +41,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   		<% if response.challenge_id == @challenge.id %> 
   			<% @response_owner = User.find(response.user_id) %>
     		<tr>
+          
     			<td ><%= response.name %></td>
           <% if user_signed_in? %>
         		<td ><%= link_to "#{@response_owner.full_name}", user_path(response.challenge_owner)%><p></p></td>
@@ -62,7 +63,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
               <%else%>
                 <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger btn-block" %><p></p>
               <%end%>
-          		<% if response.challenge_owner == current_user.id or current_user.try(:admin?) %>
+          		<% if response.user_id == current_user.id or current_user.try(:admin?) %>
           			<%= button_to "Delete", response, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{response.name}?"} %><p></p>
           		<%else%>
           			<!-- Insert Report -->

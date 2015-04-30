@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'streamio-ffmpeg'
+
 class ResponsesController < ApplicationController
   def create
     @responses = Response.new(response_params)
@@ -11,12 +14,17 @@ class ResponsesController < ApplicationController
     @notification.notification_type = "Response Notification"
     @notification.text = current_user.email + " has replied on one of your challenges."
     @notification.challenge_id = @responses.challenge_id
+    @responses.save
     if @responses.save
       @notification.response_id = @responses.id
       @notification.save
       @user = User.find(@responses.challenge_owner)
       @user.increment!(:notifications)
       @user.save
+      FFMPEG.ffmpeg_binary = '/usr/local/bin/ffmpeg'
+      @movie = FFMPEG::Movie.new("public" + @responses.path.to_s)
+      @responses.duration = @movie.duration
+      @responses.save
       redirect_to challenge_path(@challenge), notice: "The response has been sent."
     else
       redirect_to new_challenges_path, notice: "Unable to upload your reply."
