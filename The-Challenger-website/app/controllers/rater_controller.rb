@@ -10,4 +10,5 @@ class RaterController < ApplicationController
       render :json => false
     end
   end
+
 end

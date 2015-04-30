@@ -37,6 +37,14 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   <% end %>
 <% end %>
 
+<table>
+
+  <tbody>
+   <%= link_to "Most Liked Videos", {controller: "likes", action:"index"}, class:"btn btn-success btn-primary" %><p></p>
+
+  </tbody>
+
+</table>
 
 <table class="table table-bordered able-condensed table-hover">
   <thead>
@@ -112,6 +120,9 @@ and it is enabled only if the current_user is the one who uploaded the challenge
       </tr>
 
     <% end %>
+    
+  </tbody>
+  <tbody>
     
   </tbody>
 </table>

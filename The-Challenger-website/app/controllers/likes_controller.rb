@@ -1,6 +1,9 @@
 class LikesController < ApplicationController
+  
+  #def create located and the challenge and create the like on it the challenge provided
+  #afterwards it sends notification to inform the challenger's ownder of the like
+  #and increments the number of likes by 1 and same goes for the response (Sandra)
   def create
-
   	if params[:upload_type] == "Challenge"
 	  	@challenge = Challenge.find(params[:file_id])
 	  	@like = Likes.new
@@ -57,9 +60,15 @@ class LikesController < ApplicationController
   	@like = Likes.new
   end
 
+# def index locates all the challenges and categorize them according to the number of likes
+# also categorize the challenges randomly (Sandra)
   def index
+  	@all = Challenge.all
+  	@challenges = @all.order('likes_number desc').limit(5)
+  	@recommended = @challenges.order("random()").first(5)
   end
 
+# def destroy deletes the like made by a certain user on a challenge or response (Sandra)
   def destroy
   	if params[:upload_type] == "Challenge"
 	  	@like = Likes.find(params[:id])
@@ -84,6 +93,7 @@ class LikesController < ApplicationController
 	end
   end
 
+# def like_params provides the parameters needed for the functions (Sandra)
    private
   def like_params
     params.require(:likes).permit(:file_id,:user_id,:upload_type)
