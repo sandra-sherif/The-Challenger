@@ -49,10 +49,16 @@ and it is enabled only if the current_user is the one who uploaded the challenge
           <%end%>
         	<% if response.upload_type == "Video" %>
           	<td><%= video_tag response.path_url, :size => "320x240", :controls => true %><p></p>
-            <%= "#{response.likes_number} Liked this response" %></td>
+            <%= "#{response.likes_number} Liked this response" %>
+            <p></p>
+            <description> <%= response.description %> </description>
+            </td>
         	<%else%>
         		<td><%= image_tag response.path_url, :size => "320x240" %><p></p>
-            <%= "#{response.likes_number} Liked this response" %></td>
+            <%= "#{response.likes_number} Liked this response" %>
+            <p></p>
+            <description> <%= response.description %> </description>
+            </td>
       		<%end%>
       		<td>
         		<% if user_signed_in? %>
@@ -93,5 +99,10 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   }
   td {
     text-align: center;
+  }
+  
+  description {
+    font-weight: none;
+    font-style: italic;
   }
 </style>

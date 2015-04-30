@@ -41,7 +41,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
     
     <tr>
       <th>Name</th>
-      <th>Download Link</th>
+      <th>Uploaded By</th>
       <th>Display Challenge</th>
       <th>Actions</th>
 
@@ -61,11 +61,17 @@ and it is enabled only if the current_user is the one who uploaded the challenge
         <% if challenge.upload_type == "Video" %>
           <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %>
           <p></p>
-          <%= "#{challenge.likes_number} Liked this challenge" %></td>
+          <%= "#{challenge.likes_number} Liked this challenge" %>
+          <p></p>
+          <description> <%= challenge.description %> </description> 
+          </td>
         <%else%>
           <td><%= image_tag challenge.path_url, :size => "320x240" %>
           <p></p>
-          <%= "#{challenge.likes_number} Liked this challenge" %></td>
+          <%= "#{challenge.likes_number} Liked this challenge" %>
+          <p></p>
+          <description> <%= challenge.description %> </description> 
+          </td>
         <%end%>
  
         <td>
@@ -119,5 +125,10 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   }
   td {
     text-align: center;
+  }
+  
+  description {
+    font-weight: none;
+    font-style: italic;
   }
 </style>

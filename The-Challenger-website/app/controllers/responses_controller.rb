@@ -43,7 +43,7 @@ class ResponsesController < ApplicationController
 
     private
   def response_params
-    params.require(:response).permit(:challenge_id, :name, :path, :upload_type)
+    params.require(:response).permit(:challenge_id, :name, :path, :upload_type, :description)
   end
 
 end

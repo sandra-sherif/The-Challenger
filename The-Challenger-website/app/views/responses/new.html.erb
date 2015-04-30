@@ -29,6 +29,10 @@
     <%= f.label :upload_type %>
     <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Response Type'%><p></p>
     <%= hidden_field_tag(:challenge_id, @challenge.id) %>
+     <%= f.label :description %>
+    <p></p>
+    <%= f.text_field :description, :size => "80x300" %>
+    <p></p>
     <%= f.submit "Upload Response", class: "btn btn-success" %>
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 

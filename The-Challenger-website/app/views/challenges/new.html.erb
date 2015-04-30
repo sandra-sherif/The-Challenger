@@ -22,9 +22,14 @@
     <p></p>
     <%= f.label :upload_type %>
     <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Challenge Type'%><p></p>
+    <%= f.label :description %>
+    <p></p>
+      <%= f.text_field :description, :size => "80x300" %>
+    <p></p>
     <%= f.submit "Upload Challenge", class: "btn btn-success" %>
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 
   <% end %>
 
 </div>
+

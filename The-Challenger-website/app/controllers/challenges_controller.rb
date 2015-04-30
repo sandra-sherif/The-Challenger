@@ -48,7 +48,7 @@ before_filter :set_search
   # Allows the view to access these attributes.
   private
   def challenge_params
-    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type)
+    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type, :description)
   end
 
 end
