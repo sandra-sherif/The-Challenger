@@ -6,7 +6,7 @@ Notes:
 
 <body>
 <p>
-  <% if challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.email== challenge.sharing_with  %>
+  <% if ((challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.email== challenge.sharing_with) || challenge.sharing_type == "Public" ) %>
   <h1><%= @challenge.name %></h1>
 </p>
 <!-- This condition checks if @challenge.upload_type is a video or an image in order to write the appropriate tag.-->
