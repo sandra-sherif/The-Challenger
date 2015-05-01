@@ -52,7 +52,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   
   <tbody>
     <% @challenges.each do |challenge| %>
-  
+    
       <tr>
         <td ><%= challenge.name %></td>
         <td ><%= link_to "Download Challenge", challenge.path_url %></td>
@@ -76,9 +76,9 @@ and it is enabled only if the current_user is the one who uploaded the challenge
  
         <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
         <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
- 
+        <%= link_to "Tag", {controller: "tags", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
+        
         <% end %>
- 
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];

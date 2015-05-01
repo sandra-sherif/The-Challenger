@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :reports
 
   resources :challenges
+  
+  resources :tags
 
   root "challenges#index"
 
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   resources :challenges do
     # match :search, to: 'challenges#index', via: :post
     resources :comments
+    resources :tags
   end
 
   
@@ -27,6 +30,8 @@ Rails.application.routes.draw do
 
    get '/users/:controller/:action/:id/:sent_to/:status/:sent_by', to: 'users#show'
    get '/notifications/:controller/:action/:notification', to: 'notifications#index'
+   get '/users/:controller/:action/:id/:tagged_by/:tagged', to: 'challenges#index'
+   
  
   # You can have the root of your site routed with "root"
 

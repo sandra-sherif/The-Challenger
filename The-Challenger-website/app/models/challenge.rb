@@ -7,7 +7,7 @@ class Challenge < ActiveRecord::Base
     validates :name, presence: true
     validates :upload_type, presence: true
     validates :path, presence: true
-
+    
  
 
 end
