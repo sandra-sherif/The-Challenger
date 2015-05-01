@@ -1,7 +1,6 @@
 # authored by: Seif Meligy
 
 class UserNotifier < ApplicationMailer
-    
   default :from => 'from@thechallenger.com'
   # send a signup email to the user, pass in the user object that contains the user's email address
   def send_signup_email(user)
@@ -27,12 +26,13 @@ def friend_requested_accepted (user)
 	mail( :to => @friend.email,
 	:subject =>  "#{@user.full_name} has accepted your friend request" )
 end
-
+# this is an email sent when the challange is reported
 def report_sent(user)
     @user = user 
     mail( :to => @user.email, 
     :subject => 'Your video has been reported')
 end
+# an email is sent when a challange is reported 
 def deleted_video(user)
     @user = user
     mail( :to => @user.email, 
