@@ -35,6 +35,7 @@ class ReportsController < ApplicationController
     @reports = Report.all
   end
 
+# def report_params provides the parameters needed for the functions - Amr Nafie
   private
   def report_params
     params.require(:report).permit(:challenge_id, :user_id, :reason)

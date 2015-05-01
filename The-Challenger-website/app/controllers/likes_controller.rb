@@ -1,5 +1,8 @@
 class LikesController < ApplicationController
 
+  #def create located and the challenge and create the like on it the challenge provided
+  #afterwards it sends notification to inform the challenger's ownder of the like
+  #and increments the number of likes by 1 and same goes for the response - Amr Nafie
   def create
   	if params[:upload_type] == "Challenge"
 	  	@challenge = Challenge.find(params[:file_id])
@@ -60,6 +63,7 @@ class LikesController < ApplicationController
   def index
   end
 
+# def destroy deletes the like made by a certain user on a challenge or response - Amr Nafie
   def destroy
   	if params[:upload_type] == "Challenge"
 	  	@like = Likes.find(params[:id])
@@ -84,6 +88,7 @@ class LikesController < ApplicationController
 	end
   end
 
+# def like_params provides the parameters needed for the functions - Amr Nafie
   private
   def like_params
     params.require(:likes).permit(:file_id,:user_id,:upload_type)
