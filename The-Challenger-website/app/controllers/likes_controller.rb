@@ -1,14 +1,13 @@
 class LikesController < ApplicationController
 
   def create
-
   	if params[:upload_type] == "Challenge"
 	  	@challenge = Challenge.find(params[:file_id])
 	  	@like = Likes.new
 	  	@like.path = @challenge.path
 	  	@like.user_id = current_user.id
 	  	if @challenge.user1_id != current_user.id
-		  	@notification = Notification.new
+	  		@notification = Notification.new
 		    @notification.sent_by = current_user.id
 		    @notification.sent_to = @challenge.user1_id
 		    @notification.notification_type = "Like Challenge Notification"
@@ -20,9 +19,9 @@ class LikesController < ApplicationController
 		    @user.save
 		end
 	  	if @like.save
-	    	redirect_to challenges_path, notice: "You liked #{@challenge.name}."
-	    	@challenge.increment!(:likes_number)
-	    	@challenge.save
+	  		redirect_to challenges_path, notice: "You liked #{@challenge.name}."
+	  		@challenge.increment!(:likes_number)
+	  		@challenge.save
 	    else
 	    	redirect_to challenges_path(@challenge), notice: "Unable to like #{@challenge.name}, Please Try Again."
 	    end
@@ -32,7 +31,7 @@ class LikesController < ApplicationController
 	  	@like.path = @response.path
 	  	@like.user_id = current_user.id
 	  	if @response.user_id != current_user.id
-		  	@notification = Notification.new
+	  		@notification = Notification.new
 		    @notification.sent_by = current_user.id
 		    @notification.sent_to = @response.user_id
 		    @notification.notification_type = "Like Response Notification"
