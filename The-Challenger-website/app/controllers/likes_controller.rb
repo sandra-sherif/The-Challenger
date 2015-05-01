@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+
   def create
 
   	if params[:upload_type] == "Challenge"
@@ -84,7 +85,7 @@ class LikesController < ApplicationController
 	end
   end
 
-   private
+  private
   def like_params
     params.require(:likes).permit(:file_id,:user_id,:upload_type)
   end

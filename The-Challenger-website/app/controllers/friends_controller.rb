@@ -1,4 +1,5 @@
 class FriendsController < ApplicationController
+
   def add_friend
     @friends = Friends.new
     @friends.sent_to = session[:user_id]
@@ -82,4 +83,5 @@ class FriendsController < ApplicationController
   def friends_params
     params.require(:friends).permit(:sent_to, :sent_by, :status)
   end
+  
 end
