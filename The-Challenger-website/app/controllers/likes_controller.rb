@@ -1,7 +1,6 @@
 class LikesController < ApplicationController
-
+  
   def create
-
   	if params[:upload_type] == "Challenge"
 	  	@challenge = Challenge.find(params[:file_id])
 	  	@like = Likes.new
@@ -58,7 +57,12 @@ class LikesController < ApplicationController
   	@like = Likes.new
   end
 
+# def index locates all the challenges and categorize them according to the number of likes
+# also categorize the challenges randomly (Sandra)
   def index
+  	@all = Challenge.all
+  	@challenges = @all.order('likes_number desc').limit(5)
+  	@recommended = @challenges.order("random()").first(5)
   end
 
   def destroy
@@ -85,7 +89,7 @@ class LikesController < ApplicationController
 	end
   end
 
-  private
+   private
   def like_params
     params.require(:likes).permit(:file_id,:user_id,:upload_type)
   end

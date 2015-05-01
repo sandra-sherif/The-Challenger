@@ -10,6 +10,7 @@ Notes:
 </p>
 <!-- This condition checks if @challenge.upload_type is a video or an image in order to write the appropriate tag.-->
 
+
 <% if @challenge.upload_type == "Video" %>
   <%= video_tag @challenge.path_url, :size => "1000x540", :controls => true %>
 <%else%>
@@ -28,6 +29,22 @@ fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
 </p><p></p>
+
+</p><p>
+  <div class="row">
+  <div class="small-2 large-2 columns">
+    <%= imdb_style_rating_for @challenge, current_user%>
+  </div>
+  <br>
+  <div class="small-2 large-4 columns">
+    <% if current_user %>
+      <div> Recording: <%= rating_for @challenge, "Recording", path: 'star_icons', disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv' %></div>
+      Original_Score: <%= rating_for @challenge, "Original_Score", disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv'%>
+    <% end %>
+  </div>
+</div>
+</p>
+
 <h3>Comments</h3>
 
 <%= render @challenge.comments %>
@@ -51,6 +68,7 @@ fjs.parentNode.insertBefore(js, fjs);
 </body>
 <!-- Adding styles to the current body content.-->
 <style>
+
   h1 {
     text-align: center;
     font-weight: bold;
@@ -58,9 +76,11 @@ fjs.parentNode.insertBefore(js, fjs);
   div {
     vertical-align: center;
     text-align: center;
+    margin: auto;
   }
   body {
   background: url("http://i.imgur.com/PVYiioJ.jpg");
   }
+
 </style>
 
