@@ -1,6 +1,8 @@
 class Challenge < ActiveRecord::Base
 
+	#authored by Marina ElDib
 	#It enables the search for challenger to search by name or category of the challenge
+	#It takes the name of the challenge and the category as a parameter
 	ransacker :name_category do 
 		|parent| Arel::Nodes::InfixOperation.new('||', 
 		Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')

@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
   before_filter :set_search
-  
+
+  #authored by Marina ElDib
+  #It sets @search to the results of the query for the search 
   def set_search
     @search = User.search(params[:q])
   end
@@ -13,6 +15,8 @@ class UsersController < ApplicationController
     @challenges = Challenge.all
   end
 
+  #authored by Marina ElDib
+  #Index returns all users or the users searched for according to their full name
   def index
      @users = User.all
     if params[:q]

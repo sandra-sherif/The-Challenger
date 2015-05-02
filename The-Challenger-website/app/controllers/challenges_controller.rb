@@ -5,7 +5,9 @@ before_filter :set_search
     @search = Challenge.search(params[:q])
   end
 
-  # def index returns all the challenges in the database.
+  # authored by Marina ElDib
+  # def index returns all the challenges in the database and if someone search for certain challenges
+  # it returns the searched challenges.
   def index
   	@challenges = Challenge.all
     if params[:q]
