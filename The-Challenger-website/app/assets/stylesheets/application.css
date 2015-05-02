@@ -14,6 +14,8 @@
  *= require_self
  */
  
+ /*Haya Borham - css stylesheet linked to application.html.erb to adjust different styles to different html classes and elements*/
+ 
  @import "bootstrap";
  
      	header {

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <!--Haya Borham - Importing Google webfont Raleway-->
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,700' rel='stylesheet' type='text/css'>
+  
   <title>The Challenger</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -9,6 +11,9 @@
   <%= yield(:search) %>
  
 </head>
+
+<!--Haya Borham - creating a static header with a navigation bar linking to different routes around the website. The navbar's content
+depends on whether or not the user is signed in, hence the if condition-->
 <header>
   <br>
   <img src="http://i.imgur.com/ev3wHy6.png" width="130" height: auto style="padding-left:5pt;";>
@@ -34,6 +39,7 @@
 </header>
 <body>
   
+  <!--Haya Borham - class refers to a specified frame in the body of the page with the given style-->
   <div class="container" style="padding-top:40px;">
   <%= yield %>
   </div>
