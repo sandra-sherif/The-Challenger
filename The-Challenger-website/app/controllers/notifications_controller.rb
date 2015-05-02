@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+
   def show
   end
 
@@ -20,7 +21,7 @@ class NotificationsController < ApplicationController
   def status
   end
 
-    private
+  private
   def notification_params
     params.require(:notification).permit(:sent_by, :sent_to, :challenge_id, :comment_id, :text, :seen, :notification_type)
   end
