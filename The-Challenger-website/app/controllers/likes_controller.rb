@@ -8,6 +8,7 @@ class LikesController < ApplicationController
 	  	@challenge = Challenge.find(params[:file_id])
 	  	@like = Likes.new
 	  	@like.path = @challenge.path
+	  	@like.upload_type = "Challenge"
 	  	@like.user_id = current_user.id
 	  	if @challenge.user1_id != current_user.id
 	  		@notification = Notification.new
@@ -32,6 +33,7 @@ class LikesController < ApplicationController
 		@response = Response.find(params[:file_id])
 	  	@like = Likes.new
 	  	@like.path = @response.path
+	  	@like.upload_type = "Response"
 	  	@like.user_id = current_user.id
 	  	if @response.user_id != current_user.id
 	  		@notification = Notification.new
@@ -65,9 +67,23 @@ class LikesController < ApplicationController
 
 # def destroy deletes the like made by a certain user on a challenge or response - Amr Nafie
   def destroy
-  	if params[:upload_type] == "Challenge"
-	  	@like = Likes.find(params[:id])
+  	@like = Likes.find(params[:id])
+  	if @like.upload_type == "Challenge"
 	  	@challenge = Challenge.find_by(params[path: @like.path])
+	  	@notifications = Notification.all
+	    @notifications.each do |notification|
+	    	if notification.challenge_id == @challenge.id
+	      		if notification.notification_type == "Like Challenge Notification"
+	        		@notification = Notification.find(notification.id)
+	        		if @notification.seen == false
+	        			@user = User.find(@notification.sent_to)
+	         			@user.decrement(:notifications, 1)
+	         			@user.save
+	        		end
+	        		@notification.destroy
+	        	end
+	      end
+	    end
 	  	if @like.destroy
 	  		redirect_to challenges_path, notice: "You unliked #{@challenge.name}."
 	  		@challenge.decrement(:likes_number, 1)
@@ -76,8 +92,21 @@ class LikesController < ApplicationController
 	  		redirect_to challenges_path, notice: "Unable to unlike #{@challenge.name}, Please Try Again."
 	  	end
 	else
-		@like = Likes.find(params[:id])
 	  	@response = Response.find_by(params[path: @like.path])
+	  	@notifications = Notification.all
+	    @notifications.each do |notification|
+	    	if notification.response_id == @response.id 
+		      	if notification.notification_type == "Like Response Notification"
+			        @notification = Notification.find(notification.id)
+			        if @notification.seen == false
+			        	@user = User.find(@notification.sent_to)
+			        	@user.decrement(:notifications, 1)
+			        	@user.save
+			        end
+			        @notification.destroy
+			    end
+	      	end
+	    end
 	  	if @like.destroy
 	  		redirect_to :controller => 'responses', :action => 'index',  :challenge_id => @response.challenge_id, notice: "You unliked #{@response.name}."
 	  		@response.decrement(:likes_number, 1)

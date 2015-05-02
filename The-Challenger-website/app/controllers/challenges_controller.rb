@@ -35,6 +35,18 @@ before_filter :set_search
   # Redirects to the challenges view with a message that the file is deleted.
   def destroy
     @challenge = Challenge.find(params[:id])
+    @notifications = Notification.all
+    @notifications.each do |notification|
+      if notification.challenge_id = @challenge.id
+        @notification = Notification.find(notification.id)
+        if @notification.seen == false
+          @user = User.find(@notification.sent_to)
+          @user.decrement(:notifications, 1)
+          @user.save
+        end
+        @notification.destroy
+      end
+    end
     @challenge.destroy
     redirect_to challenges_path, notice:  "The challenge #{@challenge.name} has been deleted."
   end

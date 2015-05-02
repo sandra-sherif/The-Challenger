@@ -47,6 +47,11 @@ class ResponsesController < ApplicationController
     @notifications.each do |notification|
       if notification.response_id = @responses.id
         @notification = Notification.find(notification.id)
+        if @notification.seen == false
+          @user = User.find(@notification.sent_to)
+          @user.decrement(:notifications, 1)
+          @user.save
+        end
         @notification.destroy
       end
     end

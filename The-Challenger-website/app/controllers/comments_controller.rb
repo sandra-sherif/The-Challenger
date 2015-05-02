@@ -33,6 +33,20 @@ class CommentsController < ApplicationController
   def destroy
     @challenge = Challenge.find(params[:challenge_id])
     @comment = @challenge.comments.find(params[:id])
+    @notifications = Notification.all
+    @notifications.each do |notification|
+      if notification.comment_id = @comment.id
+        if notification.notification_type == "Comment Notification"
+          @notification = Notification.find(notification.id)
+          if @notification.seen == false
+            @user = User.find(@notification.sent_to)
+            @user.decrement(:notifications, 1)
+            @user.save
+          end
+          @notification.destroy
+        end
+      end
+    end
     @comment.destroy
     redirect_to challenge_path(@challenge)
   end
