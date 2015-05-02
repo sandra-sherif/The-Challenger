@@ -12,7 +12,6 @@ RSpec.describe ProfileController, type: :controller do
     user
 	end
 
-
 	it "renders the #show view" do
 	user
 	sign_in(user)

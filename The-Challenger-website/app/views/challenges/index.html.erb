@@ -27,7 +27,6 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <br />
 <br />
 
-
 <!-- The view that shows the search bar and the submit button -->
 
 <% content_for :search do %>
@@ -39,8 +38,17 @@ and it is enabled only if the current_user is the one who uploaded the challenge
       <%= f.submit "Search", class: "radius-right button" %>
     </div>
   <% end %>
-  <% end %>
 
+<% end %>
+
+<table>
+
+  <tbody>
+   <%= link_to "Most Liked Videos", {controller: "likes", action:"index"}, class:"btn btn-success btn-primary" %><p></p>
+
+  </tbody>
+
+</table>
 
 <div>
 <!-- <= form_for @challenges do |f| % -->
@@ -58,7 +66,6 @@ and it is enabled only if the current_user is the one who uploaded the challenge
    <!-- <p> <= submit_tag "Find" %> </p> -->
 <!--   < end %> -->
 </div>
-
 
 <table class="table table-bordered able-condensed table-hover">
   <thead>

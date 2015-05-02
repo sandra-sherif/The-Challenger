@@ -3,8 +3,7 @@ class ReportsController < ApplicationController
   # This method is called whenever a user click on report button and it creates a new instance of Report
   # and adds the challenge and user id to the report table then redirects to challenges_path - Amr Nafie
   def create
-    @report = Report.new(report_params)
-    
+    @report = Report.new(report_params)    
     if params[:upload_type] == "Challenge"
       @challenge = Challenge.find(params[:challenge_id])
       @user = User.find(params[:user_id])

@@ -62,6 +62,7 @@ and it is enabled only if the current_user is the one who uploaded the challenge
               <%else%>
                 <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger btn-block" %><p></p>
               <%end%>
+
               <%= link_to "View Response", response_path(response), class:"btn btn-primary btn-block" %><p></p>
               <%= link_to "Download Response", response.path_url , class:"btn btn-primary btn-block"%><p></p>
           		<% if response.user_id == current_user.id or current_user.try(:admin?) %>

@@ -14,9 +14,10 @@ class Challenge < ActiveRecord::Base
 	has_many :responses, dependent: :destroy
 	has_many :reports, dependent: :destroy
 	mount_uploader :path, UploadUploader
-	validates :name, presence: true
-	validates :upload_type, presence: true
-	validates :path, presence: true
-	validates :category, presence: true
+    validates :name, presence: true
+    validates :upload_type, presence: true
+    validates :path, presence: true
+    validates :category, presence: true
+    ratyrate_rateable 'Recording', 'Original_Score'
 
 end

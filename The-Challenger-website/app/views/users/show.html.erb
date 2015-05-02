@@ -35,7 +35,6 @@
 </br>
 <%= link_to "View All Challenges", challenges_path, class:"btn btn-primary" %>
 
-
 <% if @user.id == current_user.id %>
 
   <%= link_to "New Challenge", new_challenge_path, class:"btn btn-primary" %>
@@ -68,8 +67,10 @@
   <% @friends1 = Friends.find_by(:sent_to => @user.id, :sent_by => current_user.id) %>
   <% @friends2 = Friends.find_by(:sent_to => current_user.id, :sent_by => @user.id) %>
   <% if @block2.nil? %>
-    <% session[:user_id] = @user.id %>
-    <%= link_to "Block", {controller: "block", action:"create_block", blocked: @user.id, blocked_by: current_user.id}, class:"btn btn-danger" %>
+    <% if current_user.id != @user.id %>
+      <% session[:user_id] = @user.id %>
+      <%= link_to "Block", {controller: "block", action:"create_block", blocked: @user.id, blocked_by: current_user.id}, class:"btn btn-danger" %>
+      <% end %>
   <% else %>
     <%= link_to "Unblock", {controller: "block", action:"destroy", blocked: @user.id, blocked_by: current_user.id}, class:"btn btn-success" %>
   <%end%>

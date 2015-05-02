@@ -23,9 +23,9 @@ class LikesController < ApplicationController
 		    @user.save
 		end
 	  	if @like.save
-	  		redirect_to challenges_path, notice: "You liked #{@challenge.name}."
-	  		@challenge.increment!(:likes_number)
-	  		@challenge.save
+	    	redirect_to challenges_path, notice: "You liked #{@challenge.name}."
+	    	@challenge.increment!(:likes_number)
+	    	@challenge.save
 	    else
 	    	redirect_to challenges_path(@challenge), notice: "Unable to like #{@challenge.name}, Please Try Again."
 	    end
@@ -62,7 +62,12 @@ class LikesController < ApplicationController
   	@like = Likes.new
   end
 
+# def index locates all the challenges and categorize them according to the number of likes
+# also categorize the challenges randomly (Sandra)
   def index
+  	@all = Challenge.all
+  	@challenges = @all.order('likes_number desc').limit(5)
+  	@recommended = @challenges.order("random()").first(5)
   end
 
 # def destroy deletes the like made by a certain user on a challenge or response - Amr Nafie

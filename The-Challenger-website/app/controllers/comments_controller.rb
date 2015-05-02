@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 	# def create locates the challenge that the user clicked on by retrieving its id
 	# and then create the comment on that challenge by using the comment_params 
 	# as the parameters needed for the creation and then the current user id is located
-	# and saved in the new comment created and then it is saved and redirected to the challenge
+	# and saved in the new comment created and then it is saved and redirected to the challenge (Sandra)
 	def create
     @challenge = Challenge.find(params[:challenge_id])
     @user = User.find(current_user.id)
@@ -29,7 +29,8 @@ class CommentsController < ApplicationController
   end
 
   # def destroy is the delete method, inwhich it locates the id of the specified challenge and comment 
-  # and then destroy that comment
+  # and then destroy that comment (Sandra)
+  # when a comment is deleted, the notification decreases by 1 and is deleted - Amr-Nafie
   def destroy
     @challenge = Challenge.find(params[:challenge_id])
     @comment = @challenge.comments.find(params[:id])
@@ -51,17 +52,17 @@ class CommentsController < ApplicationController
     redirect_to challenge_path(@challenge)
   end
 
-  # def index locates all the challenges 
+  # def index locates all the challenges  (Sandra)
  	def index
  	  @challenge = Challenge.find(params[:challenge_id])
  	end
 
-  # def show locates the comment with the comment id
+  # def show locates the comment with the comment id (Sandra)
  	def show
  	  @comment = Comment.find(params[:id])
  	end
 
-  # def comment_params provides the necessary attributes to create a comment
+  # def comment_params provides the necessary attributes to create a comment (Sandra)
   private
   def comment_params
     params.require(:comment).permit(:text, :user_id, :challenge_id)

@@ -14,5 +14,6 @@ RSpec.describe UsersController, type: :controller do
 	# expect(assigns(:users)).to eq([user2])
 	expect(response).to render_template("show")
 	end 
+
 end
 
