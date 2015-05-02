@@ -22,7 +22,6 @@ class ResponsesController < ApplicationController
       @user = User.find(@responses.challenge_owner)
       @user.increment!(:notifications)
       @user.save
-      
       redirect_to challenge_path(@challenge), notice: "The response has been sent."
     else
       redirect_to new_challenges_path, notice: "Unable to upload your reply."
@@ -40,13 +39,19 @@ class ResponsesController < ApplicationController
   def show
     @responses = Response.find(params[:id])
   end
+
 # This method takes a notification and removes it from the report table and redirects to notifications page - Amr Nafie
   def destroy
     @responses = Response.find(params[:id])
     @notifications = Notification.all
     @notifications.each do |notification|
-      if notification.response_id = @responses.id
+      if notification.response_id == @responses.id
         @notification = Notification.find(notification.id)
+        if @notification.seen == false
+          @user = User.find(@notification.sent_to)
+          @user.decrement(:notifications, 1)
+          @user.save
+        end
         @notification.destroy
       end
     end
@@ -54,6 +59,7 @@ class ResponsesController < ApplicationController
     redirect_to challenge_path(@responses.challenge_id), notice:  "The challenge #{@responses.name} has been deleted."
   end
 
+# def response_params provides the parameters needed for the functions - Amr Nafie
   private
   def response_params
     params.require(:response).permit(:challenge_id, :name, :path, :upload_type)

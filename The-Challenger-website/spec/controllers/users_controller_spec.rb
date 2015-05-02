@@ -13,6 +13,7 @@ RSpec.describe UsersController, type: :controller do
 	get :show, id: user2.id
 	# expect(assigns(:users)).to eq([user2])
 	expect(response).to render_template("show")
-end 
+	end 
+
 end
 

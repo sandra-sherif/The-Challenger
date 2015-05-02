@@ -62,16 +62,19 @@ and it is enabled only if the current_user is the one who uploaded the challenge
               <%else%>
                 <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger btn-block" %><p></p>
               <%end%>
-          		<% if response.challenge_owner == current_user.id or current_user.try(:admin?) %>
+
+              <%= link_to "View Response", response_path(response), class:"btn btn-primary btn-block" %><p></p>
+              <%= link_to "Download Response", response.path_url , class:"btn btn-primary btn-block"%><p></p>
+          		<% if response.user_id == current_user.id or current_user.try(:admin?) %>
           			<%= button_to "Delete", response, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{response.name}?"} %><p></p>
           		<%else%>
-          			<!-- Insert Report -->
+          			<%= link_to "Report", {controller: "reports", action:"new", :response_id => response.id, :user_id => response.user_id, :upload_type => "Response"}, class:"btn btn-danger btn-block" %><p></p>
           		<% end %>
             <%else%>
+              <%= link_to "View Response", response_path(response), class:"btn btn-primary btn-block" %><p></p>
+              <%= link_to "Download Response", response.path_url , class:"btn btn-primary btn-block"%><p></p>
               <%= link_to "👍", new_user_session_path, class:"btn btn-success btn-block" %><p></p>
             <%end%>
-            <%= link_to "View Response", response_path(response), class:"btn btn-primary btn-block" %><p></p>
-            <%= link_to "Download Response", response.path_url , class:"btn btn-primary btn-block"%><p></p>
         		<div id="fb-root"></div>
         		<script>(function(d, s, id) {
         		var js, fjs = d.getElementsByTagName(s)[0];

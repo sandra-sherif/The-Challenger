@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427140350) do
+ActiveRecord::Schema.define(version: 20150502041934) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20150427140350) do
     t.float    "avg",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "blocked_by"
+    t.string   "blocked"
   end
 
   create_table "challenge_responses", force: :cascade do |t|
@@ -36,6 +43,7 @@ ActiveRecord::Schema.define(version: 20150427140350) do
     t.datetime "updated_at"
     t.string   "upload_type"
     t.integer  "likes_number", default: 0
+    t.string   "category"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -62,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150427140350) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "path"
+    t.string   "upload_type"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -116,6 +125,7 @@ ActiveRecord::Schema.define(version: 20150427140350) do
     t.string   "reason"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "upload_type"
   end
 
   create_table "responses", force: :cascade do |t|
