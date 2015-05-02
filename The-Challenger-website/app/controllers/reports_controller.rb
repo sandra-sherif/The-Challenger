@@ -4,11 +4,22 @@ class ReportsController < ApplicationController
   # and adds the challenge and user id to the report table then redirects to challenges_path - Amr Nafie
   def create
     @report = Report.new(report_params)
-    @challenge = Challenge.find(params[:challenge_id])
-    @user = User.find(params[:user_id])
-    @report.challenge_id = @challenge.id
-    @report.user_id = @user.id
-    @report.save
+    
+    if params[:upload_type] == "Challenge"
+      @challenge = Challenge.find(params[:challenge_id])
+      @user = User.find(params[:user_id])
+      @report.challenge_id = @challenge.id
+      @report.user_id = @user.id
+      @report.upload_type = "Challenge"
+      @report.save
+    else
+      @response = Response.find(params[:response_id])
+      @user = User.find(params[:user_id])
+      @report.challenge_id = @response.id
+      @report.user_id = @user.id
+      @report.upload_type = "Response"
+      @report.save
+    end
     if @report.save
       redirect_to challenges_path, notice: "The report has been sent."
     else

@@ -56,10 +56,48 @@ before_filter :set_search
     @challenge = Challenge.find(params[:id])
   end
 
+# this method is called by the admin in reports page to delete a challenge
+  def delete_report
+    if params[:upload_type] == "Challenge"
+      @challenge = Challenge.find(params[:id])
+      @notification = Notification.new
+      @notification.sent_by = current_user.id
+      @notification.sent_to = @challenge.user1_id
+      @notification.notification_type = "Report Challenge Notification"
+      @notification.text = "#{@challenge.name} has been removed by the admin."
+      @notification.challenge_id = @challenge.id
+      @user = User.find(@challenge.user1_id)
+      @user.increment!(:notifications)
+      @user.save
+      @notification.save
+      @report = Report.find_by(upload_type: "Challenge", user_id: @user.id, challenge_id: @challenge.id)
+      @report.destroy
+      @challenge.destroy
+      redirect_to reports_path, notice: "Challenge has been deleted."
+    else
+      @response = Response.find(params[:id])
+      @notification = Notification.new
+      @notification.sent_by = current_user.id
+      @notification.sent_to = @response.user_id
+      @notification.notification_type = "Report Response Notification"
+      @notification.text = "#{@response.name} has been removed by the admin."
+      @notification.challenge_id = @response.challenge_owner
+      @notification.response_id = @response.id
+      @user = User.find(@response.user_id)
+      @user.increment!(:notifications)
+      @user.save
+      @notification.save
+      @report = Report.find_by(upload_type: "Response", user_id: @user.id, challenge_id: @response.id)
+      @response.destroy
+      @report.destroy
+      redirect_to reports_path, notice: "Response has been deleted."
+    end
+  end
+
   # Allows the view to access these attributes.
   private
   def challenge_params
-    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type)
+    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type, :id, :report_id)
   end
 
 end

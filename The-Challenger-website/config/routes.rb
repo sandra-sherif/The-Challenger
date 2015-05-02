@@ -35,6 +35,8 @@ Rails.application.routes.draw do
    get '/users/:controller/:action/:id/:sent_to/:status/:sent_by', to: 'users#show'
    get '/notifications/:controller/:action/:notification', to: 'notifications#index'
    get '/challenges/:controller/:action/:challenge_id', to: 'responses#new'
+   get '/reports/:controller/:action/:id', to: 'challenges#delete_report'
+   post '/reports/:controller/:action/:id', to: 'challenges#delete_report'
  
   # You can have the root of your site routed with "root"
 

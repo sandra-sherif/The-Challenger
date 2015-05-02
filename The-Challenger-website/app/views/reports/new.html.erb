@@ -14,16 +14,33 @@
 
 <div class="well">
   <%= form_for @report, html: { multipart: true } do |f| %>
-  	<% @challenge = Challenge.find(params[:challenge_id]) %>
-  	<% @user = User.find(params[:user_id]) %>
-  	<%= f.label "Challenge Name" %><p></p>
-  	<%= @challenge.name %><p></p>
-  	<%= f.label "Uploaded By" %><p></p>
-  	<%= @user.full_name %><p></p>
-  	<%= hidden_field_tag(:challenge_id, @challenge.id) %>
-  	<%= hidden_field_tag(:user_id, @user.id) %>
-    <%= f.label "Why do you want to remove this challenge?" %><p></p>
-    <%= f.select :reason, [["It's annoying or not interesting","It's annoying or not interesting"],["I don't think it should be on The Challenger","I don't think it should be on The Challenger"],["It's spam","It's spam"]], :prompt => 'Select a reason'%><p></p>
+    <% if params[:upload_type] == "Challenge" %>
+    	<% @challenge = Challenge.find(params[:challenge_id]) %>
+    	<% @user = User.find(params[:user_id]) %>
+    	<%= f.label "Challenge Name" %><p></p>
+    	<%= @challenge.name %><p></p>
+    	<%= f.label "Uploaded By" %><p></p>
+    	<%= @user.full_name %><p></p>
+    	<%= hidden_field_tag(:challenge_id, @challenge.id) %>
+      <%= hidden_field_tag(:upload_type, "Challenge") %>
+      <%= hidden_field_tag(:report_id, @report.id) %>
+    	<%= hidden_field_tag(:user_id, @user.id) %>
+      <%= f.label "Why do you want to remove this challenge?" %><p></p>
+      <%= f.select :reason, [["It's annoying or not interesting","It's annoying or not interesting"],["I don't think it should be on The Challenger","I don't think it should be on The Challenger"],["It's spam","It's spam"]], :prompt => 'Select a reason'%><p></p>
+    <%else%>
+      <% @response = Response.find(params[:response_id]) %>
+      <% @user = User.find(params[:user_id]) %>
+      <%= f.label "Response Name" %><p></p>
+      <%= @response.name %><p></p>
+      <%= f.label "Uploaded By" %><p></p>
+      <%= @user.full_name %><p></p>
+      <%= hidden_field_tag(:response_id, @response.id) %>
+      <%= hidden_field_tag(:upload_type, "Response") %>
+      <%= hidden_field_tag(:report_id, @report.id) %>
+      <%= hidden_field_tag(:user_id, @user.id) %>
+      <%= f.label "Why do you want to remove this response?" %><p></p>
+      <%= f.select :reason, [["It's annoying or not interesting","It's annoying or not interesting"],["I don't think it should be on The Challenger","I don't think it should be on The Challenger"],["It's spam","It's spam"]], :prompt => 'Select a reason'%><p></p>
+    <%end%>
     <%= f.submit "Submit report", class: "btn btn-success" %>
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 
