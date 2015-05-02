@@ -13,9 +13,15 @@ Rails.application.routes.draw do
 
   resources :challenges
 
-  root "challenges#index"
+  # root "challenges#index"
+  
+  root "welcome#index"
 
-  get 'welcome/index'
+  get 'users/welcome/index.html.erb' => 'welcome#index'
+  get 'welcome/index.html.erb' => 'welcome#index'
+  get 'challenges/welcome/index.html.erb' => 'welcome#index'
+  get 'challenges/welcome/:id/index.html.erb' => 'welcome#index'
+  get 'challenges/:id/welcome/index.html.erb' => 'welcome#index'
 
   resources :challenges do
     # match :search, to: 'challenges#index', via: :post
