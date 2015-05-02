@@ -5,7 +5,9 @@ before_filter :set_search
     @search = Challenge.search(params[:q])
   end
 
-  # def index returns all the challenges in the database.
+  # authored by Marina ElDib
+  # def index returns all the challenges in the database and if someone search for certain challenges
+  # it returns the searched challenges.
   def index
     @challenges = Challenge.all
     if params[:q]
@@ -37,7 +39,7 @@ before_filter :set_search
     @challenge = Challenge.find(params[:id])
     @notifications = Notification.all
     @notifications.each do |notification|
-      if notification.challenge_id = @challenge.id
+      if notification.challenge_id == @challenge.id
         @notification = Notification.find(notification.id)
         if @notification.seen == false
           @user = User.find(@notification.sent_to)
@@ -97,7 +99,7 @@ before_filter :set_search
   # Allows the view to access these attributes.
   private
   def challenge_params
-    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type, :id, :report_id)
+    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type, :id, :report_id, :category)
   end
 
 end

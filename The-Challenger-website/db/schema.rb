@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20150502041934) do
 
+  create_table "blocks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "blocked_by"
+    t.string   "blocked"
+  end
+
   create_table "challenge_responses", force: :cascade do |t|
     t.string   "path"
     t.datetime "created_at"
@@ -26,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150502041934) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "upload_type"
+    t.string   "category"
     t.integer  "likes_number", default: 0
   end
 
@@ -88,7 +96,6 @@ ActiveRecord::Schema.define(version: 20150502041934) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "likes_number",    default: 0
-    t.float    "duration"
   end
 
   create_table "users", force: :cascade do |t|

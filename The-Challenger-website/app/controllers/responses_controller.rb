@@ -45,7 +45,7 @@ class ResponsesController < ApplicationController
     @responses = Response.find(params[:id])
     @notifications = Notification.all
     @notifications.each do |notification|
-      if notification.response_id = @responses.id
+      if notification.response_id == @responses.id
         @notification = Notification.find(notification.id)
         if @notification.seen == false
           @user = User.find(@notification.sent_to)

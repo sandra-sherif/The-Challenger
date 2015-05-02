@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :friends
 
+  resources :block
+
   resources :notifications
 
   resources :reports
@@ -33,6 +35,10 @@ Rails.application.routes.draw do
    resources :users
 
    get '/users/:controller/:action/:id/:sent_to/:status/:sent_by', to: 'users#show'
+   get '/users/:controller/:action/:id/:blocked_by/:blocked', to: 'users#show'
+   # get 'block/create_block/:id/', to: 'block#create_block'
+   # get 'block/destroy/:id', to: 'block#destroy'
+
    get '/notifications/:controller/:action/:notification', to: 'notifications#index'
    get '/challenges/:controller/:action/:challenge_id', to: 'responses#new'
    get '/reports/:controller/:action/:id', to: 'challenges#delete_report'
@@ -43,6 +49,7 @@ Rails.application.routes.draw do
 #This line sets the route of /profile/ to the action show in the profile controller
 
   get 'profile/', to: 'profile#show', as: 'profile'
+  # get 'category', to: 'category#index'
   
   #get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
   
