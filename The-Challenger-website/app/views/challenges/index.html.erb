@@ -17,10 +17,12 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <% end %>
 
 <br />
-<%= link_to "New Challenge", new_challenge_path, class: "btn btn-success" %>
 <% if user_signed_in? %>
+  <%= link_to "New Challenge", new_challenge_path, class: "btn btn-success" %>
   <%= link_to "Back To Profile", current_user, class: "btn btn-primary" %>
-<%end%> 
+<%else%>
+  <%= link_to "New Challenge", new_user_session_path, class: "btn btn-success" %>
+<%end%>
 <br />
 <br />
 
