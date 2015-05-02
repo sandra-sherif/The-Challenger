@@ -33,9 +33,14 @@ class FriendsController < ApplicationController
   end
 
   def destroy
-    @notification = Notification.find(params[:id])
-    @notification.destroy
-    redirect_to notifications_path, notice:  "The notification has been deleted."
+    @friends = Friends.find(params[:id])
+    if @friends.sent_by = current_user.id
+      @user = User.find(@friends.sent_to)
+    else
+      @user = User.find(@friends.sent_by)
+    end
+    @friends.destroy
+    redirect_to challenges_path, notice:  "You and #{@user.full_name} are no longer friends."
   end
 
   def accept

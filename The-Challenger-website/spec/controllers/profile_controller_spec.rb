@@ -13,12 +13,12 @@ RSpec.describe ProfileController, type: :controller do
 	end
 
 
-	it "renders the #show view" do
-	user
-	sign_in(user)
-	get :show
-	expect(response).to render_template("show")
-	# expect(assigns(:user)).to eq([user])
-	end
+it "renders the #show view" do
+user
+sign_in(user)
+get :show
+expect(response).to render_template("show")
+# expect(assigns(:user)).to eq([user])
+end
 
 end

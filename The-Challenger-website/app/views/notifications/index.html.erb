@@ -61,7 +61,8 @@
         <%end%></td>
         <td>
         <% if notification.notification_type == "Challenge Notification" or 
-        	notification.notification_type == "Comment Notification" %>
+        	notification.notification_type == "Comment Notification" or
+          notification.notification_type == "Like Challenge Notification"%>
         	<!-- check if challenge is available -->
         	<% @challenge = Challenge.find(notification.challenge_id) %>
         	<%= link_to "View Challenge", challenge_path(@challenge), class:"btn btn-primary btn-block" %>
@@ -76,6 +77,15 @@
         <%end%>
         <% if notification.notification_type == "Accepted Request Notification" %>
           <%= link_to "View Profile", user_path(notification.sent_by), class:"btn btn-primary btn-block" %><p></p>
+        <%end%>
+        <% if notification.notification_type == "Response Notification" or 
+          notification.notification_type == "Like Response Notification"%>
+          <% @challenge = Challenge.find(notification.challenge_id) %>
+          <% @response = Response.find(notification.response_id) %>
+          <%= link_to "View Challenge", challenge_path(@challenge), class:"btn btn-primary btn-block" %>
+          <p></p>
+          <%= link_to "View Response", response_path(@response), class:"btn btn-primary btn-block" %>
+          <p></p>
         <%end%>
         <%= button_to "Delete",  notification, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete this notification?"} %><p></p>
         </td>

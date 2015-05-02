@@ -4,10 +4,7 @@ before_filter :set_search
   def set_search
     @search = Challenge.search(params[:q])
   end
-
-  # authored by Marina ElDib
-  # def index returns all the challenges in the database and if someone search for certain challenges
-  # it returns the searched challenges.
+  # def index returns all the challenges in the database.
   def index
   	@challenges = Challenge.all
     if params[:q]
@@ -36,7 +33,7 @@ before_filter :set_search
   # def destroy deletes a challange with the input challenge id.
   # Redirects to the challenges view with a message that the file is deleted.
   def destroy
-    @challenge = Challenge.find(params[:id])
+  	@challenge = Challenge.find(params[:id])
     @challenge.destroy
     redirect_to challenges_path, notice:  "The challenge #{@challenge.name} has been deleted."
   end
@@ -46,10 +43,12 @@ before_filter :set_search
     @challenge = Challenge.find(params[:id])
   end
 
+
+
   # Allows the view to access these attributes.
   private
   def challenge_params
-    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type, :category)
+    params.require(:challenge).permit(:name, :path, :user1_id, :upload_type)
   end
 
 end
