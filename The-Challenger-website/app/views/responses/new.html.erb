@@ -12,6 +12,7 @@
 
 <% end %>
 
+<!--Haya Borham: Params including description were added to the view to gather users' response description-->
 <div class="well">
   <%= form_for @responses, html: { multipart: true } do |f| %>
   	<% @challenge = Challenge.find(params[:challenge_id]) %>

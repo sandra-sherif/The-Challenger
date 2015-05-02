@@ -61,6 +61,8 @@ and it is enabled only if the current_user is the one who uploaded the challenge
           <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %>
           <p></p>
           <%= "#{challenge.likes_number} Liked this challenge" %>
+          
+          <!--Haya Borham: Description is rendered to user along with the challenge display itself-->
           <p></p>
           <description> <%= challenge.description %> </description> 
           </td>

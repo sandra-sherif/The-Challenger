@@ -41,6 +41,7 @@ class ResponsesController < ApplicationController
     redirect_to challenge_path(@responses.challenge_id), notice:  "The challenge #{@responses.name} has been deleted."
   end
 
+# Haya Borham - view accesses Response attributes, including the description of the response itself
     private
   def response_params
     params.require(:response).permit(:challenge_id, :name, :path, :upload_type, :description)

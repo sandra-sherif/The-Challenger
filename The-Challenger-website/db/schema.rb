@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150430202436) do
     t.datetime "updated_at"
   end
 
+#Haya Borham - schema got automatically udated with new column description for Challenges
   create_table "challenges", force: :cascade do |t|
     t.string   "name"
     t.string   "path"
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150430202436) do
     t.datetime "updated_at",   null: false
   end
 
+#Haya Borham - schema got automatically udated with new column description for Responses
   create_table "responses", force: :cascade do |t|
     t.integer  "challenge_id"
     t.integer  "challenge_owner"
