@@ -36,7 +36,7 @@ before_filter :set_search
   # def destroy deletes a challange with the input challenge id.
   # Redirects to the challenges view with a message that the file is deleted.
   def destroy
-  	@challenge = Challenge.find(params[:id])
+    @challenge = Challenge.find(params[:id])
     @challenge.destroy
     redirect_to challenges_path, notice:  "The challenge #{@challenge.name} has been deleted."
   end
@@ -45,7 +45,6 @@ before_filter :set_search
   def show
     @challenge = Challenge.find(params[:id])
   end
-
 
   # Allows the view to access these attributes.
   private

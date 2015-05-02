@@ -11,7 +11,6 @@ class BlockController < ApplicationController
 	#in both cases it redirects to the profile of the user to be blocked.
 	#It takes as blocked_by the user signed in id and as blocked the id of the user to be blocked from 
 	#the session
-
 	def create_block
 		@block = Block.new
 		@block.blocked_by = current_user.id
@@ -23,7 +22,6 @@ class BlockController < ApplicationController
 		else
 			redirect_to user_path, notice: "The block for #{@user.full_name} wasn't saved"
 		end
-
 	end
 
 	#authored by Marina ElDib
@@ -43,11 +41,8 @@ class BlockController < ApplicationController
 	#authored by Marina ElDib
 	#It allows the view to access these attributes
 	private
-
 	def block_params
 		params.require(:block).permit(:blocked_by, :blocked)
 	end
-
-
 
 end

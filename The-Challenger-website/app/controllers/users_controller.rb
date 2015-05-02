@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_filter :set_search
 
   #authored by Marina ElDib
@@ -10,7 +9,7 @@ class UsersController < ApplicationController
 
   #This action gets all the challenges into a variable to be used later in the view and it also
   #gets the user with the id passed and stores into the variable user
-	def show
+  def show
     @user = User.find(params[:id])
     @challenges = Challenge.all
   end

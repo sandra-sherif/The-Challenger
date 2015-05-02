@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 
-# Include default devise modules. Others available are:
-# :confirmable, :lockable, :timeoutable and :omniauthabl
-# before_save :delete_avatar, if:{ delete_avatar == '1' && !avatar_updated_at_changed? }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthabl
+  # before_save :delete_avatar, if:{ delete_avatar == '1' && !avatar_updated_at_changed? }
   
   #authored by Marina ElDib
   #It facilitates the search with the full name instead of only first name or last name
@@ -25,12 +25,11 @@ class User < ActiveRecord::Base
     end
    end
 
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-	has_many :challenges, :dependent => :destroy
-	has_many :comments, :dependent => :destroy
-	has_many :Likes, :dependent => :destroy
+  has_many :challenges, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+  has_many :Likes, :dependent => :destroy
   has_many :reports, :dependent => :destroy
   has_many :friends, :dependent => :destroy
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "missing.jpeg"
