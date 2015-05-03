@@ -1,0 +1,37 @@
+<% if !@responses.errors.empty? %>
+
+  <div class="alert alert-error">
+    <ul>
+      <% @responses.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+
+      <% end %>
+    
+    </ul>
+  </div>
+
+<% end %>
+
+<div class="well">
+  <%= form_for @responses, html: { multipart: true } do |f| %>
+  	<% @challenge = Challenge.find(params[:challenge_id]) %>
+  	<% @user = User.find(@challenge.user1_id) %>
+  	<%= f.label "Challenge Name" %><p></p>
+  	<%= @challenge.name %><p></p>
+  	<%= f.label "Uploaded By" %><p></p>
+  	<%= @user.full_name %><p></p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <p></p> 
+    <%= f.label :path %>
+    <%= f.file_field :path %>
+    <p></p>
+    <%= f.label :upload_type %>
+    <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Response Type'%><p></p>
+    <%= hidden_field_tag(:challenge_id, @challenge.id) %>
+    <%= f.submit "Upload Response", class: "btn btn-success" %>
+    <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
+
+  <% end %>
+
+</div>

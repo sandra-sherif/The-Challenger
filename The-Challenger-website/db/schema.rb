@@ -11,11 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426083207) do
+ActiveRecord::Schema.define(version: 20150502041934) do
 
   create_table "blocks", force: :cascade do |t|
-    t.string "blocked_by"
-    t.string "blocked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "blocked_by"
+    t.string   "blocked"
   end
 
   create_table "challenge_responses", force: :cascade do |t|
@@ -32,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150426083207) do
     t.datetime "updated_at"
     t.string   "upload_type"
     t.string   "category"
+    t.integer  "likes_number", default: 0
   end
 
   create_table "comments", force: :cascade do |t|
@@ -56,6 +59,9 @@ ActiveRecord::Schema.define(version: 20150426083207) do
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "path"
+    t.string   "upload_type"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -68,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150426083207) do
     t.datetime "updated_at",                        null: false
     t.boolean  "seen",              default: false
     t.string   "notification_type"
+    t.integer  "response_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -76,6 +83,19 @@ ActiveRecord::Schema.define(version: 20150426083207) do
     t.string   "reason"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "upload_type"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer  "challenge_id"
+    t.integer  "challenge_owner"
+    t.string   "name"
+    t.string   "path"
+    t.integer  "user_id"
+    t.string   "upload_type"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "likes_number",    default: 0
   end
 
   create_table "users", force: :cascade do |t|

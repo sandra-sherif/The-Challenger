@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  post 'likes/new' => 'challenges#show'
+  resources :likes
+
+  resources :responses
+
   resources :friends
 
   resources :block
@@ -18,7 +23,10 @@ Rails.application.routes.draw do
     # match :search, to: 'challenges#index', via: :post
     resources :comments
   end
-  
+
+  resources :challenges do
+    resources :responses
+  end
   
   devise_for :users, controllers: { registrations: "users/registrations" }
 
@@ -32,6 +40,9 @@ Rails.application.routes.draw do
    # get 'block/destroy/:id', to: 'block#destroy'
 
    get '/notifications/:controller/:action/:notification', to: 'notifications#index'
+   get '/challenges/:controller/:action/:challenge_id', to: 'responses#new'
+   get '/reports/:controller/:action/:id', to: 'challenges#delete_report'
+   post '/reports/:controller/:action/:id', to: 'challenges#delete_report'
  
   # You can have the root of your site routed with "root"
 

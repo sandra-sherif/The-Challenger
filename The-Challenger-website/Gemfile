@@ -66,4 +66,4 @@ gem 'carrierwave'
 
 gem 'foreigner'
 
-
+gem 'streamio-ffmpeg'

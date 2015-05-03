@@ -49,7 +49,7 @@
 
     <tr>
       <th>Name</th>
-      <th>Download Link</th>
+      <th>Uploaded By</th>
       <th>Display Challenge</th>
       <th>Actions</th>
 
@@ -57,31 +57,42 @@
   </thead>
 <tbody>
     <% @challenges.each do |challenge| %>
-
-    <% if challenge.user1_id == current_user.id %>
+     <% @challenge_owner = User.find(challenge.user1_id) %>
+     <% if challenge.user1_id == current_user.id %>
       <tr>
         <td ><%= challenge.name %></td>
-        <td ><%= link_to "Download Challenge", challenge.path_url %></td>
-    
+        <td ><%= link_to "#{@challenge_owner.full_name}", user_path(challenge.user1_id)%><p></p></td>
         <% if challenge.upload_type == "Video" %>
-    
-          <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %></td>
-
+          <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %>
+          <p></p>
+          <%= "#{challenge.likes_number} Liked this challenge" %></td>
         <%else%>
-
-          <td><%= image_tag challenge.path_url, :size => "320x240" %></td>
-
+          <td><%= image_tag challenge.path_url, :size => "320x240" %>
+          <p></p>
+          <%= "#{challenge.likes_number} Liked this challenge" %></td>
         <%end%>
 
         <td>
-          <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-info btn-block" %>
-          <p></p>
-          <%= link_to "View Comments", {controller: "comments", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %>
-          <p></p>
-          <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %>
-
+        <% if challenge.user1_id != current_user.id %>
+            <%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => challenge.id}, class:"btn btn-success btn-block" %><p></p>
         <% end %>
-
+        <% @test = Likes.find_by(user_id: current_user.id, path: challenge.path.to_s) %>
+        <% if @test.nil? %>
+          <%= link_to "👍", {controller: "likes", action:"create", file_id:challenge.id, upload_type:"Challenge" }, :method => :post, class:"btn btn-success btn-block" %>
+          <p></p>
+        <%else%>
+          <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger btn-block" %>
+          <p></p>
+        <%end%>
+        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %><p></p>
+        <%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %><p></p>
+        <p></p>
+        <%= link_to "Download Challenge", challenge.path_url , class:"btn btn-primary btn-block"%><p></p>
+        <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
+          <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %>
+        <%else%>
+          <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
+        <% end %>
           <div id="fb-root"></div>
           <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -95,7 +106,7 @@
           <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
         </td>
       </tr>
-
+      <% end %>
     <% end %>
 
   </tbody>
