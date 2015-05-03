@@ -35,29 +35,41 @@ and it is enabled only if the current_user is the one who uploaded the challenge
   
   <tbody>
     <% @reports.each do |report| %>
-    <% @challenge = Challenge.find(report.challenge_id) %>
-  	<% unless @challenge.nil? %>
-      <tr>
-        <td>
-        <%= @challenge.name %>
-        </td>
-        <td>
-        <% @user = User.find(report.user_id) %>
-        <%= @user.full_name %></td>
-        <td><%= report.reason %></td>
-        <% if @challenge.upload_type == "Video" %>
-
-          <td><%= video_tag @challenge.path_url, :size => "320x240", :controls => true %></td>
- 
-        <%else%>
-
-          <td><%= image_tag @challenge.path_url, :size => "320x240" %></td>
-  
-        <%end%>
-        <td><%= button_to "Delete",  @challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{@challenge.name}?"} %></td>
-      </tr>
-
-    <% end %>
+      <% if report.upload_type == "Challenge" %>
+        <% @challenge = Challenge.find(report.challenge_id) %>
+        <tr>
+          <td>
+          <%= @challenge.name %>
+          </td>
+          <td>
+          <% @user = User.find(report.user_id) %>
+          <%= @user.full_name %></td>
+          <td><%= report.reason %></td>
+          <% if @challenge.upload_type == "Video" %>
+            <td><%= video_tag @challenge.path_url, :size => "320x240", :controls => true %></td>
+          <%else%>
+            <td><%= image_tag @challenge.path_url, :size => "320x240" %></td>
+          <%end%>
+          <td><%= button_to "Delete",  {controller: "challenges", action: "delete_report", id: report.challenge_id, upload_type: "Challenge"}, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{@challenge.name}?", report_id: report.id} %></td>
+        </tr>
+      <% else %>
+        <% @response = Response.find(report.challenge_id) %>
+        <tr>
+          <td>
+          <%= @response.name %>
+          </td>
+          <td>
+          <% @user = User.find(report.user_id) %>
+          <%= @user.full_name %></td>
+          <td><%= report.reason %></td>
+          <% if @response.upload_type == "Video" %>
+            <td><%= video_tag @response.path_url, :size => "320x240", :controls => true %></td>
+          <%else%>
+            <td><%= image_tag @response.path_url, :size => "320x240" %></td>
+          <%end%>
+          <td><%= button_to "Delete",  {controller: "challenges", action: "delete_report", id: @response.id, upload_type: "Response", report_id: report.id}, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{@response.name}?"} %></td>
+        </tr>
+      <%end%>
     <% end %>
   </tbody>
 </table>

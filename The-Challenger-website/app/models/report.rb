@@ -1,4 +1,5 @@
 class Report < ActiveRecord::Base
+	
 	belongs_to :Challenge
 	belongs_to :User
 	validates :user_id, presence: true

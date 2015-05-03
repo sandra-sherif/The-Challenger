@@ -26,7 +26,10 @@
     <%= f.text_field :sharing_with, placeholder: "enter email"  %><br>
     <%= f.label :sharing_type %>
     <%= f.select :sharing_type, [['Private', 'Private'],['Public','Public']], :prompt => 'Select a Sharing Type'%> <p></p>
-      
+    <%= f.label :category %>
+    <%= f.select :category, [['Sports','Sports'],['Entertainment','Entertainment'], ['Music','Music'],
+    ['Riddle', 'Riddle'], ['Knowledge', 'Knowledge'], ['Dare', 'Dare']], :prompt => 'Select a Challenge Category' %>
+    <p></p>
     <%= f.submit "Upload Challenge", class: "btn btn-success" %>
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
 
