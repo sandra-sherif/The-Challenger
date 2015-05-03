@@ -35,6 +35,22 @@ fjs.parentNode.insertBefore(js, fjs);
 
  <% end %>
 
+ </p><p>
+  <div class="row">
+  <div class="small-2 large-2 columns">
+    <%= imdb_style_rating_for @challenge, current_user%>
+  </div>
+  <br>
+  <div class="small-2 large-4 columns">
+    <% if current_user %>
+      <div> Recording: <%= rating_for @challenge, "Recording", disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv' %></div>
+      Original_Score: <%= rating_for @challenge, "Original_Score", disable_after_rate: true, enable_half: true, cancel_place: 'right', cancel_hint: 'Cancel this vote!', imdb_avg: true, target: '#hintDiv'%>
+      <div id="hintDiv"></div>
+    <% end %>
+  </div>
+</div>
+</p>
+
 <h3>Comments</h3>
 
 <%= render @challenge.comments %>

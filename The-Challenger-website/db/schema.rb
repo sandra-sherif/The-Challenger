@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20150502041934) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "upload_type"
-    t.integer  "likes_number", default: 0
     t.string   "category"
+    t.integer  "likes_number", default: 0
   end
 
   create_table "comments", force: :cascade do |t|
