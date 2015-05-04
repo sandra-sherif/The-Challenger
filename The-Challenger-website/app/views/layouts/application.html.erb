@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!--<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>-->
+  <!--Haya Borham - Importing Google webfont Raleway-->
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,700' rel='stylesheet' type='text/css'>
+  
   <title>The Challenger</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -9,7 +11,36 @@
   <%= yield(:search) %>
  
 </head>
+
+<!--Haya Borham - creating a static header with a navigation bar linking to different routes around the website. The navbar's content
+depends on whether or not the user is signed in, hence the if condition-->
+<header>
+  <br>
+  <img src="http://i.imgur.com/ev3wHy6.png" width="130" height: auto style="padding-left:5pt;";>
+	<img src="http://i.imgur.com/0Jkpuwq.png" width="200" height: auto;>
+	 <ul>
+	   <li><img src="http://i.imgur.com/iDlyl4r.png" width="90" height: auto style="padding-top:0pt;";></li>
+  		<li id="dby">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Developed By</li>
+  		 <% if user_signed_in? %>
+  		    <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+          <li><%= link_to 'Edit Profile', edit_user_registration_path, :class => 'navbar-link' %></li> 
+          <li><%= link_to "Profile", current_user%></li>
+          <li>Logged in as <strong><%= current_user.full_name %></strong></li>
+          <li><a href="welcome/index.html.erb">Home</a></li>
+  
+    <% else %>
+  
+        <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> </li>
+        <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+        <li><a href="welcome/index.html.erb">Home</a></li>
+
+    <% end %>
+	</ul> 
+</header>
 <body>
+  
+  <!--Haya Borham - class refers to a specified frame in the body of the page with the given style-->
+  <div class="container" style="padding-top:40px;">
 
 <!-- This condition checks whether the user is signed in or not. In both cases, a message will be displayed whether the request was confirmed or rejected -->
 
@@ -24,25 +55,12 @@
     <%end%>
 
   <div class="container" style="padding-top:20px;">
+  
   <%= yield %>
   </div>
 
 <!-- This code will create a navigation bar as a footer with the current user signed in name and two links edit profile and log out if the user is signed in. Otherwise, it will display two links to sign up or log in -->
 
   <p class="navbar-text pull-right">
-
-    <% if user_signed_in? %>
-  
-      Logged in as <strong><%= current_user.full_name %></strong>.
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %> 
-  
-    <% else %>
-  
-      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-
-    <% end %>
-
   </body>
 </html>
