@@ -9,24 +9,6 @@
 </head>
 <body>
 
-<!-- This condition checks whether the user is signed in or not. In both cases, a message will be displayed whether the request was confirmed or rejected -->
-
-    <% if !user_signed_in? %>
-    
-      <% if notice %>
-    
-        <p class="alert alert-success"><%= notice %></p>
-    
-      <% end %>
-
-      <% if alert %>
-  
-        <p class="alert alert-danger"><%= alert %></p>
-
-      <% end %>
-
-    <%end%>
-
   <div class="container" style="padding-top:20px;">
   <%= yield %>
   </div>

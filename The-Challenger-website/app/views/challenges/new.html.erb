@@ -23,7 +23,8 @@
     <%= f.label :upload_type %>
     <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Challenge Type'%><p></p>
     <%= f.label :sharing_with %> 
-    <%= f.text_field :sharing_with, placeholder: "enter email"  %><br>
+    <%= f.text_field :sharing_with, placeholder: "Enter e-mail here"  %><br>
+    <p></p>
     <%= f.label :sharing_type %>
     <%= f.select :sharing_type, [['Private', 'Private'],['Public','Public']], :prompt => 'Select a Sharing Type'%> <p></p>
     <%= f.label :category %>
