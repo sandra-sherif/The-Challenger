@@ -1,2 +1,69 @@
-<h1>Likes#index</h1>
-<p>Find me in app/views/likes/index.html.erb</p>
+<table class="table table-bordered able-condensed table-hover">
+  <thead>
+
+    <tr>
+
+      <th>Most Liked Videos</th>
+    
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @challenges.each do |challenge| %>
+    <tr>
+    <td> <%= challenge.name %> </td>
+    <td>
+     <% if challenge.upload_type == "Video" %>
+      <%= video_tag challenge.path_url, :size => "320x240", :controls => true %>
+      <% else %>
+      <%= image_tag challenge.path_url, :size => "320x240" %>
+        <%end%>
+        </td>
+        <td>
+           <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %>
+        </td>
+        </tr>
+ <% end %>
+  <td>
+   
+  </td>
+       
+  </tbody>
+  <tbody>
+    
+  </tbody>
+</table>
+
+<br>
+<br>
+
+<table class="table table-bordered able-condensed table-hover">
+  <thead>
+    
+    <tr>
+      <th> Recommended Videos</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+       <% @recommended.each do |challenge| %>
+       <tr>
+       <td> <%= challenge.name %> </td>
+       <td> <% if challenge.upload_type == "Video" %>
+      <%= video_tag challenge.path_url, :size => "320x240", :controls => true %>
+      <% else %>
+      <%= image_tag challenge.path_url, :size => "320x240" %>
+        <%end%>
+        </td>
+        <td>
+           <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %>
+        </td>
+        </tr>
+        <% end %>
+  </tbody>
+  <tbody>
+    
+  </tbody>
+</table>
+

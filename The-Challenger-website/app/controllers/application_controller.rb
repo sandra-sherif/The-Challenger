@@ -22,11 +22,6 @@ def after_sign_in_path_for(user)
   '/profile/'
 end
 
-# def removepicture_path(user)
-# 	user.delete_avatar
-# '/profile/'
-# end
-
 protect_from_forgery with: :exception
 
 end

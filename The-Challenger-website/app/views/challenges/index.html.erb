@@ -8,7 +8,8 @@ Notes:
 6- The delete button calls the predefined delete method that calls the def destroy method in challenges_controller
 and it is enabled only if the current_user is the one who uploaded the challenge.
 7- @challenges.each do |challenge| loops on all the challenges and view each one in a separate row.
-8- if challenge.upload_type == "Video" checks the upload_type of the challenge to choose the appropriate tag.-->
+8- if challenge.upload_type == "Video" checks the upload_type of the challenge to choose the appropriate tag.
+9 - if ((challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.email== challenge.sharing_with) || challenge.sharing_type == "Public" ckecks the sharing type of the challenge to choose according action on which chellenges to display -->
 
 <% if !flash[:notice].blank? %>
   <div class="alert alert-info">
@@ -17,28 +18,42 @@ and it is enabled only if the current_user is the one who uploaded the challenge
 <% end %>
 
 <br />
-<%= link_to "New Challenge", new_challenge_path, class: "btn btn-success" %>
 <% if user_signed_in? %>
+  <%= link_to "New Challenge", new_challenge_path, class: "btn btn-success" %>
   <%= link_to "Back To Profile", current_user, class: "btn btn-primary" %>
-<%end%> 
+<%else%>
+  <%= link_to "New Challenge", new_user_session_path, class: "btn btn-success" %>
+<%end%>
+<br />
 <br />
 <br />
 
+<!-- The view that shows the search bar and the submit button -->
+
 <% content_for :search do %>
   <div class="large-8 small-9 columns">
-  <%= search_form_for @search do |f| %>
-    <%= f.text_field :name_cont, class: "radius-left expand", placeholder: "Challenges by name" %>
+    <%= search_form_for @search do |f| %>
+      <%= f.text_field :name_category_cont, class: "radius-left expand", placeholder: "Challenges by name or category" %>
   </div>
     <div class="large-4 small-3 columns">
       <%= f.submit "Search", class: "radius-right button" %>
     </div>
   <% end %>
+
 <% end %>
 
+<table>
+
+  <tbody>
+   <%= link_to "Most Liked Videos", {controller: "likes", action:"index"}, class:"btn btn-success btn-primary" %><p></p>
+
+  </tbody>
+
+</table>
 
 <table class="table table-bordered able-condensed table-hover">
   <thead>
-    
+
     <tr>
       <th>Name</th>
       <th>Uploaded By</th>
@@ -46,78 +61,84 @@ and it is enabled only if the current_user is the one who uploaded the challenge
       <th>Actions</th>
 
     </tr>
+
   </thead>
   
   <tbody>
     <% @challenges.each do |challenge| %>
-    <% @challenge_owner = User.find(challenge.user1_id) %>
-      <tr>
-        <td ><%= challenge.name %></td>
-        <% if user_signed_in? %>
-          <td ><%= link_to "#{@challenge_owner.full_name}", user_path(challenge.user1_id)%><p></p></td>
-        <%else%>
-          <td ><%= link_to "#{@challenge_owner.full_name}", new_user_session_path%><p></p></td>
-        <%end%>
-        <% if challenge.upload_type == "Video" %>
-          <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %>
-          <p></p>
-          <%= "#{challenge.likes_number} Liked this challenge" %></td>
-        <%else%>
-          <td><%= image_tag challenge.path_url, :size => "320x240" %>
-          <p></p>
-          <%= "#{challenge.likes_number} Liked this challenge" %></td>
-        <%end%>
- 
-        <td>
-        <% if user_signed_in? %>
-          <% if challenge.user1_id != current_user.id %>
-            <%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => challenge.id}, class:"btn btn-success btn-block" %><p></p>
-          <% end %>
-          <% @test = Likes.find_by(user_id: current_user.id, path: challenge.path.to_s) %>
-          <% if @test.nil? %>
-            <%= link_to "👍", {controller: "likes", action:"create", file_id:challenge.id, upload_type:"Challenge" }, :method => :post, class:"btn btn-success btn-block" %>
-            <p></p>
-          <%else%>
-            <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger btn-block" %>
-            <p></p>
-          <%end%>
-        <%else%>
-          <%= link_to "Reply", new_user_session_path, class:"btn btn-success btn-block" %><p></p>
-          <%= link_to "👍", new_user_session_path, class:"btn btn-success btn-block" %><p></p>
-        <%end%>
-        <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %><p></p>
-        <%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %><p></p>
-        <%= link_to "Download Challenge", challenge.path_url , class:"btn btn-primary btn-block"%><p></p>
-        <% if user_signed_in? %>
-          <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
-            <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
-          <%else%>
-            <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id}, class:"btn btn-danger btn-block" %><p></p>
-          <% end %>
-        <%else%>
-          <%= link_to "Report", new_user_session_path, class:"btn btn-danger btn-block" %><p></p>
-        <%end%>
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
-        </td>
-      </tr>
-
+      <% if user_signed_in? %>
+        <% @block = Block.find_by(:blocked_by => challenge.user1_id, :blocked => current_user.id) %>
+      <% if @block.nil? %>
+        <% @challenge_owner = User.find(challenge.user1_id) %>
+          <tr>
+            <% if ((challenge.sharing_type == "Private" and current_user.id == challenge.user1_id || current_user.email== challenge.sharing_with) || challenge.sharing_type == "Public" )%>
+              <td ><%= challenge.name %></td>
+              <% if user_signed_in? %>
+                <td ><%= link_to "#{@challenge_owner.full_name}", user_path(challenge.user1_id)%><p></p></td>
+              <%else%>
+                <td ><%= link_to "#{@challenge_owner.full_name}", new_user_session_path%><p></p></td>
+              <%end%>
+              <% if challenge.upload_type == "Video" %>
+                <td><%= video_tag challenge.path_url, :size => "320x240", :controls => true %>
+                <p></p>
+                <%= "#{challenge.likes_number} Liked this challenge" %></td>
+              <%else%>
+                <td><%= image_tag challenge.path_url, :size => "320x240" %>
+                <p></p>
+                <%= "#{challenge.likes_number} Liked this challenge" %></td>
+              <%end%>
+              <%end%>
+       
+              <td>
+              <% if user_signed_in? %>
+                <% if challenge.user1_id != current_user.id %>
+                  <%= link_to "Reply", {controller: "responses", action:"new", :challenge_id => challenge.id}, class:"btn btn-success btn-block" %><p></p>
+                <% end %>
+                <% @test = Likes.find_by(user_id: current_user.id, path: challenge.path.to_s) %>
+                <% if @test.nil? %>
+                  <%= link_to "👍", {controller: "likes", action:"create", file_id:challenge.id, upload_type:"Challenge" }, :method => :post, class:"btn btn-success btn-block" %>
+                  <p></p>
+                <%else%>
+                  <%= link_to "👎",  @test, method: :delete, class: "btn btn-danger btn-block" %>
+                  <p></p>
+                <%end%>
+              <%else%>
+                <%= link_to "Reply", new_user_session_path, class:"btn btn-success btn-block" %><p></p>
+                <%= link_to "👍", new_user_session_path, class:"btn btn-success btn-block" %><p></p>
+              <%end%>
+              <%= link_to "View Challenge", challenge_path(challenge), class:"btn btn-primary btn-block" %><p></p>
+              <%= link_to "View Responses", {controller: "responses", action:"index", challenge_id:challenge }, class:"btn btn-primary btn-block" %><p></p>
+              <%= link_to "Download Challenge", challenge.path_url , class:"btn btn-primary btn-block"%><p></p>
+              <% if user_signed_in? %>
+                <% if challenge.user1_id == current_user.id or current_user.try(:admin?) %>
+                  <%= button_to "Delete",  challenge, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Are you sure that you wish to delete #{challenge.name}?"} %><p></p>
+                <%else%>
+                  <%= link_to "Report", {controller: "reports", action:"new", :challenge_id => challenge.id, :user_id => challenge.user1_id, :upload_type => "Challenge"}, class:"btn btn-danger btn-block" %><p></p>
+                <% end %>
+              <%else%>
+                <%= link_to "Report", new_user_session_path, class:"btn btn-danger btn-block" %><p></p>
+              <%end%>
+              <div id="fb-root"></div>
+              <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));</script>
+              <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+              </td>
+            <% end %>
+          </tr>
     <% end %>
-    
+  <% end %>
   </tbody>
 </table>
 <style>
-  th {
-    text-align: center;
-  }
-  td {
-    text-align: center;
-  }
+th {
+text-align: center;
+}
+td {
+text-align: center;
+}
 </style>

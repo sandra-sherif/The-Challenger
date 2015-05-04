@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
 
+  get 'challenges/index'
+
+  get 'challenges/create'
+  post '/rate' => 'rater#create', :as => 'rate'
   post 'likes/new' => 'challenges#show'
+  
   resources :likes
 
   resources :responses
 
   resources :friends
+
+  resources :challenges do
+    resources :block
+  end
 
   resources :notifications
 
@@ -26,7 +35,8 @@ Rails.application.routes.draw do
   resources :challenges do
     # match :search, to: 'challenges#index', via: :post
     resources :comments
-  end
+    
+   end
 
   resources :challenges do
     resources :responses
@@ -39,14 +49,25 @@ Rails.application.routes.draw do
    resources :users
 
    get '/users/:controller/:action/:id/:sent_to/:status/:sent_by', to: 'users#show'
+
+   get '/challenges/Likes', to: 'likes#index'
+   get '/users/:controller/:action/:id/:blocked_by/:blocked', to: 'users#show'
+   # get '/users/:controller/:action/:id/:blocked_by/:blocked', to: 'block#destroy'
+   # get 'block/create_block/:id/', to: 'block#create_block'
+   # get 'block/destroy/:id', to: 'block#destroy'
+
    get '/notifications/:controller/:action/:notification', to: 'notifications#index'
    get '/challenges/:controller/:action/:challenge_id', to: 'responses#new'
+   get '/reports/:controller/:action/:id', to: 'challenges#delete_report'
+   post '/reports/:controller/:action/:id', to: 'challenges#delete_report'
  
   # You can have the root of your site routed with "root"
 
 #This line sets the route of /profile/ to the action show in the profile controller
 
   get 'profile/', to: 'profile#show', as: 'profile'
+
+  # get 'category', to: 'category#index'
   
   #get 'profile/removepicture/', to: 'profile#delete_picture', as: 'removepicture_path'
   

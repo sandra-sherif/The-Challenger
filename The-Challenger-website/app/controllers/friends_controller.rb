@@ -1,4 +1,7 @@
 class FriendsController < ApplicationController
+
+# This method creates a new record in friends table with a pending status 
+# and creates a new notification for the sent_to user - Amr Nafie
   def add_friend
     @friends = Friends.new
     @friends.sent_to = session[:user_id]
@@ -32,6 +35,7 @@ class FriendsController < ApplicationController
     @friends = Friends.find(params[:id])
   end
 
+# This method takes a friend request and removes it from the report table and redirects to challenges page - Amr Nafie
   def destroy
     @friends = Friends.find(params[:id])
     if @friends.sent_by = current_user.id
@@ -43,6 +47,8 @@ class FriendsController < ApplicationController
     redirect_to challenges_path, notice:  "You and #{@user.full_name} are no longer friends."
   end
 
+# This method takes a friend request from friends table with a pending status and set status to accept
+# and creates a new notification for the sent_to user - Amr Nafie
   def accept
     @notification = Notification.find(params[:notification])
     @friends = Friends.find_by(:sent_to => current_user.id, :sent_by => @notification.sent_by)
@@ -64,6 +70,8 @@ class FriendsController < ApplicationController
     end
   end
 
+# This method takes a friend request from friends table with a pending status and set status to reject
+# and creates a new notification for the sent_to user - Amr Nafie
   def reject
     @notification = Notification.find(params[:notification])
     @friends = Friends.find_by(:sent_to => current_user.id, :sent_by => @notification.sent_by)
@@ -78,8 +86,10 @@ class FriendsController < ApplicationController
     end
   end
 
+# def friends_params provides the parameters needed for the functions - Amr Nafie
   private
   def friends_params
     params.require(:friends).permit(:sent_to, :sent_by, :status)
   end
+  
 end

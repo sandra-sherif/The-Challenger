@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+
   def show
   end
 
@@ -10,6 +11,7 @@ class NotificationsController < ApplicationController
     @notification = Notification.new
   end
 
+# This method takes a notification and deletes it from the notifications table - Amr Nafie
   def destroy
     #Bug
     @notification = Notification.find(params[:id])
@@ -20,9 +22,10 @@ class NotificationsController < ApplicationController
   def status
   end
 
-    private
+  # def notification_params provides the parameters needed for the functions - Amr Nafie
+  private
   def notification_params
-    params.require(:notification).permit(:sent_by, :sent_to, :challenge_id, :comment_id, :text, :seen, :notification_type)
+    params.require(:notification).permit(:sent_by, :sent_to, :challenge_id, :comment_id, :text, :seen, :notification_type, :tag_id)
   end
 
 end
