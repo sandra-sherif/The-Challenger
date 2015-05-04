@@ -30,6 +30,7 @@
     <%= f.label :upload_type %>
     <%= f.select :upload_type, [['Image','Image'],['Video','Video']], :prompt => 'Select a Response Type'%><p></p>
     <%= hidden_field_tag(:challenge_id, @challenge.id) %>
+     <p></p>
      <%= f.label :description %>
     <p></p>
     <%= f.text_field :description, :size => "80x300" %>

@@ -1,13 +1,17 @@
 class LikesController < ApplicationController
-  def create
 
+  #def create located and the challenge and create the like on it the challenge provided
+  #afterwards it sends notification to inform the challenger's ownder of the like
+  #and increments the number of likes by 1 and same goes for the response - Amr Nafie
+  def create
   	if params[:upload_type] == "Challenge"
 	  	@challenge = Challenge.find(params[:file_id])
 	  	@like = Likes.new
 	  	@like.path = @challenge.path
+	  	@like.upload_type = "Challenge"
 	  	@like.user_id = current_user.id
 	  	if @challenge.user1_id != current_user.id
-		  	@notification = Notification.new
+	  		@notification = Notification.new
 		    @notification.sent_by = current_user.id
 		    @notification.sent_to = @challenge.user1_id
 		    @notification.notification_type = "Like Challenge Notification"
@@ -29,9 +33,10 @@ class LikesController < ApplicationController
 		@response = Response.find(params[:file_id])
 	  	@like = Likes.new
 	  	@like.path = @response.path
+	  	@like.upload_type = "Response"
 	  	@like.user_id = current_user.id
 	  	if @response.user_id != current_user.id
-		  	@notification = Notification.new
+	  		@notification = Notification.new
 		    @notification.sent_by = current_user.id
 		    @notification.sent_to = @response.user_id
 		    @notification.notification_type = "Like Response Notification"
@@ -57,13 +62,33 @@ class LikesController < ApplicationController
   	@like = Likes.new
   end
 
+# def index locates all the challenges and categorize them according to the number of likes
+# also categorize the challenges randomly (Sandra)
   def index
+  	@all = Challenge.all
+  	@challenges = @all.order('likes_number desc').limit(5)
+  	@recommended = @challenges.order("random()").first(5)
   end
 
+# def destroy deletes the like made by a certain user on a challenge or response - Amr Nafie
   def destroy
-  	if params[:upload_type] == "Challenge"
-	  	@like = Likes.find(params[:id])
+  	@like = Likes.find(params[:id])
+  	if @like.upload_type == "Challenge"
 	  	@challenge = Challenge.find_by(params[path: @like.path])
+	  	@notifications = Notification.all
+	    @notifications.each do |notification|
+	    	if notification.challenge_id == @challenge.id
+	      		if notification.notification_type == "Like Challenge Notification"
+	        		@notification = Notification.find(notification.id)
+	        		if @notification.seen == false
+	        			@user = User.find(@notification.sent_to)
+	         			@user.decrement(:notifications, 1)
+	         			@user.save
+	        		end
+	        		@notification.destroy
+	        	end
+	      end
+	    end
 	  	if @like.destroy
 	  		redirect_to challenges_path, notice: "You unliked #{@challenge.name}."
 	  		@challenge.decrement(:likes_number, 1)
@@ -72,8 +97,21 @@ class LikesController < ApplicationController
 	  		redirect_to challenges_path, notice: "Unable to unlike #{@challenge.name}, Please Try Again."
 	  	end
 	else
-		@like = Likes.find(params[:id])
 	  	@response = Response.find_by(params[path: @like.path])
+	  	@notifications = Notification.all
+	    @notifications.each do |notification|
+	    	if notification.response_id == @response.id 
+		      	if notification.notification_type == "Like Response Notification"
+			        @notification = Notification.find(notification.id)
+			        if @notification.seen == false
+			        	@user = User.find(@notification.sent_to)
+			        	@user.decrement(:notifications, 1)
+			        	@user.save
+			        end
+			        @notification.destroy
+			    end
+	      	end
+	    end
 	  	if @like.destroy
 	  		redirect_to :controller => 'responses', :action => 'index',  :challenge_id => @response.challenge_id, notice: "You unliked #{@response.name}."
 	  		@response.decrement(:likes_number, 1)
@@ -84,7 +122,8 @@ class LikesController < ApplicationController
 	end
   end
 
-   private
+# def like_params provides the parameters needed for the functions - Amr Nafie
+  private
   def like_params
     params.require(:likes).permit(:file_id,:user_id,:upload_type)
   end
