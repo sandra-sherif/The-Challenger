@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150502041934) do
     t.integer  "likes_number", default: 0
     t.string   "sharing_type"
     t.string   "sharing_with"
+    t.string   "description"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -140,6 +141,7 @@ ActiveRecord::Schema.define(version: 20150502041934) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "likes_number",    default: 0
+    t.string   "description"
   end
 
   create_table "users", force: :cascade do |t|

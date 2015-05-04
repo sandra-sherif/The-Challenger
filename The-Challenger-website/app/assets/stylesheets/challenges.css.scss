@@ -1,4 +1,56 @@
 @import "bootstrap";
-body {
-background: url("http://i.imgur.com/PVYiioJ.jpg");
-}
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+
+
+    /* header {
+        background:url("http://i.imgur.com/ev3wHy6.png");
+        padding-left: 10pt;
+     }
+     */
+
+ body {
+    
+    //font-family: 'PT Sans', sans-serif;
+    //font-family: "Helvetica";
+      color: red;
+      background:Moccasin !important;
+    
+     }
+ 
+ .field {
+     
+    //  font-family: 'PT Sans', sans-serif;
+    //font-family: "Helvetica";
+      color: red;
+      background:Moccasin !important;
+ }
+   
+      /*ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			position: fixed;
+			top: 50pt;
+			right: 0.5pt;
+			position: absolute;
+	}*/
+
+    
+   /* <header>
+	     <ul>
+	 	    <li><a href="http://google.com">Sign Up</a></li>
+  		    <li><a href="http://google.com">Sign In</a></li>
+  		    <li><a href="http://google.com">Contact Us</a></li>
+  		    <li><a href="http://google.com">Challenges</a></li>
+  		    <li><a href="http://google.com">Home</a></li>
+	    </ul> 
+	</header>*/
+   
+
+/*@color: #4D926F;
+ 
+#body {
+  background: @color;
+}*/
+
+

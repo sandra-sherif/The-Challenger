@@ -97,19 +97,22 @@ class ChallengesController < ApplicationController
     end
   end
 
-# def indexPrivateSharing
-# @challenges = Challege.where(params[:user_id ,:sharing_with])
-# end
-#Default show Image method streams the file contents.
-#File doesn't have to be in public/ dir
-# def show
-# send_file @image.filename, :type => @image.content_type,
-# :disposition => 'inline'
-# end
-# Allows the view to access these attributes.
+  # Allows the view to access these attributes.
+  # Haya Borham - as mentioned above, including the description of the challenge itself
+  # def indexPrivateSharing
+  # @challenges = Challege.where(params[:user_id ,:sharing_with])
+  # end
+  #Default show Image method streams the file contents.
+  #File doesn't have to be in public/ dir
+  # def show
+  # send_file @image.filename, :type => @image.content_type,
+  # :disposition => 'inline'
+  # end
+  # Allows the view to access these attributes.
   private
   def challenge_params
     params.require(:challenge).permit(:name, :path, :user_id, :upload_type, :sharing_type, :sharing_with,
-      :id, :report_id, :category)
+      :id, :report_id, :category, :description)
   end
+
 end
