@@ -12,6 +12,7 @@
 
 <% end %>
 
+<!--Haya Borham: Params including description were added to the view to gather users' challenge description-->
 <div class="well">
   <%= form_for @challenge, html: { multipart: true } do |f| %>
     <%= f.label :name %>
@@ -30,6 +31,10 @@
     <%= f.label :category %>
     <%= f.select :category, [['Sports','Sports'],['Entertainment','Entertainment'], ['Music','Music'],
     ['Riddle', 'Riddle'], ['Knowledge', 'Knowledge'], ['Dare', 'Dare']], :prompt => 'Select a Challenge Category' %>
+    <p></p>
+    <%= f.label :description %>
+    <p></p>
+      <%= f.text_field :description, :size => "80x300" %>
     <p></p>
     <%= f.submit "Upload Challenge", class: "btn btn-success" %>
     <%= link_to "Back", challenges_path , class:"btn btn-danger"%>
