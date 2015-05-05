@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'challenges/index'
+
+  get 'challenges/create'
   post '/rate' => 'rater#create', :as => 'rate'
   post 'likes/new' => 'challenges#show'
   
@@ -9,7 +12,9 @@ Rails.application.routes.draw do
 
   resources :friends
 
-  resources :block
+  resources :challenges do
+    resources :block
+  end
 
   resources :notifications
 
@@ -17,14 +22,21 @@ Rails.application.routes.draw do
 
   resources :challenges
 
-  root "challenges#index"
+  # root "challenges#index"
+  
+  root "welcome#index"
 
-  get 'welcome/index'
+  get 'users/welcome/index.html.erb' => 'welcome#index'
+  get 'welcome/index.html.erb' => 'welcome#index'
+  get 'challenges/welcome/index.html.erb' => 'welcome#index'
+  get 'challenges/welcome/:id/index.html.erb' => 'welcome#index'
+  get 'challenges/:id/welcome/index.html.erb' => 'welcome#index'
 
   resources :challenges do
     # match :search, to: 'challenges#index', via: :post
     resources :comments
-  end
+    
+   end
 
   resources :challenges do
     resources :responses
@@ -40,6 +52,7 @@ Rails.application.routes.draw do
 
    get '/challenges/Likes', to: 'likes#index'
    get '/users/:controller/:action/:id/:blocked_by/:blocked', to: 'users#show'
+   # get '/users/:controller/:action/:id/:blocked_by/:blocked', to: 'block#destroy'
    # get 'block/create_block/:id/', to: 'block#create_block'
    # get 'block/destroy/:id', to: 'block#destroy'
 

@@ -13,3 +13,90 @@
  *= require_tree .
  *= require_self
  */
+ 
+ /*Haya Borham - css stylesheet linked to application.html.erb to adjust different styles to different html classes and elements*/
+ 
+ @import "bootstrap";
+ 
+     	header {
+		    width: 100%;
+		    background: white;
+		    height: 120pt;
+		    color: #260902;
+		    font-family: 'Raleway';
+			text-decoration: none;
+			font-size: 13pt;
+		}
+		
+		header a {
+		    color: #260902;
+			text-align: center;
+		    font-family: 'Raleway';
+			text-decoration: none;
+			display: block;
+			width: 90pt;
+			font-size: 13pt;
+		}
+
+
+		header a:hover {
+		    font-family: 'Raleway';
+		    font-weight: bold;
+  			color: #E33E14;
+  			text-decoration: none;
+  		}
+  		
+  		
+  		a {
+  		    color: #260902;
+  		    font-family: 'Raleway';
+  		}
+  		
+  		a:hover {
+  		    font-weight: bold;
+  		    font-family: 'Raleway';
+  		    color: white;
+  		    text-decoration: none;
+  		}
+        
+
+		ul {
+		 
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			position: fixed;
+			position: absolute;
+			top: 50pt;
+			right: 15pt;
+		}
+		
+		ul img:hover {
+		    -ms-transform: rotate(20deg);
+  			-webkit-transform: rotate(20deg);
+  			-moz-transform: rotate(20deg);
+  			-o-transform: rotate(20deg);
+		     transform: rotate(20deg);	
+		}
+
+		li {
+			float: right;
+		    background: none;
+            outline: 0;
+			
+		}
+		
+		
+
+     body {
+        background: #27A376;
+        color: #260902;
+        font-family: 'Raleway';
+     }
+     
+     .container:hover {
+         background:transparent;
+     }
+
+     
+    

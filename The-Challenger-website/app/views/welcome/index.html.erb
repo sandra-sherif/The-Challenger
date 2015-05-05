@@ -1,3 +1,56 @@
-<h1>Welcome#index</h1>
+<!--Haya Borham - Homepage HTML, whose css/style was overwritten to make it look different from the rest of the website (application.css/html.erb)-->
 
-<p>Find me in app/views/welcome/index.html.erb</p>
+<!DOCTYPE html>
+<head>
+	<title>The Challenger - Home</title>
+	<style>
+		header {
+			background: transparent;
+			color: white;
+
+		}
+		
+		header img {
+		    visibility: hidden;
+		    display: none;
+		}
+		
+		
+		header a {
+		    color: white;
+		}
+		
+		
+		body {
+			    background: url("http://i.imgur.com/OqDQEox.jpg"); 
+  			    background-size: cover;
+  			    color: white;
+  			    /*color: black;*/
+  			    font-weight: none;
+  			    font-size: 16pt;
+  			    text-align: left;
+		}
+		
+		
+		.btn-warning {
+		    position:fixed; 
+		    left:145pt; 
+		}
+		
+		#dby {
+		    color: transparent;
+		}
+		
+	</style>
+</head>
+<header>
+</header>
+<body>
+	<img src="http://i.imgur.com/3xf3v5u.png" width="500" height: auto style="position:fixed; left:6pt; bottom:130pt;border:none;"></a>
+    <br>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mingle. Challenge. Share.</p>
+    <br>
+    <%= link_to "View Challenges", challenges_path, class: "btn btn-warning" %>
+</body>
+
+

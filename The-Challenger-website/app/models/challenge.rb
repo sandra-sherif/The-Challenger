@@ -8,7 +8,7 @@ class Challenge < ActiveRecord::Base
 		Arel::Nodes::InfixOperation.new('||', parent.table[:name], Arel::Nodes.build_quoted(' ')
     	), parent.table[:category])
 	end
-	
+
 	belongs_to :user1, :class_name => "User", :foreign_key => "user1_id"
 	has_many :comments, dependent: :destroy
 	has_many :responses, dependent: :destroy
@@ -17,6 +17,8 @@ class Challenge < ActiveRecord::Base
     validates :name, presence: true
     validates :upload_type, presence: true
     validates :path, presence: true
+    validates :sharing_type, presence: true
+    sharing_type = ['Private', 'Public'] 
     validates :category, presence: true
     ratyrate_rateable 'Recording', 'Original_Score'
 
